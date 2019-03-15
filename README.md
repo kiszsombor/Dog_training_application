@@ -20,7 +20,37 @@ tesztelte a kutyaiskolában tanultakat). Ha a kedvencünk egy feladatcsoport
 minden egyes feladatát teljesítette, csak abban az esetben léphet a
 következő szintre.
 
-### Adatbázis terv:
+### 1. Adatbázis terv:
 <p align="center">
-  <img src="design/Database.png" width="1000" title="hover text">
+  <img src="design/Database.png" width="1000" title="Database Plan">
 </p>
+
+
+### 2. Program felépítése
+ - **api**: Service Interface
+	- DogService
+	- TrainerService
+ - **services**
+	- DogServiceImpl
+	- TrainerServiceImpl
+ - **controllers**
+	- DogController 
+	- TrainerController
+ - **entities**
+	- Dog
+	- Trainer
+ - **repositories**
+	- DogRepository
+	- TrainerRepository
+  
+  ### 3. Végpontok
+ - **GET/** 
+ 	> főoldal
+ - **GET/dog** 
+ 	> összes kutyát megjelenítő oldal
+ - **GET/dog/{dogId}** 
+ 	> egy kutya megjelenítése
+ - **GET/trainer** 
+ 	> oktatók kilistázása
+ - **GET/trainer/{trainerId}** 
+ 	> egy oktató megjelenítése
