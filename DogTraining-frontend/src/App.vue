@@ -1,22 +1,27 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <NavigationBar></NavigationBar>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header'
+import NavigationBar from '@/components/NavigationBar'
+// import LoginPage from '@/components/pages/LoginPage'
+// import BasicPage from '@/components/pages/BasicPage'
+
 export default {
   name: 'App',
   components:{
-    Header
+    NavigationBar,
+    // LoginPage,
+    // BasicPage
   }
 }
 </script>
 
 <style>
 body{
-background-color: rgb(221, 224, 207);
+  background-color: rgb(221, 224, 207);
 }
 </style>
