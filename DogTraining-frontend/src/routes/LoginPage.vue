@@ -1,6 +1,6 @@
 <template>
   <div class="login-page">
-    <BasicPage :headerTitle="title"></BasicPage>
+    <BasicPage :headerTitle="title" :bodyTitle="bodyTitle"></BasicPage>
   </div>
   
   <!-- <div class='login'>
@@ -31,6 +31,7 @@ export default {
   data () {
     return {
       title: "Login Page Title",
+      bodyTitle: "LoginBody",
     }
   },
   mounted() {
@@ -49,9 +50,9 @@ export default {
   text-align: center;
 } */
 
-div.login{
+/* div.login{
   padding: 20px 50px;
-}
+} */
 /* div h1{
   text-align: center;
 } */

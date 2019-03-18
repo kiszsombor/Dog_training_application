@@ -136,8 +136,8 @@ header nav a:hover{
   box-shadow: -2px 5px 71px 13px rgba(153,148,153,1);
 }
 
-div.selectedRouter{
+/* div.selectedRouter{
   background-color: blue;
-}
+} */
 
 </style>
