@@ -1,5 +1,6 @@
 <template>
-    <div class="login-body">
+
+    <div class="login">
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
 
             <b-form-group
@@ -12,7 +13,7 @@
                     type="text"
                     v-model="form.name"
                     required
-                    placeholder="Enter name" />
+                    placeholder="Full Name" />
             </b-form-group>
 
             <b-form-group
@@ -29,7 +30,7 @@
                     v-model="form.email"
                     required
                     autocomplete="username email"
-                    placeholder="Enter email" />
+                    placeholder="email@example.com" />
             </b-form-group>
 
             <b-form-group
@@ -43,7 +44,7 @@
                     v-model="form.password"
                     required
                     autocomplete="current-password"
-                    placeholder="Enter password" />
+                    placeholder=" *********** " />
             </b-form-group>
 
 
@@ -74,7 +75,7 @@
 <script>
 export default {
 
-    name: "LoginBody",
+    name: "Login",
     data() {
         return {
         form: {
@@ -111,7 +112,7 @@ export default {
 
 <style scoped>
 
-div.login-body{
+div.login{
     margin: 10%;
 }
 

@@ -1,16 +1,16 @@
 <template>
-  <div class="main-page">
-    <BasicPage :headerTitle="title"></BasicPage>
+  <div class="page1-page">
+    <BaseContainer :headerTitle="title"></BaseContainer>
   </div>
   
 </template>
 
 <script>
 
-import BasicPage from '@/components/page_layouts/BasicPage'
+import BaseContainer from '@/components/base/BaseContainer'
 
 export default {
-    name: 'MainPage',
+    name: 'Page1',
     props: {
 
     },
@@ -19,7 +19,7 @@ export default {
     },
     data() {
         return {
-            title: "Main Page Title",
+            title: "Page 1 Title",
         }
     },
     methods: {
@@ -29,7 +29,7 @@ export default {
         
     },
     components: {
-      BasicPage,
+      BaseContainer,
     }
 }
 </script>

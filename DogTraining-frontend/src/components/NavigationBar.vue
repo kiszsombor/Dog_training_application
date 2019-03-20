@@ -1,51 +1,75 @@
 <template>
-<header class="container-fluid">
-  <div class="row">
-    <div class="container">
-      <div class="row">
-        <h1 class="col-lg-4" v-on:click="mainPageButtonPressed">
-          {{title}}
-        </h1>
-        <!-- <nav v-for="menuItem in menuItems">
-          <a href="">{{ menuItem }}</a>
-        </nav> -->
-        
-        <nav class="col-lg-8">
-          <!-- <b-card no-body>
-            <b-tabs pills card>
-              <b-tab v-for="menuItem in MenuItems" :key="menuItem.value"><b-card-text> {{ menuItem}} </b-card-text></b-tab>
-              <b-tab title="Tab 1" active><b-card-text>Tab Contents 1</b-card-text></b-tab>
-              <b-tab title="Tab 2"><b-card-text>Tab Contents 2</b-card-text></b-tab>
-            </b-tabs>
-          </b-card> -->
-          <!-- <a v-for="menuItem in menuItems" :key="menuItem.value"> {{ menuItem }} </a> -->
-          <router-link 
-            v-for="pageItemString in pageItemsString"
-            :key="pageItemString.id"
-            :to="pageItemString"
-          >
-            <div>
-              {{ pageItemString }}
-            </div>
-            <!-- <div v-if="selectedPageItemIndex === index - 1">
-              {{ pageItemString }}
-            </div> -->
+  <header class="container-fluid">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          <h1 class="col-lg-4">
+            <router-link to="/">
+              <div>
+                {{title}}
+              </div>
+            </router-link>
+          </h1>
+          
+
+          <!-- <h1 class="col-lg-4" v-on:click="mainPageButtonPressed">
+              {{title}}
+          </h1> -->
+
+          <!-- <nav v-for="menuItem in menuItems">
+            <a href="">{{ menuItem }}</a>
+          </nav> -->
+          
+          <nav class="col-lg-8">
+            <!-- <b-card no-body>
+              <b-tabs pills card>
+                <b-tab v-for="menuItem in MenuItems" :key="menuItem.value"><b-card-text> {{ menuItem}} </b-card-text></b-tab>
+                <b-tab title="Tab 1" active><b-card-text>Tab Contents 1</b-card-text></b-tab>
+                <b-tab title="Tab 2"><b-card-text>Tab Contents 2</b-card-text></b-tab>
+              </b-tabs>
+            </b-card> -->
+            <!-- <a v-for="menuItem in menuItems" :key="menuItem.value"> {{ menuItem }} </a> -->
+            <router-link
+              v-for="pageItemString in pageItemsString"
+              :key="pageItemString.id"
+              :to="pageItemString"
+            >
+              <div class ="col-lg-8">
+                {{ pageItemString }}
+              </div>
+              
+             
+              <!-- <div class ="col-lg-8">
+                <b-tab :title=pageItemString active="">
+                  <b-card-text> {{pageItemString}} </b-card-text>
+                </b-tab>
+              </div> -->
+
+            </router-link>
+
+              <!-- <div v-if="selectedPageItemIndex === index - 1">
+                {{ pageItemString }}
+              </div> -->
+              
             
-          </router-link>
-          <!-- <a href="">menu</a>
-          <a href="">menu</a>
-          <a href="">menu</a>
-          <a href="">menu</a> -->
-        </nav>
-        
+            <!-- <a href="">menu</a>
+            <a href="">menu</a>
+            <a href="">menu</a>
+            <a href="">menu</a> -->
+          </nav>
+          
+        </div>
       </div>
+      
+      <!-- <button class= "login-button" v-on:click="loginButtonPressed">LOGIN</button> -->
+      <router-link to="LoginPage">LOGIN</router-link>
+
+      <b-navbar></b-navbar>
+
+
+
     </div>
-    
-    <!-- <button class= "login-button" v-on:click="loginButtonPressed">LOGIN</button> -->
-    <router-link to="/LoginPage">LOGIN</router-link>
-    <!-- <router-link to="" >Login</router-link> -->
-  </div>
-</header>
+  </header>
 </template>
 
 <script>

@@ -1,25 +1,29 @@
 <template>
-    <div class="basic-page">
+    <div class="base-container">
         <div class="header">
             <h1> {{headerTitle}} </h1>
 
         </div>
         <div class="body">
-            <h1 v-if="bodyTitle === 'Default Page Body'"> {{ bodyTitle }} </h1>
-            <LoginBody v-if="bodyTitle === 'LoginBody'"></LoginBody>
+            <Login v-if="bodyTitle === 'LoginBody'"></Login>
+            <h1 v-else> {{ bodyTitle }} </h1>
+            
+            
             
             <!-- <LoginBody></LoginBody> -->
         </div>
 
+        
+
     </div>
 </template>
 
-<script>
 
-import LoginBody from './login_page/LoginBody'
+<script>
+import Login from '@/router/views/Login.vue'
 
 export default {
-    name: 'BasicPage',
+    name: 'BaseContainer',
     props: {
         headerTitle: {
             default: 'Default Page Title',
@@ -40,10 +44,11 @@ export default {
         
     },
     components: {
-        LoginBody
+        Login
     },
 }
 </script>
+
 
 <style scoped>
 

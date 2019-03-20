@@ -1,7 +1,11 @@
 <template>
   <div class="login-page">
-    <BasicPage :headerTitle="title" :bodyTitle="bodyTitle"></BasicPage>
+    <BaseContainer :headerTitle="title" :bodyTitle="bodyTitle"></BaseContainer>
   </div>
+
+  <!-- <div class="login-page">
+    <Login></Login>
+  </div> -->
   
   <!-- <div class='login'>
     <router-view>
@@ -24,7 +28,8 @@
 
 <script>
 
-import BasicPage from '@/components/page_layouts/BasicPage'
+import BaseContainer from '@/components/base/BaseContainer'
+import Login from './Login'
 
 export default {
   name: 'LoginPage',
@@ -38,7 +43,7 @@ export default {
     
   },
   components: {
-    BasicPage
+    BaseContainer
   },
 }
 </script>

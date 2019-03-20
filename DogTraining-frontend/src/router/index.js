@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import MainPage from '@/routes/MainPage'
-import LoginPage from '@/routes/LoginPage'
-import Page1 from '@/routes/Page1'
-import Page2 from '@/routes/Page2'
-import Page3 from '@/routes/Page3'
-import Page4 from '@/routes/Page4'
+import Home from '@/router/views/Home'
+import LoginPage from '@/router/views/LoginPage'
+import Page1 from '@/router/views/Page1'
+import Page2 from '@/router/views/Page2'
+import Page3 from '@/router/views/Page3'
+import Page4 from '@/router/views/Page4'
 
 Vue.use(Router)
 
@@ -14,12 +14,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'MainPage',
-      component: MainPage
+      name: 'Home',
+      component: Home
     },
     {
       path: '/LoginPage',
-      name: 'LoginPage',
+      name: 'LoginPge',
       component: LoginPage
     },
     {

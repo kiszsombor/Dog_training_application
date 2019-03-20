@@ -5,6 +5,7 @@
   </div>
 </template>
 
+
 <script>
 import NavigationBar from '@/components/NavigationBar'
 // import LoginPage from '@/components/pages/LoginPage'
@@ -19,6 +20,7 @@ export default {
   }
 }
 </script>
+
 
 <style>
 body{
