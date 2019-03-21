@@ -1,14 +1,12 @@
 package hu.elte.DogTrainingApplication.entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import hu.elte.DogTrainingApplication.common.SeasonTicketType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "season_ticket")
-public class SeasonTicket {
+public class SeasonTicket implements Serializable {
+    @Transient
+    private static final long serialVersionUID= 6921592859109495666L;
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
@@ -34,23 +34,24 @@ public class SeasonTicket {
 
     @Column(name = "start_date", updatable = false)
     @CreationTimestamp
-    private LocalDateTime start_at;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date", updatable = false)
     @UpdateTimestamp
-    private LocalDateTime end_at;
+    private LocalDateTime endDate;
+
+    @Column(name = "type")
+    private SeasonTicketType type;
 
     @Column(name = "paid")
-    private boolean paid;
+    private Boolean paid;
 
-    @Column(name = "dog_id", updatable = false)
-    private boolean dogId;
 
-    @OneToOne
-    @JoinColumn
-    private SeasonTicketSegment seasonTicketSegment;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seasonTicket")
+    private Set<SeasonTicketSegment> seasonTicketSegments;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dog_id", nullable = false)
-    private Dog dog_id;
+    private Dog dog;
 }

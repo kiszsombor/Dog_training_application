@@ -1,5 +1,6 @@
 package hu.elte.DogTrainingApplication.entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,29 +14,33 @@ import org.hibernate.annotations.UpdateTimestamp;
  * @author kiszs
  * @category entity
  *
+ * @modify: Bajári Lúcia: 19/03/21
+ *
  */
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "season_ticket_segment")
-public class SeasonTicketSegment {
+public class SeasonTicketSegment implements Serializable {
+
+    @Transient
+    private static final long serialVersionUID= 9220596922452110584L;
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "season_ticket_id", updatable = false, nullable = false)
-    private Integer seasonTicketId;
+    //@Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date", nullable = false)
+    private LocalDateTime date;
 
-    @Column(name = "date", updatable = false)
-    private LocalDateTime start_at;
-
-    @Column(name = "spent_time")
+    //TODO: percekben megadott időpontok kellenek ide, az nem jó Integer típusnak?
+    @Column(name = "spent_time",nullable = false)
     private LocalDateTime spentTime;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "season_ticket_id", nullable = false)
     private SeasonTicket seasonTicket;
 

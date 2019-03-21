@@ -33,4 +33,9 @@ public class DogServiceImpl implements DogService {
         return dogRepository.findById(id);
     }
 
+    @Override
+    public void save(Dog dog) {
+        dogRepository.save(dog);
+    }
+
 }

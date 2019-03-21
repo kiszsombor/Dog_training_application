@@ -22,4 +22,10 @@ public interface DogService {
      *      Egy kutya lekérése id alapján
      */
     Optional<Dog> findById(Integer id);
+
+    /**
+     * @param dog
+     *  Új kutya regisztrálásához
+     */
+    void save(Dog dog);
 }
