@@ -142,6 +142,7 @@ CREATE TABLE `taken_times` (
 # Létrehozó script a dog_tricks táblához
 #
 #----------------------------------
+#----------------------------------
 CREATE TABLE `dog_tricks` (
   `dog_id` int(11) NOT NULL,
   `trick_id` int(11) NOT NULL
@@ -173,7 +174,7 @@ VALUES ('Kis Károly', 'karcsi25@gmail.com', 'karesz_address', 305552145, '1990-
 INSERT INTO dog (name,age,breed,weight,trainer_id) VALUES ("Buksi",5,"breed_Buksi",5,1);
 INSERT INTO dog (name,age,breed,weight,trainer_id) VALUES ("Morci",4,"breed_Morci",5,2);
 
-INSERT INTO season_ticket_segment (season_ticket_id, date, spent_time) VALUES (1, '2019-01-16 12:00:00', '2019-02-16 12:00:00');
+INSERT INTO season_ticket_segment (season_ticket_id, date, spent_time) VALUES (1, NOW(), 90);
 
 INSERT INTO season_ticket (start_date, end_date, paid, dog_id) VALUES ('2019-01-16 12:00:00', '2019-02-16 12:00:00', true, 1);
 
