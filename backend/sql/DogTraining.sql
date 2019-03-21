@@ -45,13 +45,33 @@ CREATE TABLE `trainer` (
 # Létrehozó script a season_ticket_segment táblához
 #
 #----------------------------------
+-- CREATE TABLE `season_ticket_segment` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `season_ticket_id` int(11) NOT NULL,
+--   `date` timestamp NULL DEFAULT NULL,
+--   `spent_time` timestamp NULL DEFAULT NULL,
+--   PRIMARY KEY (`Id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+#----------------------------------
+# Author: Bajári Lúcia
+#----------------------------------
+#
+# Módosítás + kapcsolat hozzáadása: season_ticket_segment
+#
+#----------------------------------
+
 CREATE TABLE `season_ticket_segment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `season_ticket_id` int(11) NOT NULL,
+  `season_ticket_id` int(11) DEFAULT NULL,
   `date` timestamp NULL DEFAULT NULL,
-  `spent_time` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`Id`)
+  `spent_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `season_ticket_id` (`season_ticket_id`),
+  FOREIGN KEY (`season_ticket_id`) REFERENCES `season_ticket` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
 
 #----------------------------------
 # Author: Kis Zsombor
@@ -60,13 +80,31 @@ CREATE TABLE `season_ticket_segment` (
 # Létrehozó script a season_ticket táblához
 #
 #----------------------------------
+-- CREATE TABLE `season_ticket` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `start_date` datetime NULL DEFAULT NULL,
+--   `end_date` datetime NULL DEFAULT NULL,
+--   `paid` boolean NOT NULL,
+--   `dog_id` int(11) DEFAULT NULL,
+--   PRIMARY KEY (`Id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+#----------------------------------
+# Author: Bajári Lúcia
+#----------------------------------
+#
+# Módosítás + kapcsolat hozzáadása: season_ticket
+#
+#----------------------------------
+
 CREATE TABLE `season_ticket` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `start_date` datetime NULL DEFAULT NULL,
-  `end_date` datetime NULL DEFAULT NULL,
-  `paid` boolean NOT NULL,
   `dog_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
+  `start_date` timestamp NULL DEFAULT NULL,
+  `end_date` timestamp NULL DEFAULT NULL,
+  `type` enum('TWELWE','SIXTEEN','TWENTY') DEFAULT NULL,
+  `paid` boolean DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`dog_id`) REFERENCES `dog_training_database`.`dog`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #----------------------------------
@@ -145,4 +183,4 @@ INSERT INTO taken_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 
 
 INSERT INTO dog_tricks (dog_id, trick_id) VALUES (1, 1);
 
-INSERT INTO trick (name, category) VALUES ("sit", "basic");
+INSERT INTO trick (name, category) VALUES ("sit", "basic");CREATE TABLE `season_ticket` (   `id` int(11) NOT NULL AUTO_INCREMENT,   `student_id` int(11) DEFAULT NULL,   `language` enum('ENGLISH','GERMAN','FRENCH') DEFAULT NULL,   `start_date` timestamp NULL DEFAULT NULL,   `end_date` timestamp NULL DEFAULT NULL,   `type` enum('TWELWE','SIXTEEN','TWENTY') DEFAULT NULL,   `paid` tinyint(4) DEFAULT NULL,   PRIMARY KEY (`id`),   KEY `student_id` (`student_id`),   FOREIGN KEY (`student_id`) REFERENCES `dog_training_database`.`student`(`id`) ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1
