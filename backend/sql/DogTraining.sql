@@ -13,11 +13,11 @@ CREATE SCHEMA `dog_training_database` DEFAULT CHARACTER SET utf8 COLLATE utf8_bi
 CREATE TABLE `dog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `age` int(10) unsigned NOT NULL,
+  `birth_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `breed` varchar(45) DEFAULT NULL,
   `weight` varchar(45) DEFAULT NULL,
   `trainer_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #----------------------------------
@@ -155,10 +155,11 @@ CREATE TABLE `dog_tricks` (
 # Létrehozó script a trick táblához
 #
 #----------------------------------
+#*************TODO**********TODO*************TODO************TODO: Megfelelő enum-ok létrehozása
 CREATE TABLE `trick` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` enum NULL DEFAULT NULL,
-  `category` enum NULL DEFAULT NULL,
+  `name` enum('Trick1','Trick2') NULL DEFAULT NULL,
+  `category` enum('Category1','Category2') NULL DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -171,8 +172,8 @@ INSERT INTO trainer (name, email, address, phone_number, birth_date, birth_place
 VALUES ('Kis Károly', 'karcsi25@gmail.com', 'karesz_address', 305552145, '1990-04-16 00:00:00', 'Budapest'); 
 
 
-INSERT INTO dog (name,age,breed,weight,trainer_id) VALUES ("Buksi",5,"breed_Buksi",5,1);
-INSERT INTO dog (name,age,breed,weight,trainer_id) VALUES ("Morci",4,"breed_Morci",5,2);
+INSERT INTO dog (name,birth_date,breed,weight,trainer_id) VALUES ("Buksi",NOW(),"breed_Buksi",5,1);
+INSERT INTO dog (name,birth_date,breed,weight,trainer_id) VALUES ("Morci",NOW(),"breed_Morci",5,2);
 
 INSERT INTO season_ticket_segment (season_ticket_id, date, spent_time) VALUES (1, NOW(), 90);
 

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Bajári LÚCIA
@@ -32,8 +33,9 @@ public class Dog implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "age")
-    private Integer Age;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "birth_date")
+    private Date birthDate;
 
     @Column(name = "breed")
     private String breed;
