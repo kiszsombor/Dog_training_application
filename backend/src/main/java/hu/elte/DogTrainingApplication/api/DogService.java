@@ -1,11 +1,31 @@
 package hu.elte.DogTrainingApplication.api;
 
 import hu.elte.DogTrainingApplication.entities.Dog;
-
-import java.util.List;
-
+import java.util.Optional;
+/**
+ * DogService interfésze
+ *
+ * @author Bajári LÚCIA
+ * @category Interface
+ */
 public interface DogService {
 
-    boolean nothing();
-    List<Dog> findAll();
+    /**
+     * @return Iterable<Dog>
+     *     Az összes kutya kilistázása
+     */
+    Iterable<Dog> findAll();
+
+    /**
+     * @param id
+     * @return Optional<Dog>
+     *      Egy kutya lekérése id alapján
+     */
+    Optional<Dog> findById(Integer id);
+
+    /**
+     * @param dog
+     *  Új kutya regisztrálásához
+     */
+    void save(Dog dog);
 }
