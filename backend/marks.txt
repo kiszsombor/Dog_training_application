@@ -1,0 +1,28 @@
+Authentication: 
+
+	felhasználónév: user
+	jelszó: Using generated security password: ... (generált minden futtatásnál)
+
+Postman: 
+	Authorization: Basic author ugyanezen paraméterekkel
+	GET: mûködik
+	PUT viszont nem
+
+	URL: http://localhost:8080/season_tickets/modify/2
+	Body: raw: JSON(application/json)
+
+	{
+     
+        
+		"startDate": "2021-04-13T17:10:27.000+0000",
+        
+		"endDate": "2021-05-13T16:10:27.000+0000",
+        
+		"type":"TWENTY",
+        
+		"paid":false
+       
+
+	}
+	
+	KÉRÉS: ezt ki tudjátok próbálni, másnál mûködik-e? Nálam 401, ill 403-as hibákat dob :( 
