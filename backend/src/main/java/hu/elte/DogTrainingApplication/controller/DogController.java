@@ -3,11 +3,15 @@ package hu.elte.DogTrainingApplication.controller;
 
 import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.entities.Dog;
+import hu.elte.DogTrainingApplication.entities.SeasonTicket;
+import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -43,6 +47,27 @@ public class DogController {
             return ResponseEntity.ok(optional.get());
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * @param id
+     * @return List<SeasonTicket>
+     *      Egy diákhoz tartozó összes bérlet kilistázása
+     */
+    @GetMapping("/{id}/season_tickets")
+    public List<SeasonTicket> findAllSeasonTicketByDogId(@PathVariable Integer id){
+        return dogService.findAllSeasonTicketByDogId(id);
+    }
+
+    /**
+     * @param id
+     * @param seasonTicketId
+     * @return  List<SeasonTicketSegment>
+     *     Egy kztya bérletei közül egy adott id alapján egy bérlet lekérdezése (szegmenseinek megjelenítése)
+     */
+    @GetMapping("/{id}/season_tickets/{seasonTicketId}")
+    public List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(@PathVariable Integer id, @PathVariable Integer seasonTicketId){
+        return dogService.findAllSeasonTicketSegmentBySeasonTicketId(seasonTicketId);
     }
 
 

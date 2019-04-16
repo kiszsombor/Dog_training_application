@@ -1,5 +1,6 @@
 package hu.elte.DogTrainingApplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,7 @@ public class Dog implements Serializable {
     @Column(name = "weight")
     private Integer weight;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trainer_id", nullable = false)
     private Trainer trainer;

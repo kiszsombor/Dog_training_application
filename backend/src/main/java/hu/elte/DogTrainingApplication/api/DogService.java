@@ -1,6 +1,10 @@
 package hu.elte.DogTrainingApplication.api;
 
 import hu.elte.DogTrainingApplication.entities.Dog;
+import hu.elte.DogTrainingApplication.entities.SeasonTicket;
+import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
+
+import java.util.List;
 import java.util.Optional;
 /**
  * DogService interfésze
@@ -28,4 +32,26 @@ public interface DogService {
      *  Új kutya regisztrálásához
      */
     void save(Dog dog);
+    /**
+     * @param dogId
+     * @return  List<SeasonTicket>
+     *     Egy kutyához tartozó összes bérlet lekérdezése
+     */
+    List<SeasonTicket> findAllSeasonTicketByDogId(Integer dogId);
+
+
+    /**
+     * @param seasonTicketId
+     * @return  List<SeasonTicketSegment>
+     *     Egy bérlethez tartozó összes id lekérdezése
+     */
+    List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(Integer seasonTicketId);
+
+    /**
+     * @param dogId
+     *  Id alapján kutya törlése
+     */
+    void delete(Integer dogId);
+
+
 }

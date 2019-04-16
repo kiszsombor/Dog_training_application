@@ -30,4 +30,10 @@ public interface SeasonTicketService {
      *     Új bérlet felvételéhez
      */
     void save (SeasonTicket seasonTicket);
+
+    /**
+     * @param id
+     * Bérlet törlése id alapján
+     */
+    void delete(Integer id);
 }
