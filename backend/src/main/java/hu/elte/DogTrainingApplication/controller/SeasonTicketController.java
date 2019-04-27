@@ -16,6 +16,8 @@ import java.util.Optional;
  *
  * A SeasonTicketService kommunikációjáért felel.
  */
+//TODO: hiányzik a bérletek módosításáért felelős @PutMapping
+
 @Log4j2
 @RestController
 @CrossOrigin
@@ -51,9 +53,44 @@ public class SeasonTicketController {
      * @param seaonTicket
      * Új bérlet felvételéhez
      */
-    @PostMapping("/save")
+    @PostMapping("/save") //FIXME: kutyához kell csaatolni
     public void post(@RequestBody SeasonTicket seaonTicket) {
         seaonTicketService.save(seaonTicket);
     }
 
+
+    /**
+     * @param id
+     * @param seasonTicket
+     * Put: id alapján meghatározott bérlet adatainak módosításáért felelős metódus
+     */
+    @PutMapping("/modify/{id}")
+    public void put(@PathVariable Integer id, @RequestBody SeasonTicket seasonTicket) {
+        Optional<SeasonTicket> optionalSeasonTicket = seaonTicketService.findById(id);
+        SeasonTicket oldSeasonTicket=new SeasonTicket();
+        if(optionalSeasonTicket.isPresent()) {
+
+            oldSeasonTicket=optionalSeasonTicket.get();
+
+        }
+//        SeasonTicket oldSeasonTicket=seaonTicketService.findById(id).get();
+        System.out.println(("Bérlet: "+oldSeasonTicket.getId()));
+        oldSeasonTicket.setSeasonTicket(seasonTicket.getStartDate(),seasonTicket.getEndDate(),seasonTicket.getType(),
+                seasonTicket.getPaid(),seasonTicket.getDog(),seasonTicket.getSeasonTicketSegments());
+
+        seaonTicketService.save(oldSeasonTicket);
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<Boolean> deleteSeasonTicket(@PathVariable("id") Integer id) {
+        try {
+            seaonTicketService.delete(id);
+            return ResponseEntity.ok(true);
+        } catch (Exception e) {
+            log.error("Nem sikerült a season ticket lekérdezése {}", e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

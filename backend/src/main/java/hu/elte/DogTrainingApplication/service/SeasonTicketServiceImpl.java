@@ -37,4 +37,9 @@ public class SeasonTicketServiceImpl implements SeasonTicketService {
     public void save(SeasonTicket seasonTicket) {
         seasonTicketRepository.save(seasonTicket);
     }
+
+    @Override
+    public void delete(Integer id) {
+        seasonTicketRepository.deleteById(id);
+    }
 }

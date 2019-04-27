@@ -2,6 +2,8 @@ package hu.elte.DogTrainingApplication.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,7 @@ public class SeasonTicketSegment implements Serializable {
     @Column(name = "spent_time",nullable = false)
     private LocalDateTime spentTime;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "season_ticket_id", nullable = false)
     private SeasonTicket seasonTicket;
