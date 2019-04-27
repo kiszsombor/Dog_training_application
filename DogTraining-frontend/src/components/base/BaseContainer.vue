@@ -1,6 +1,6 @@
 <template>
     <div class="base-container">
-        <div class="header">
+        <div class="header main-title">
             <h1> {{headerTitle}} </h1>
 
         </div>
@@ -61,5 +61,7 @@ div.body h1{
     text-align: center;
     padding: 10%;
 }
-
+div.base-container{
+    padding-top:40px;
+}
 </style>

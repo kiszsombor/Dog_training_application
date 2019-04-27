@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Home from '@/router/views/Home'
 import LoginPage from '@/router/views/LoginPage'
-import Page1 from '@/router/views/Page1'
+import SeasonTickets from '@/components/SeasonTickets'
 import Page2 from '@/router/views/Page2'
 import Page3 from '@/router/views/Page3'
 import Page4 from '@/router/views/Page4'
@@ -23,9 +23,9 @@ export default new Router({
       component: LoginPage
     },
     {
-      path: '/Page1',
-      name: 'Page1',
-      component: Page1
+      path: '/SeasonTickets',
+      name: 'SeasonTickets',
+      component: SeasonTickets
     },
     {
       path: '/Page2',
