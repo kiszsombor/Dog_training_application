@@ -11,6 +11,8 @@ import Page4 from '@/router/views/Page4'
 Vue.use(Router)
 
 export default new Router({
+  base: '/app',
+  mode: 'history',
   routes: [
     {
       path: '/',
