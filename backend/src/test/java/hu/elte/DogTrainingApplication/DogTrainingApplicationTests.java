@@ -34,11 +34,11 @@ public class DogTrainingApplicationTests {
 	public void contextLoads() {
 	}
 
-	Integer id=1;
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
 	private MockMvc mockMvc;
+	private Dog dog;
 
 	@Autowired
 	private DogService dogService;
@@ -46,14 +46,29 @@ public class DogTrainingApplicationTests {
 	@MockBean
 	private DogRepository dogRepository;
 
+
+	Integer id=1;
+
 	@Before
 	public void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+		dog = new Dog();
+		dog.setId(id);
+	}
+
+	@Test
+	public void findDogById() {
+
+		System.out.println(dog);
+		Dog dog2=dogService.findById(id);
+		System.out.println("Id alaján ugyanaz a kutya: ---   " + dog2);
+
+		//assertEquals(dog,dog2);
+
 	}
 
 
-
-	@Test
+	//@Test
 	public void testDog1() throws Exception {
 
 		mockMvc.perform(get("/dog/1")).andExpect(status().isOk())
@@ -64,7 +79,7 @@ public class DogTrainingApplicationTests {
 				.andExpect(jsonPath("$.weight").value(5));
 	}
 
-	@Test
+	//@Test
 	public void testDog2() throws Exception {
 
 		mockMvc.perform(get("/dog/2")).andExpect(status().isOk())
@@ -75,7 +90,7 @@ public class DogTrainingApplicationTests {
 				.andExpect(jsonPath("$.weight").value(5));
 	}
 
-	@Test
+	//@Test
 	public void testDogs() throws Exception {
 
 		mockMvc.perform(get("/dog")).andExpect(status().isOk())
