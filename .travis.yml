@@ -8,6 +8,7 @@ stages:
 before_install:
   - cd backend/
 
+
 install:
 
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
