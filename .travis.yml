@@ -6,12 +6,11 @@ stages:
   - Backend test
 
 before_install:
-  - mvn -f backend/pom.xml
+  - cd backend/
 
 install:
 
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - npm install
 
 jobs:
   - include:
