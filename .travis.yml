@@ -5,6 +5,9 @@ stages:
   - Compile backend
   - Backend test
 
+before_install:
+  - mvn -f backend/pom.xml
+
 install:
 
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
