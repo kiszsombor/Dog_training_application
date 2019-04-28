@@ -22,10 +22,10 @@ public interface DogService {
 
     /**
      * @param id
-     * @return Optional<Dog>
+     * @return Dog
      *      Egy kutya lekérése id alapján
      */
-    Optional<Dog> findById(Integer id);
+    Dog findById(Integer id);
 
     /**
      * @param dog

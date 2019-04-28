@@ -42,9 +42,9 @@ public class DogController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Dog> getDogById(@PathVariable Integer id) {
-        Optional<Dog> optional= dogService.findById(id);
-        if (optional.isPresent()) {
-            return ResponseEntity.ok(optional.get());
+        Dog dog= dogService.findById(id);
+        if (!dog.equals(null)) {
+            return ResponseEntity.ok(dog);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

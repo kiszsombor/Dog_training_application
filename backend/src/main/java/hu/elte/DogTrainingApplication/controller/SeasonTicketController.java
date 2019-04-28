@@ -2,6 +2,7 @@ package hu.elte.DogTrainingApplication.controller;
 
 import hu.elte.DogTrainingApplication.api.SeasonTicketService;
 import hu.elte.DogTrainingApplication.entities.SeasonTicket;
+import hu.elte.DogTrainingApplication.wrapper.DogAndSeasonTicketWrapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,12 +51,14 @@ public class SeasonTicketController {
     }
 
     /**
-     * @param seaonTicket
+     * @param wrapper
      * Új bérlet felvételéhez
      */
-    @PostMapping("/save") //FIXME: kutyához kell csaatolni
-    public void post(@RequestBody SeasonTicket seaonTicket) {
-        seaonTicketService.save(seaonTicket);
+    @PostMapping("/save")
+    public SeasonTicket post(@RequestBody DogAndSeasonTicketWrapper wrapper) {
+        wrapper.setDog(wrapper.getSeasonTicket(),wrapper.getDog());
+        System.out.println("DOG: "+wrapper.getDog());
+        return seaonTicketService.save(wrapper.getSeasonTicket());
     }
 
 

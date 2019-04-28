@@ -37,8 +37,13 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public Optional<Dog> findById(Integer id) {
-        return dogRepository.findById(id);
+    public Dog findById(Integer id) {
+
+        Optional<Dog> optional =dogRepository.findById(id);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        return null;
     }
 
     @Override
