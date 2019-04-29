@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="bg-light">
+  <div id="app">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <NavigationBar></NavigationBar>
     <router-view/>
   </div>
@@ -23,17 +26,23 @@ export default {
 
 
 <style>
-/* body{
-  background-color: rgb(221, 224, 207);
-} */
+.pages{
+  background-color: #fff;
+    padding-top:7%;
+    margin-left:20%;
+    margin-right:20%;
+    overflow-y:auto;
+    margin-bottom:5%;
+}
 
 .main-title{
-font: bold 30px "Century Schoolbook", Georgia, Times, serif;
- color: #333;
- line-height: 90%;
- margin: .2em 0 .4em 0;
- letter-spacing: -2px;
- text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
- text-align:center;
+
+    font-weight:bold;
+    color: #575555;
+    font-family: arial, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 2%;
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
-  <div class="page3-page">
-    <BaseContainer :headerTitle="title"></BaseContainer>
+  <div class="pages">
+    <!-- <BaseContainer :headerTitle="title"></BaseContainer> -->
+    <h1 class="main-title">
+      {{title}}
+    </h1>
   </div>
   
 </template>
@@ -35,9 +38,5 @@ export default {
 </script>
 
 <style scoped>
-
-/* div.title h1{
-  text-align: center;
-} */
 
 </style>

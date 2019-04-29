@@ -1,6 +1,9 @@
 <template>
-  <div class="page1-page">
-    <BaseContainer :headerTitle="title"></BaseContainer>
+  <div class="pages">
+    <!-- <BaseContainer :headerTitle="title"></BaseContainer> -->
+    <h1 class="main-title">
+      {{title}}
+      </h1> 
   </div>
   
 </template>
@@ -19,7 +22,7 @@ export default {
     },
     data() {
         return {
-            title: "Page 1 Title",
+            title: "Profilom",
         }
     },
     methods: {
@@ -36,8 +39,5 @@ export default {
 
 <style scoped>
 
-/* div.title h1{
-  text-align: center;
-} */
 
 </style>
