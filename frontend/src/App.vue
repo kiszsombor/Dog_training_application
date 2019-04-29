@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="bg-light">
+  <div id="app">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <NavigationBar></NavigationBar>
     <router-view/>
   </div>
@@ -23,9 +26,7 @@ export default {
 
 
 <style>
-/* body{
-  background-color: rgb(221, 224, 207);
-} */
+
 
 .main-title{
 font: bold 30px "Century Schoolbook", Georgia, Times, serif;
