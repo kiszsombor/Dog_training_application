@@ -109,7 +109,7 @@
                                   Felhasználó
                                   </h6></template>
                                 <b-dropdown-item aria-role="listitem">
-                                  <router-link :to="``">
+                                  <router-link :to="`/profile`">
                                     <div class="dropdown_item"> Saját profil</div>
                                     </router-link>
                                 </b-dropdown-item>

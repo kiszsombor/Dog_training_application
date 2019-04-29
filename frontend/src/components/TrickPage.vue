@@ -1,28 +1,30 @@
 <template>
-  <div class="main">
+  <div class="pages">
     <!-- <h1>{{ msg }}</h1> -->
-    <div class="title">
-        <h2>Képzés</h2>
-    </div>
+    <h1 class="main-title">
+      {{title}}
+      </h1> 
     <!-- <nav-bar-trick></nav-bar-trick> -->
-    <ul>
-      <li class="basic">
-        <router-link to="/TrickPage/BasicTricks"> Alapszint 
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[0]" class="mb-2">{{values[0]}}/{{max}}</b-progress-bar></b-progress>
-        </router-link>
-      </li>
-      <li class="intermediate">
-        <router-link to="/TrickPage/IntermediateTricks"> Középszint
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[1]" class="mb-2">{{values[1]}}/{{max}}</b-progress-bar></b-progress>
-        </router-link>
-      </li>
-      <li class="advanced">
-        <router-link to="/TrickPage/AdvancedTricks"> Haladó szint
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[2]" class="mb-2">{{values[2]}}/{{max}}</b-progress-bar></b-progress>
-        </router-link>
-      </li>
-    </ul>
-    <p class="back"><router-link to="/TrickPage"> VISSZA </router-link></p>
+    <div class="main">
+        <ul>
+          <li class="basic">
+            <router-link to="/TrickPage/BasicTricks"> Alapszint 
+              <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[0]" class="mb-2">{{values[0]}}/{{max}}</b-progress-bar></b-progress>
+            </router-link>
+          </li>
+          <li class="intermediate">
+            <router-link to="/TrickPage/IntermediateTricks"> Középszint
+              <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[1]" class="mb-2">{{values[1]}}/{{max}}</b-progress-bar></b-progress>
+            </router-link>
+          </li>
+          <li class="advanced">
+            <router-link to="/TrickPage/AdvancedTricks"> Haladó szint
+              <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[2]" class="mb-2">{{values[2]}}/{{max}}</b-progress-bar></b-progress>
+            </router-link>
+          </li>
+        </ul>
+        <p class="back"><router-link to="/TrickPage"> VISSZA </router-link></p>
+    </div>
   </div>
 </template>
 
@@ -34,18 +36,13 @@ export default {
   data() {
       return {
         max: 3,
-        values: [3, 1, 0]
+        values: [3, 1, 0],
+        title: 'Trükkök'
       }
     },
   components: {
       // 'nav-bar-trick': NavBarTrick
     }
-  // ,
-  // data () {
-  //   return {
-  //     msg: 'Welcome to Your Vue.js App'
-  //   }
-  // }
 }
 </script>
 
