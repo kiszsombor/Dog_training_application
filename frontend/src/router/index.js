@@ -9,7 +9,7 @@ import TrickPage from '@/components/TrickPage'
 import BasicTricks from '@/components/BasicTricks'
 import IntermediateTricks from '@/components/IntermediateTricks'
 import AdvancedTricks from '@/components/AdvancedTricks'
-import Page1 from '@/router/views/Page1'
+import DogProfile from '@/router/views/DogProfile'
 import Page2 from '@/router/views/Page2'
 import Page3 from '@/router/views/Page3'
 import Page4 from '@/router/views/Page4'
@@ -57,8 +57,8 @@ export default new Router({
     },
     {
       path: '/profile',
-      name: 'Page1',
-      component: Page1
+      name: 'DogProfile',
+      component: DogProfile
     },
 	  {
       path: '/Page2',
