@@ -89,11 +89,12 @@
                                       
                                         <b-nav-item class="menu">
                                           <router-link
-                                            v-for="pageItemString in pageItemsString"
+                                            v-for="(pageItemString,index) in pageItemsString"
                                             :key="pageItemString.id"
                                             :to="pageItemString"
                                           >
-                                            <h6><a>{{pageItemString}}</a></h6>
+                                            <h6>
+                                              <a>{{pageItemStringNames[index]}}</a></h6>
                                            
                                           </router-link>
                                           </b-nav-item>
@@ -148,7 +149,8 @@ export default {
   data () {
     return {
       title: "Dog Training",
-      pageItemsString: ["Page1", "Page2", "Page3", "Page4"],
+      pageItemsString: ["profile", "tricks", "Page3", "seasonTickets"],
+      pageItemStringNames:["Profilom", "Trükkjeim", "Page3", "Bérleteim"]
       // selectedPageItemIndex: 1,
     }
   },

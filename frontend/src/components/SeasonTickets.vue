@@ -3,7 +3,7 @@
 
     <div class="seasonticket-page">
         <div class="header">
-            <h1> {{title}} </h1>
+            <h1 class="main-title"> {{title}} </h1>
 
                             <div>
                                     <b-alert v-if="deleted"
@@ -148,22 +148,24 @@ export default {
     margin-left:20%;
     margin-right:20%;
     overflow-y:auto;
+    margin-bottom:5%;
+
 }
 th,td{
     text-align: center;
 }
-h1{
+/* h1{
     
     text-align:center;
     font-weight:bold;
 
-    color: #999999;
+    color: #575555;
     font-family: arial, sans-serif;
-    font-size: 22px;
+    font-size: 28px;
     font-weight: bold;
     margin-top: 0px;
     margin-bottom: 2%;
-}
+} */
 
 .button{
     text-align: right;

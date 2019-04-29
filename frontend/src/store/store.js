@@ -29,6 +29,48 @@ export default new Vuex.Store({
           type:	"TWELWE",
           paid:	false
         }
+        ,
+        { id:	5,
+          startDate:	"2019-01-16T12:00:00",
+          endDate:	"2019-02-16T12:00:00",
+          type:	"TWELWE",
+          paid:	false
+        }
+        ,
+        { id:	6,
+          startDate:	"2019-01-16T12:00:00",
+          endDate:	"2019-02-16T12:00:00",
+          type:	"TWELWE",
+          paid:	false
+        }
+        ,
+        { id:	7,
+          startDate:	"2019-01-16T12:00:00",
+          endDate:	"2019-02-16T12:00:00",
+          type:	"TWELWE",
+          paid:	false
+        }
+        ,
+        { id:	8,
+          startDate:	"2019-01-16T12:00:00",
+          endDate:	"2019-02-16T12:00:00",
+          type:	"TWELWE",
+          paid:	false
+        }
+        ,
+        { id:	9,
+          startDate:	"2019-01-16T12:00:00",
+          endDate:	"2019-02-16T12:00:00",
+          type:	"TWELWE",
+          paid:	false
+        }
+        ,
+        { id:	10,
+          startDate:	"2019-01-16T12:00:00",
+          endDate:	"2019-02-16T12:00:00",
+          type:	"TWELWE",
+          paid:	false
+        }
         
       ]
     },

@@ -26,15 +26,23 @@ export default {
 
 
 <style>
-
+.pages{
+  background-color: #fff;
+    padding-top:7%;
+    margin-left:20%;
+    margin-right:20%;
+    overflow-y:auto;
+    margin-bottom:5%;
+}
 
 .main-title{
-font: bold 30px "Century Schoolbook", Georgia, Times, serif;
- color: #333;
- line-height: 90%;
- margin: .2em 0 .4em 0;
- letter-spacing: -2px;
- text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
- text-align:center;
+
+    font-weight:bold;
+    color: #575555;
+    font-family: arial, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 2%;
 }
 </style>
