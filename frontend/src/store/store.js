@@ -72,6 +72,43 @@ export default new Vuex.Store({
           paid:	false
         }
         
+      ],
+      dogs:[
+        {
+          id:	1,
+          name:	"Buksi",
+          birthDate:	"2019-03-21T17:52:00.000+0000",
+          breed:	"breed_Buksi",
+          weight:	5,
+        },
+        {
+          id:	2,
+          name:	"Pamacs",
+          birthDate:	"2019-03-21T17:52:00.000+0000",
+          breed:	"breed_pami",
+          weight:	5,
+        },
+        {
+          id:	3,
+          name:	"Szilva",
+          birthDate:	"2019-03-21T17:52:00.000+0000",
+          breed:	"breed_Buksi",
+          weight:	5,
+        },
+        {
+          id:	4,
+          name:	"Körte",
+          birthDate:	"2019-03-21T17:52:00.000+0000",
+          breed:	"breed_Buksi",
+          weight:	5,
+        },
+        {
+          id:	5,
+          name:	"Kutyi",
+          birthDate:	"2019-03-21T17:52:00.000+0000",
+          breed:	"breed_Buksi",
+          weight:	5,
+        }
       ]
     },
     mutations: {
