@@ -41,17 +41,17 @@ export default new Router({
       component: TrickPage
     },
     {
-      path: '/TrickPage/BasicTricks',
+      path: '/alapszint',
       name: 'BasicTricks',
       component: BasicTricks
     },
     {
-      path: '/TrickPage/IntermediateTricks',
+      path: '/kozepszint',
       name: 'IntermediateTricks',
       component: IntermediateTricks
     },
     {
-      path: '/TrickPage/AdvancedTricks',
+      path: '/haladoszint',
       name: 'AdvancedTricks',
       component: AdvancedTricks
     },

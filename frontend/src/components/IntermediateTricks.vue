@@ -19,7 +19,7 @@
         <button type="button" class="btn li button btn-lg btn-block">Séta lábnál</button>
       </li>
     </ul>
-    <p class="back"><router-link to="/TrickPage"> VISSZA </router-link></p>
+    <p><b-button class="back"><router-link to="/tricks"> VISSZA </router-link></b-button></p>
   </div>
 </template>
 
@@ -109,12 +109,15 @@ li button:active {
     border: none;
 }
 .back {
-    padding-top: 4%;
+    text-align: center;
     background-color: #606060;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     font-family: Arial, sans-serif;
-    font-size: 130%;
     /* visibility: hidden; */
+}
+p {
+    text-align: center;
 }
 a{
     background-color: #606060;
@@ -124,10 +127,7 @@ a{
 }
 a:hover {
     background-color: #606060;
-    border-color: #606060;
     color: skyblue;
-	  background-repeat: no-repeat;
-	  background-position: 43% 50%;
-    background-size: 5%;
+    text-decoration: none;
 }
 </style>
