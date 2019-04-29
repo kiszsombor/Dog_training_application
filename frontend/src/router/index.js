@@ -60,12 +60,12 @@ export default new Router({
       name: 'Page1',
       component: Page1
     },
-	{
+	  {
       path: '/Page2',
       name: 'Page2',
       component: Page2
     },
-	
+    {	
       path: '/Page3',
       name: 'Page3',
       component: Page3
