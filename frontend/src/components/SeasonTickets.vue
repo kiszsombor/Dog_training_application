@@ -40,11 +40,46 @@
                     </div>
             
                 <div class=" button my-3">
-                    <b-button v-b-tooltip.hover title="Új bérlet hozzáadása" variant="secondary"><i class="fas fa-plus"></i></b-button>
+                    <b-button v-b-modal.modal-prevent v-b-tooltip.hover title="Új bérlet hozzáadása" variant="secondary"><i class="fas fa-plus"></i></b-button>
                 </div>
                 
             
+            <!-- Modal Component -->
+            <b-modal id="modal-prevent" ref="modal"
+            title="Bérlet hozzáadása"
+            ok-variant="primary"
+            ok-title="Hozzáadás"
+            cancel-title="Mégse"
             
+            >
+            <!-- @shown="clearSeasonTicket" -->
+            <form @submit.stop.prevent="handleSubmit">
+                <b-container class="bv-example-row">
+                <b-row>
+                    <b-col cols="6">Érvényesség kezdete</b-col>
+                    <b-col cols="6"><b-form-input type="date" placeholder="Érvényesség kezdete..."></b-form-input></b-col>
+                    <div class="w-100 padding"></div>
+                    <b-col cols="6">Érvényesség vége</b-col>
+                    <b-col cols="6"><b-form-input type="date"  placeholder="Érvényesség vége..."></b-form-input></b-col>
+                    <div class="w-100 padding"></div>
+                    <b-col cols="6">Eddig lejárt órák száma</b-col>
+                    <b-col cols="6"><b-form-input type="number"></b-form-input></b-col>
+                    <div class="w-100 padding"></div>
+                    <b-col cols="6">Fizetve</b-col>
+                     <b-col cols="6">
+                        <b-form-group>
+                            <b-form-radio-group
+                                v-model="selected"
+                                :options="options"
+                                name="radio-inline"
+                            ></b-form-radio-group>
+                        </b-form-group>
+                     </b-col>
+                </b-row>
+                </b-container>
+               
+            </form>
+            </b-modal>
             <hr>
 
         </div>
@@ -119,6 +154,11 @@ export default {
             deleted:true,
             dismissSecs: 2,
             dismissCountDown: 0,
+            selected: 'first',
+            options: [
+          { text: 'Igen', value: 'yes' },
+          { text: 'Nem', value: 'no' },
+        ]
 
         }
     },
@@ -181,5 +221,8 @@ th,td{
   /* transition: opacity .5s; */
 }
 
+ .padding{
+        margin:2%;
+    }
 
 </style>

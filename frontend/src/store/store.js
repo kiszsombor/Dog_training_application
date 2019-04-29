@@ -80,6 +80,7 @@ export default new Vuex.Store({
           birthDate:	"2019-03-21T17:52:00.000+0000",
           breed:	"breed_Buksi",
           weight:	5,
+          description:"The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
         },
         {
           id:	2,

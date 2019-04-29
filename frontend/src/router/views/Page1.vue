@@ -7,6 +7,10 @@
         
   <div class="card">
   <b-card
+
+    header-text-variant="white"
+    header-bg-variant="secondary"
+
     bg-variant="light"
     
     tag="article"
@@ -14,12 +18,12 @@
     class="mb-2"
   >
   <div slot="header">
-        <b-row>
+        <b-row bg-variant="dark" >
           <b-col cols="10">
           <h3>{{dog.name}}</h3>
           </b-col>
-             <b-col cols="1"> <b-button variant="secondary" v-b-tooltip.hover title="Profil szerkesztése"><i class="fas fa-edit"></i></b-button></b-col>
-              <b-col cols="1"> <b-button v-b-modal.modal-1 variant="secondary" v-b-tooltip.hover title="Profil törlése"><i class="fas fa-trash"></i></b-button></b-col>
+             <b-col cols="1"> <b-button variant="dark" v-b-tooltip.hover title="Profil szerkesztése"><i class="fas fa-edit"></i></b-button></b-col>
+              <b-col cols="1"> <b-button v-b-modal.modal-1 variant="dark" v-b-tooltip.hover title="Profil törlése"><i class="fas fa-trash"></i></b-button></b-col>
         </b-row>
       </div>
     <b-card-text>
@@ -36,6 +40,13 @@
           <b-col cols="6">Súly </b-col>
           <b-col cols="6">{{dog.weight}}</b-col>
               <div class="w-100"></div>
+              <br>
+                  
+              <b-col cols="12">
+                <hr>
+                  
+                  
+                {{dog.description}}</b-col>
 
         </b-row>
       </b-container>    
