@@ -22,7 +22,7 @@
           <b-col cols="10">
           <h3>{{dog.name}}</h3>
           </b-col>
-             <b-col cols="1"> <b-button variant="dark" v-b-tooltip.hover title="Profil szerkesztése"><i class="fas fa-edit"></i></b-button></b-col>
+             <b-col cols="1"> <b-button variant="dark" v-b-tooltip.hover  v-b-modal.modal-prevent title="Profil szerkesztése"><i class="fas fa-edit"></i></b-button></b-col>
               <b-col cols="1"> <b-button v-b-modal.modal-1 variant="dark" v-b-tooltip.hover title="Profil törlése"><i class="fas fa-trash"></i></b-button></b-col>
         </b-row>
       </div>
@@ -51,14 +51,7 @@
         </b-row>
       </b-container>    
       </b-card-text>
-      <!-- <div slot="footer">
-        <b-row>
-             <b-col cols="6"> <b-button href="#" class="foot" variant="primary">Szerkesztés</b-button></b-col>
-              <b-col cols="6"><b-button href="#" class="foot" variant="primary">Törlés</b-button></b-col>
-        </b-row>
-      </div> -->
-
-
+      
   </b-card>
 </div>
 
@@ -69,8 +62,61 @@
                             <p class="my-4">A törlés végleges! </p>
                         </b-modal>
                     </div>
+
+
+<!-- Modal Component -->
+            <b-modal id="modal-prevent" ref="modal"
+            title="Profil módosítása"
+            ok-variant="primary"
+            ok-title="Módosítás"
+            cancel-title="Mégse"
+            size="lg"
+            
+            >
+            
+            <!-- @shown="clearSeasonTicket" -->
+            <form @submit.stop.prevent="handleSubmit">
+                <b-container class="bv-example-row">
+                <b-row>
+                    <b-col cols="4">Név</b-col>
+                    <b-col cols="8"><b-form-input type="text" v-model="myAccount.name"></b-form-input></b-col>
+                    <div class="w-100 padding"></div>
+
+                    <b-col cols="4">Születési dátum</b-col>
+                    <b-col cols="8"><b-form-input type="date" v-model="myAccount.birthDate"></b-form-input></b-col>
+                    <div class="w-100 padding"></div>
+
+                    <b-col cols="4">Fajta</b-col>
+                    <b-col cols="8"><b-form-input type="text" v-model="myAccount.breed"></b-form-input></b-col>
+                    <div class="w-100 padding"></div>
+
+                    <b-col cols="4">Súly</b-col>
+                     <b-col cols="8"><b-form-input type="number" v-model="myAccount.weight"></b-form-input></b-col>
+                     <div class="w-100 padding"></div>
+
+                    <b-col cols="4">Leírás</b-col>
+                     <b-col cols="8">
+                        <b-form-textarea
+                          id="textarea"
+                          v-model="myAccount.description"
+                          placeholder="Leírás..."
+                          rows="4"
+                          max-rows="12"
+                      ></b-form-textarea>
+                    </b-col>
+                </b-row>
+                </b-container>
+               
+            </form>
+            </b-modal>
+<div>
+  <br>
+  {{myAccount}}
+</div>
+
+
   </div>
-  
+
 </template>
 
 <script>
@@ -88,7 +134,15 @@ export default {
     data() {
         return {
             title: "Profilom",
-            dog: this.$store.state.dogs[0]
+            dog: this.$store.state.dogs[0],
+
+            myAccount:{
+              name:"",
+              birthDate:null,
+              weight:null,
+              breed:"",
+              description:""
+            }
         }
     },
     methods: {

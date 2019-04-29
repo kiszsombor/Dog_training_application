@@ -51,7 +51,9 @@
             ok-title="Hozzáadás"
             cancel-title="Mégse"
             
+            
             >
+            <!-- size="lg" -->
             <!-- @shown="clearSeasonTicket" -->
             <form @submit.stop.prevent="handleSubmit">
                 <b-container class="bv-example-row">
@@ -88,7 +90,7 @@
                 <table class="table">
                 <thead class=" thread bg-secondary">
                     <tr>
-                    <th scope="col">#</th>
+                    <th scope="col"></th>
                     <th scope="col">Érvényesség kezdete</th>
                     <th scope="col">Érvényesség vége</th>
                     <th scope="col">Fizetve</th>
