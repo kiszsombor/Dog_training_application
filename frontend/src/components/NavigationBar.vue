@@ -149,8 +149,8 @@ export default {
   data () {
     return {
       title: "Dog Training",
-      pageItemsString: ["profile", "tricks", "Page3", "seasonTickets"],
-      pageItemStringNames:["Profilom", "Trükkjeim", "Page3", "Bérleteim"]
+      pageItemsString: ["tricks", "Page3", "seasonTickets"],
+      pageItemStringNames:["Trükkjeim", "Page3", "Bérleteim"]
       // selectedPageItemIndex: 1,
     }
   },

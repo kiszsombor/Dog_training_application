@@ -4,27 +4,26 @@
     <h1 class="main-title">
       {{title}}
       </h1> 
-    <!-- <nav-bar-trick></nav-bar-trick> -->
-    <div class="main">
-        <ul>
-          <li class="basic">
-            <router-link to="/TrickPage/BasicTricks"> Alapszint 
-              <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[0]" class="mb-2">{{values[0]}}/{{max}}</b-progress-bar></b-progress>
-            </router-link>
-          </li>
-          <li class="intermediate">
-            <router-link to="/TrickPage/IntermediateTricks"> Középszint
-              <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[1]" class="mb-2">{{values[1]}}/{{max}}</b-progress-bar></b-progress>
-            </router-link>
-          </li>
-          <li class="advanced">
-            <router-link to="/TrickPage/AdvancedTricks"> Haladó szint
-              <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[2]" class="mb-2">{{values[2]}}/{{max}}</b-progress-bar></b-progress>
-            </router-link>
-          </li>
-        </ul>
-        <p class="back"><router-link to="/TrickPage"> VISSZA </router-link></p>
-    </div>
+<div class="main">
+    <ul>
+      <li class="basic">
+        <router-link to="/alapszint"> Alapszint 
+          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[0]" class="mb-2">{{values[0]}}/{{max}}</b-progress-bar></b-progress>
+        </router-link>
+      </li>
+      <li class="intermediate">
+        <router-link to="/kozepszint"> Középszint
+          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[1]" class="mb-2">{{values[1]}}/{{max}}</b-progress-bar></b-progress>
+        </router-link>
+      </li>
+      <li class="advanced">
+        <router-link to="/haladoszint"> Haladó szint
+          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[2]" class="mb-2">{{values[2]}}/{{max}}</b-progress-bar></b-progress>
+        </router-link>
+      </li>
+    </ul>
+    <p class="back"><router-link to="/tricks"> VISSZA </router-link></p>
+  </div>
   </div>
 </template>
 
@@ -37,7 +36,7 @@ export default {
       return {
         max: 3,
         values: [3, 1, 0],
-        title: 'Trükkök'
+        title: 'Trükkjeim'
       }
     },
   components: {
@@ -87,10 +86,10 @@ li{
     padding: 2% 0% 2% 0%;
 }
 li a {
-  font-size: 120%;
+    font-size: 120%;
     display: inline-block;
     width: 80%;
-    padding: 2% 0% 0% 0%;
+    padding: 3% 0% 0% 0%;
     background-color: lightgray;
     text-decoration: none;
     color: black;
