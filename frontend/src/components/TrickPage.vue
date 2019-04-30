@@ -7,22 +7,22 @@
 <div class="main">
     <ul>
       <li class="basic">
-        <router-link to="/alapszint"> Alapszint 
+        <router-link :to="`/logged/${dogId}/alapszint`"> Alapszint 
           <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[0]" class="mb-2">{{values[0]}}/{{max}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="intermediate">
-        <router-link to="/kozepszint"> Középszint
+        <router-link :to="`/logged/${dogId}/kozepszint`"> Középszint
           <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[1]" class="mb-2">{{values[1]}}/{{max}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="advanced">
-        <router-link to="/haladoszint"> Haladó szint
+        <router-link :to="`/logged/${dogId}/haladoszint`"> Haladó szint
           <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[2]" class="mb-2">{{values[2]}}/{{max}}</b-progress-bar></b-progress>
         </router-link>
       </li>
     </ul>
-    <p class="back"><router-link to="/tricks"> VISSZA </router-link></p>
+    <p class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></p>
   </div>
   </div>
 </template>
@@ -36,7 +36,8 @@ export default {
       return {
         max: 3,
         values: [3, 1, 0],
-        title: 'Trükkjeim'
+        title: 'Trükkjeim',
+        dogId:this.$route.params.dogId
       }
     },
   components: {

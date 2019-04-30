@@ -19,7 +19,7 @@
         <button type="button" class="btn li button btn-lg btn-block">Apportíroz</button>
       </li>
     </ul>
-    <p><b-button class="back"><router-link to="/tricks"> VISSZA </router-link></b-button></p>
+    <p><b-button class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
   </div>
 </template>
 
@@ -31,12 +31,12 @@ export default {
     components: {
       // 'nav-bar-trick': NavBarTrick
     }
-  // ,
-  // data () {
-  //   return {
-  //     msg: 'Welcome to Your Vue.js App'
-  //   }
-  // }
+  ,
+  data () {
+    return {
+      dogId: this.$route.params.dogId
+    }
+  }
 }
 </script>
 

@@ -31,6 +31,9 @@ const moduleDog={
     ADD_NEW_SEASON_TICKET(state, seasonTicket){
       state.seasonTickets.push(seasonTicket)
     },
+    DELETE_SEASON_TICKET(state, seasonTicket){
+      delete state.seasonTickets[seasonTicket];
+  },
    },
   actions: {  
     getDogById(context,dogID){
@@ -45,12 +48,21 @@ const moduleDog={
           context.commit('INIT_SEASON_TICKETS_BY_A_DOG',res.data)
       })
   },
-  addNewSeasonTicket(context, payload){
-    return SeasonTicketApi.addNewSeasonTicket({...payload})
-        .then(res => {
-            context.commit('ADD_NEW_SEASON_TICKET', res.data)
-            return Promise.resolve()
-        })
+    addNewSeasonTicket(context, payload){
+      return SeasonTicketApi.addNewSeasonTicket({...payload})
+          .then(res => {
+              context.commit('ADD_NEW_SEASON_TICKET', res.data)
+              return Promise.resolve()
+          })
+  },
+  deleteSeasonTicketById(context,seasonTicketId){
+    SeasonTicketApi.deleteSeasonTicketById(seasonTicketId)
+    .then(res=>{
+        // console.log("Res.data delete: ",res.data)
+        context.commit('DELETE_SEASON_TICKET', res.data)
+        return Promise.resolve()
+
+    })
 },
 
   },

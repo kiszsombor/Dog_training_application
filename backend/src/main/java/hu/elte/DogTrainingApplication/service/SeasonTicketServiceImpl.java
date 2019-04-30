@@ -40,7 +40,14 @@ public class SeasonTicketServiceImpl implements SeasonTicketService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public SeasonTicket deleteById(Integer id) {
+        Optional<SeasonTicket> deletedTicketOptional=seasonTicketRepository.findById(id);
+        SeasonTicket deletedTicket=null;
+        if(deletedTicketOptional.isPresent()){
+            deletedTicket=deletedTicketOptional.get();
+        }
+
         seasonTicketRepository.deleteById(id);
+        return deletedTicket;
     }
 }

@@ -109,7 +109,7 @@
                         <td v-else><i class="fas fa-times"></i></td>
                         <td>10/12</td>
                         <td><b-button variant="secondary"><i class="fas fa-edit"></i></b-button></td>
-                        <td><b-button v-b-modal.modal-1 variant="secondary" ><i class="fas fa-trash"></i></b-button></td>
+                        <td><b-button v-b-modal.modal-1 variant="secondary" @click="ticketId=s.id"><i class="fas fa-trash"></i></b-button></td>
                         
                     </tr>
                     
@@ -118,7 +118,7 @@
                 <!-- MODAL -->
                     <div>
 
-                        <b-modal id="modal-1" title="Biztos ki szeretné törölni?" ok-title="Igen" cancel-title="Nem" @ok="showAlert">
+                        <b-modal id="modal-1" title="Biztos ki szeretné törölni?" ok-title="Igen" cancel-title="Nem" @ok="deleteSeasonTicket(ticketId), showAlert()">
                             <p class="my-4">A törlés végleges! </p>
                         </b-modal>
                     </div>
@@ -170,7 +170,7 @@ export default {
         return {
             dogId:this.$route.params.dogId,
             title: "Bérleteim",
-            body: "Body",
+            ticketId:null,
             ticketsLoading:true,
             seasonTicket:{
                 startDate:"",
@@ -197,28 +197,35 @@ export default {
 
     },
     methods: {
-        ...mapActions(['getAllSeasonTicketsByDog']),
+        ...mapActions(['getAllSeasonTicketsByDog','deleteSeasonTicketById','getDogById']),
         getSeasonTickets(){
                 // this.ticketsLoading=false;
                 this.getAllSeasonTicketsByDog(this.dogId);
                 
         },
-        countDownChanged(dismissCountDown) {
-        this.dismissCountDown = dismissCountDown
-      },
-      showAlert() {
-              this.dismissCountDown = this.dismissSecs
-      },
-      saveNewSeasonTicket(){
-            this.$store.dispatch('addNewSeasonTicket',
-              {
-                seasonTicket: this.seasonTicket,
-                dog: this.dog
-              })    
-              
+        deleteSeasonTicket(id){
+                this.deleteSeasonTicketById(id);   
         },
-        
-    },
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        // getDog(){
+        //     return this.getDogById(this.dogId)
+        // },
+        showAlert() {
+                this.dismissCountDown = this.dismissSecs
+        },
+        saveNewSeasonTicket(){
+
+                this.$store.dispatch('addNewSeasonTicket',
+                {
+                    seasonTicket: this.seasonTicket,
+                    dog: this.dog
+                })    
+                
+            },
+            
+        },
     //FIXME: csak a profil után tölti be a state-ből a kutyát
     computed: {
         ...mapState({
