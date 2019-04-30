@@ -91,7 +91,7 @@
                                           <router-link
                                             v-for="(pageItemString,index) in pageItemsString"
                                             :key="pageItemString.id"
-                                            :to="pageItemString"
+                                            :to="`/logged/${dogId}/${pageItemString}`"
                                           >
                                             <h6>
                                               <a>{{pageItemStringNames[index]}}</a></h6>
@@ -109,7 +109,7 @@
                                   Felhasználó
                                   </h6></template>
                                 <b-dropdown-item aria-role="listitem">
-                                  <router-link :to="`/profile`">
+                                  <router-link :to="`/logged/${dogId}/profile`">
                                     <div class="dropdown_item"> Saját profil</div>
                                     </router-link>
                                 </b-dropdown-item>
@@ -149,6 +149,7 @@ export default {
   data () {
     return {
       title: "Dog Training",
+      dogId:this.$route.params.dogId,
       pageItemsString: ["tricks", "Page3", "seasonTickets"],
       pageItemStringNames:["Trükkjeim", "Page3", "Bérleteim"]
       // selectedPageItemIndex: 1,

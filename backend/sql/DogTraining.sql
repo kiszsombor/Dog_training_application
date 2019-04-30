@@ -186,3 +186,9 @@ INSERT INTO taken_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 
 INSERT INTO dog_tricks (dog_id, trick_id) VALUES (1, 1);
 
 INSERT INTO trick (name, category) VALUES ("sit", "basic");CREATE TABLE `season_ticket` (   `id` int(11) NOT NULL AUTO_INCREMENT,   `student_id` int(11) DEFAULT NULL,   `language` enum('ENGLISH','GERMAN','FRENCH') DEFAULT NULL,   `start_date` timestamp NULL DEFAULT NULL,   `end_date` timestamp NULL DEFAULT NULL,   `type` enum('TWELWE','SIXTEEN','TWENTY') DEFAULT NULL,   `paid` tinyint(4) DEFAULT NULL,   PRIMARY KEY (`id`),   KEY `student_id` (`student_id`),   FOREIGN KEY (`student_id`) REFERENCES `dog_training_database`.`student`(`id`) ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1
+
+
+
+INSERT INTO `season_ticket` (`id`, `dog_id`, `start_date`, `end_date`, `type`, `paid`) VALUES (NULL, '2', '2019-04-03 00:00:00', '2019-04-19 00:00:00', NULL, '0'), (NULL, '3', '2019-04-14 00:00:00', '2019-04-27 00:00:00', NULL, '1');
+
+INSERT INTO `season_ticket` (`id`, `dog_id`, `start_date`, `end_date`, `type`, `paid`) VALUES (NULL, '2', '2019-04-23 00:00:00', '2019-05-24 00:00:00', NULL, '1'), (NULL, '2', '2019-04-20 00:00:00', '2019-05-17 00:00:00', NULL, '1');

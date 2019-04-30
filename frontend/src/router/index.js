@@ -21,45 +21,50 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/logged/:dogId',
       name: 'Home',
-      component: Home
+      component: Home,
+      children:[
+        {
+          path: 'SeasonTickets',
+          name: 'SeasonTickets',
+          component: SeasonTickets
+        },
+        {
+          path: 'profile',
+          name: 'DogProfile',
+          component: DogProfile
+        },
+        {
+          path: 'tricks',
+          name: 'TrickPage',
+          component: TrickPage
+        },
+        {
+          path: 'alapszint',
+          name: 'BasicTricks',
+          component: BasicTricks
+        },
+        {
+          path: 'kozepszint',
+          name: 'IntermediateTricks',
+          component: IntermediateTricks
+        },
+        {
+          path: 'haladoszint',
+          name: 'AdvancedTricks',
+          component: AdvancedTricks
+        },
+      ]
     },
     {
       path: '/LoginPage',
       name: 'LoginPge',
       component: LoginPage
     },
-    {
-      path: '/SeasonTickets',
-      name: 'SeasonTickets',
-      component: SeasonTickets
-    },
-    {
-      path: '/tricks',
-      name: 'TrickPage',
-      component: TrickPage
-    },
-    {
-      path: '/alapszint',
-      name: 'BasicTricks',
-      component: BasicTricks
-    },
-    {
-      path: '/kozepszint',
-      name: 'IntermediateTricks',
-      component: IntermediateTricks
-    },
-    {
-      path: '/haladoszint',
-      name: 'AdvancedTricks',
-      component: AdvancedTricks
-    },
-    {
-      path: '/profile',
-      name: 'DogProfile',
-      component: DogProfile
-    },
+    
+    
+    
 	  {
       path: '/Page2',
       name: 'Page2',

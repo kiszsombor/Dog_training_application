@@ -137,8 +137,8 @@
 </template>
 
 <script>
-
-import BaseContainer from '@/components/base/BaseContainer'
+import { mapState, mapActions } from 'vuex';
+// import BaseContainer from '@/components/base/BaseContainer'
 
 export default {
     name: 'SeasonTicket',
@@ -150,9 +150,10 @@ export default {
     },
     data() {
         return {
+            dogId:this.$route.params.dogId,
             title: "Bérleteim",
             body: "Body",
-            seasonTickets: this.$store.state.seasonTickets,
+            // seasonTickets: this.$store.state.moduleSeasonTickets.seasonTickets,
             deleted:true,
             dismissSecs: 2,
             dismissCountDown: 0,
@@ -164,7 +165,15 @@ export default {
 
         }
     },
+    created(){
+        this.getSeasonTickets();
+        console.log(this.dogId)
+    },
     methods: {
+        ...mapActions(['getAllSeasonTicketsByDog']),
+        getSeasonTickets(){
+                this.getAllSeasonTicketsByDog(this.dogId);
+        },
         countDownChanged(dismissCountDown) {
         this.dismissCountDown = dismissCountDown
       },
@@ -174,10 +183,11 @@ export default {
     
     },
     computed: {
-        
+        ...mapState({
+            seasonTickets: function (state) { return state.moduleDog.seasonTickets }
+        })
     },
     components: {
-      BaseContainer,
     }
 }
 </script>
