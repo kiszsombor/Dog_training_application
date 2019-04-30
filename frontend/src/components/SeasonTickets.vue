@@ -103,8 +103,8 @@
                 <tbody v-for="s in seasonTickets" :key="s.id">
                     <tr>
                         <th scope="row">{{s.id}}</th>
-                        <td>{{s.startDate}}</td>
-                        <td>{{s.endDate}}</td>
+                        <td>{{moment(String(s.startDate)).format("LL")}}</td>
+                        <td>{{moment(String(s.endDate)).format("LL")}}</td>
                         <td v-if="s.paid"><i class="fas fa-check"></i></td>
                         <td v-else><i class="fas fa-times"></i></td>
                         <td>10/12</td>
@@ -126,13 +126,12 @@
             </div>
             
         </div>
-            <div v-else>
+            <div v-if=" !ticketsLoading && seasonTickets.length<0">
                     <b-card bg-variant="secondary" text-variant="white">
                         <b-card-text class="cardText">Nincs megjelenítendő bérlet</b-card-text>
                     </b-card>
 
             </div>
-
         <!-- <div>
             {{ticketsLoading}}
                     <div v-bind:class="{ active: ticketsLoading}">
@@ -142,12 +141,21 @@
                     </div>
 
         </div> -->
+        <div>
+            
+                    <div v-if="ticketsLoading">
+                        <div class="text-center mb-3 d-flex justify-content-center">
+                            <b-spinner variant="primary"></b-spinner>
+                        </div>  
+                    </div>
+
+        </div>
         
 
 
 
-{{seasonTicket}}
-
+<!-- {{seasonTickets[0].startDate}} -->
+<!-- {{moment(String(seasonTickets[0].startDate)).format("LL")}} -->
 
         
     </div>
@@ -157,6 +165,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { setTimeout } from 'timers';
+import moment from 'moment'
 // import BaseContainer from '@/components/base/BaseContainer'
 
 export default {
@@ -165,9 +174,11 @@ export default {
 
     },
     mounted() {
+        moment.locale('hu')
     },
     data() {
         return {
+            moment:moment,
             dogId:this.$route.params.dogId,
             title: "Bérleteim",
             ticketId:null,
@@ -192,6 +203,7 @@ export default {
     created(){
         this.getSeasonTickets();
 
+        console.log(moment(this.seasonTicket.startDate).format("LL"))
         console.log("Dog ",this.dog.name)
         console.log("SeasonTicket ",this.seasonTicket)
 
@@ -200,8 +212,10 @@ export default {
         ...mapActions(['getAllSeasonTicketsByDog','deleteSeasonTicketById','getDogById']),
         getSeasonTickets(){
                 // this.ticketsLoading=false;
-                this.getAllSeasonTicketsByDog(this.dogId);
-                
+            this.getAllSeasonTicketsByDog(this.dogId)
+                setTimeout(() => {
+                    this.ticketsLoading = false
+                },0)  
         },
         deleteSeasonTicket(id){
                 this.deleteSeasonTicketById(id);   
@@ -224,7 +238,10 @@ export default {
                 })    
                 
             },
-            
+       
+        },
+        formatDate(date){
+            moment(String(date)).format("LL");
         },
     //FIXME: csak a profil után tölti be a state-ből a kutyát
     computed: {
