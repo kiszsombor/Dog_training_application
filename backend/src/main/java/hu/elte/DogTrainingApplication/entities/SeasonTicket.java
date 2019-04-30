@@ -2,6 +2,7 @@ package hu.elte.DogTrainingApplication.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -34,12 +35,12 @@ public class SeasonTicket implements Serializable {
     private Integer id;
 
     @Column(name = "start_date", updatable = false)
-    @CreationTimestamp
-    private LocalDateTime startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
 
     @Column(name = "end_date", updatable = false)
-    @UpdateTimestamp
-    private LocalDateTime endDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
 
     @Column(name = "type")
     private SeasonTicketType type;
@@ -57,7 +58,7 @@ public class SeasonTicket implements Serializable {
     @JoinColumn(name = "dog_id", nullable = false)
     private Dog dog;
 
-    public void setSeasonTicket(LocalDateTime startDate, LocalDateTime endDate, SeasonTicketType type, Boolean paid, Dog dog, Set<SeasonTicketSegment> seasonTicketSegments) {
+    public void setSeasonTicket(Date startDate, Date endDate, SeasonTicketType type, Boolean paid, Dog dog, Set<SeasonTicketSegment> seasonTicketSegments) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.type = type;

@@ -50,6 +50,7 @@
             ok-variant="primary"
             ok-title="Hozzáadás"
             cancel-title="Mégse"
+            @ok="saveNewSeasonTicket()"
             
             
             >
@@ -59,10 +60,10 @@
                 <b-container class="bv-example-row">
                 <b-row>
                     <b-col cols="6">Érvényesség kezdete</b-col>
-                    <b-col cols="6"><b-form-input type="date" placeholder="Érvényesség kezdete..."></b-form-input></b-col>
+                    <b-col cols="6"><b-form-input type="date" v-model="seasonTicket.startDate" placeholder="Érvényesség kezdete..."></b-form-input></b-col>
                     <div class="w-100 padding"></div>
                     <b-col cols="6">Érvényesség vége</b-col>
-                    <b-col cols="6"><b-form-input type="date"  placeholder="Érvényesség vége..."></b-form-input></b-col>
+                    <b-col cols="6"><b-form-input type="date"  v-model="seasonTicket.endDate" placeholder="Érvényesség vége..."></b-form-input></b-col>
                     <div class="w-100 padding"></div>
                     <b-col cols="6">Eddig lejárt órák száma</b-col>
                     <b-col cols="6"><b-form-input type="number"></b-form-input></b-col>
@@ -71,7 +72,7 @@
                      <b-col cols="6">
                         <b-form-group>
                             <b-form-radio-group
-                                v-model="selected"
+                                v-model="seasonTicket.paid"
                                 :options="options"
                                 name="radio-inline"
                             ></b-form-radio-group>
@@ -85,7 +86,7 @@
             <hr>
 
         </div>
-        <div class="body">
+        <div class="body" v-if="seasonTickets.length>0">
             <div>
                 <table class="table">
                 <thead class=" thread bg-secondary">
@@ -125,10 +126,27 @@
             </div>
             
         </div>
+            <div v-else>
+                    <b-card bg-variant="secondary" text-variant="white">
+                        <b-card-text class="cardText">Nincs megjelenítendő bérlet</b-card-text>
+                    </b-card>
+
+            </div>
+
+        <!-- <div>
+            {{ticketsLoading}}
+                    <div v-bind:class="{ active: ticketsLoading}">
+                        <div class="text-center mb-3 d-flex justify-content-center">
+                            <b-spinner variant="primary"></b-spinner>
+                        </div>  
+                    </div>
+
+        </div> -->
+        
 
 
 
-
+{{seasonTicket}}
 
 
         
@@ -138,6 +156,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { setTimeout } from 'timers';
 // import BaseContainer from '@/components/base/BaseContainer'
 
 export default {
@@ -146,45 +165,65 @@ export default {
 
     },
     mounted() {
-
     },
     data() {
         return {
             dogId:this.$route.params.dogId,
             title: "Bérleteim",
             body: "Body",
+            ticketsLoading:true,
+            seasonTicket:{
+                startDate:"",
+                endDate:"",
+                paid: true,
+            },
             // seasonTickets: this.$store.state.moduleSeasonTickets.seasonTickets,
             deleted:true,
             dismissSecs: 2,
             dismissCountDown: 0,
-            selected: 'first',
+            
             options: [
-          { text: 'Igen', value: 'yes' },
-          { text: 'Nem', value: 'no' },
-        ]
+            { text: 'Igen', value: 'true' },
+            { text: 'Nem', value: 'false' },
+            ]
 
         }
     },
     created(){
         this.getSeasonTickets();
-        console.log(this.dogId)
+
+        console.log("Dog ",this.dog.name)
+        console.log("SeasonTicket ",this.seasonTicket)
+
     },
     methods: {
         ...mapActions(['getAllSeasonTicketsByDog']),
         getSeasonTickets(){
+                // this.ticketsLoading=false;
                 this.getAllSeasonTicketsByDog(this.dogId);
+                
         },
         countDownChanged(dismissCountDown) {
         this.dismissCountDown = dismissCountDown
       },
       showAlert() {
               this.dismissCountDown = this.dismissSecs
-      }
-    
+      },
+      saveNewSeasonTicket(){
+            this.$store.dispatch('addNewSeasonTicket',
+              {
+                seasonTicket: this.seasonTicket,
+                dog: this.dog
+              })    
+              
+        },
+        
     },
+    //FIXME: csak a profil után tölti be a state-ből a kutyát
     computed: {
         ...mapState({
-            seasonTickets: function (state) { return state.moduleDog.seasonTickets }
+            seasonTickets: function (state) { return state.moduleDog.seasonTickets },
+            dog: function (state) { return state.moduleDog.dog }
         })
     },
     components: {
@@ -206,18 +245,7 @@ export default {
 th,td{
     text-align: center;
 }
-/* h1{
-    
-    text-align:center;
-    font-weight:bold;
 
-    color: #575555;
-    font-family: arial, sans-serif;
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 0px;
-    margin-bottom: 2%;
-} */
 
 .button{
     text-align: right;
@@ -233,8 +261,14 @@ th,td{
   /* transition: opacity .5s; */
 }
 
- .padding{
+.padding{
         margin:2%;
-    }
+}
+
+.cardText{
+    font-size:18px;
+    /* font-weight:bold; */
+}
+
 
 </style>

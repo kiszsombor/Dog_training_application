@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import DogApi from '../api/dog-api'
+import SeasonTicketApi from '../api/season-tickets-api'
 Vue.use(Vuex)
 
 
@@ -8,51 +9,17 @@ const moduleSeasonTickets = {
   state: { 
     seasonTickets:[],
    },
-  mutations: {  },
-  actions: {  },
+  mutations: { 
+    
+   },
+  actions: { 
+    
+   },
 }
 const moduleDog={
   state:{
     dog:{},
     seasonTickets: [],
-    dogs:[
-      {
-        id:	1,
-        name:	"Buksi",
-        birthDate:	"2019-03-21T17:52:00.000+0000",
-        breed:	"breed_Buksi",
-        weight:	5,
-        description:"The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
-      },
-      {
-        id:	2,
-        name:	"Pamacs",
-        birthDate:	"2019-03-21T17:52:00.000+0000",
-        breed:	"breed_pami",
-        weight:	5,
-      },
-      {
-        id:	3,
-        name:	"Szilva",
-        birthDate:	"2019-03-21T17:52:00.000+0000",
-        breed:	"breed_Buksi",
-        weight:	5,
-      },
-      {
-        id:	4,
-        name:	"Körte",
-        birthDate:	"2019-03-21T17:52:00.000+0000",
-        breed:	"breed_Buksi",
-        weight:	5,
-      },
-      {
-        id:	5,
-        name:	"Kutyi",
-        birthDate:	"2019-03-21T17:52:00.000+0000",
-        breed:	"breed_Buksi",
-        weight:	5,
-      }
-    ]
   },
   mutations: { 
     INIT_DOG_BY_ID(state,dog){
@@ -60,7 +27,10 @@ const moduleDog={
     },
     INIT_SEASON_TICKETS_BY_A_DOG(state,seasonTickets){
       state.seasonTickets=[...seasonTickets]
-    }
+    },
+    ADD_NEW_SEASON_TICKET(state, seasonTicket){
+      state.seasonTickets.push(seasonTicket)
+    },
    },
   actions: {  
     getDogById(context,dogID){
@@ -72,17 +42,23 @@ const moduleDog={
     getAllSeasonTicketsByDog(context,dogID){
       DogApi.getAllSeasonTicketsByDog(dogID)
       .then(res => {
-          console.log("STORE: Ticket_res: ",res.data, dogID)
           context.commit('INIT_SEASON_TICKETS_BY_A_DOG',res.data)
       })
   },
+  addNewSeasonTicket(context, payload){
+    return SeasonTicketApi.addNewSeasonTicket({...payload})
+        .then(res => {
+            context.commit('ADD_NEW_SEASON_TICKET', res.data)
+            return Promise.resolve()
+        })
+},
 
   },
 
 }
 export default new Vuex.Store({
   modules: {
-    moduleSeasonTickets: moduleSeasonTickets,
+    // moduleSeasonTickets: moduleSeasonTickets,
     moduleDog:moduleDog
   },
     state: {
