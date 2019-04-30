@@ -1,13 +1,17 @@
 package hu.elte.DogTrainingApplication.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import hu.elte.DogTrainingApplication.common.DogSex;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Bajári LÚCIA
@@ -41,6 +45,11 @@ public class Dog implements Serializable {
     @Column(name = "breed")
     private String breed;
 
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    @Column(name = "sex")
+    private DogSex sex;
+
     @Column(name = "weight")
     private Integer weight;
 
@@ -49,6 +58,14 @@ public class Dog implements Serializable {
     @JoinColumn(name = "trainer_id", nullable = false)
     private Trainer trainer;
 
+    @JsonIgnore
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "dog_trick",
+            joinColumns = { @JoinColumn(name = "dog_id") },
+            inverseJoinColumns = { @JoinColumn(name = "trick_id") }
+    )
+    Set<Trick> tricks = new HashSet();
 
 
 
