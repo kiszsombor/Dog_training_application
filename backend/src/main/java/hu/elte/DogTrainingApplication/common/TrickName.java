@@ -5,6 +5,12 @@ public enum TrickName{
     SIT,
     LAY,
     STAY,
-    ATTENTION,
-    UP
+    PAY_ATTENTION,
+    LEAVE_IT,
+    LEASH_WALK,
+    LEG_WALK,
+    UP,
+    SHAKE_IT,
+    ROLL_OVER,
+    BRING_IT
 }
