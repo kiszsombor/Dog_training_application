@@ -186,3 +186,17 @@ INSERT INTO taken_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 
 INSERT INTO dog_tricks (dog_id, trick_id) VALUES (1, 1);
 
 INSERT INTO trick (name, category) VALUES ("sit", "basic");CREATE TABLE `season_ticket` (   `id` int(11) NOT NULL AUTO_INCREMENT,   `student_id` int(11) DEFAULT NULL,   `language` enum('ENGLISH','GERMAN','FRENCH') DEFAULT NULL,   `start_date` timestamp NULL DEFAULT NULL,   `end_date` timestamp NULL DEFAULT NULL,   `type` enum('TWELWE','SIXTEEN','TWENTY') DEFAULT NULL,   `paid` tinyint(4) DEFAULT NULL,   PRIMARY KEY (`id`),   KEY `student_id` (`student_id`),   FOREIGN KEY (`student_id`) REFERENCES `dog_training_database`.`student`(`id`) ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1
+
+
+#Trainer tábla módosítás
+
+ALTER TABLE `trainer` ADD `password` VARCHAR(45) NOT NULL AFTER `email`;
+INSERT INTO `trainer` (`id`, `name`, `email`, `password`, `address`, `phone_number`, `birth_date`, `birth_place`) VALUES (NULL, 'Kovács Gábor', 'gabor82@gmail.com', 'gabor82', 'gabor_addr', '2055566', '1995-05-02 00:00:00', 'Veszprém');
+
+ALTER TABLE `trainer` ADD `role` ENUM('ROLE_ADMIN','ROLE_USER','','','') NOT NULL AFTER `password`;
+
+UPDATE `trainer` SET `password` = 'emma1' WHERE `trainer`.`id` = 1;
+UPDATE `trainer` SET `password` = 'karcsi25', `role` = 'ROLE_USER' WHERE `trainer`.`id` = 2;
+
+
+ALTER TABLE `trainer` ADD `user_name` VARCHAR(45) NOT NULL AFTER `email`;
