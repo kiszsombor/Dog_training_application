@@ -11,6 +11,7 @@ import hu.elte.DogTrainingApplication.repository.SeasonTicketSegmentRepository;
 import hu.elte.DogTrainingApplication.repository.TrickRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

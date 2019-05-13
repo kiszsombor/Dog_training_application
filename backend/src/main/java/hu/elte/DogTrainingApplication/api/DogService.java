@@ -53,7 +53,6 @@ public interface DogService {
      *  Id alapján kutya törlése
      */
     void delete(Integer dogId);
-
-   public List<Trick> findTricksByDog(Integer dogId);
+    List<Trick> findTricksByDog(Integer dogId);
 
 }
