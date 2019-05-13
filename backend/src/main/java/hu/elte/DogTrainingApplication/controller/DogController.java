@@ -5,6 +5,7 @@ import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.SeasonTicket;
 import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
+import hu.elte.DogTrainingApplication.entities.Trick;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -70,6 +71,11 @@ public class DogController {
         return dogService.findAllSeasonTicketSegmentBySeasonTicketId(seasonTicketId);
     }
 
+    @GetMapping("/{id}/tricks")
+    public List<Trick> findTricksByDog(@PathVariable Integer id){
+        System.out.println(dogService.findTricksByDog(id));
+        return dogService.findTricksByDog(id);
+    }
 
 
 }

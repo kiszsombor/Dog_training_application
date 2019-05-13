@@ -4,9 +4,11 @@ import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.SeasonTicket;
 import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
+import hu.elte.DogTrainingApplication.entities.Trick;
 import hu.elte.DogTrainingApplication.repository.DogRepository;
 import hu.elte.DogTrainingApplication.repository.SeasonTicketRepository;
 import hu.elte.DogTrainingApplication.repository.SeasonTicketSegmentRepository;
+import hu.elte.DogTrainingApplication.repository.TrickRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,8 @@ public class DogServiceImpl implements DogService {
     private SeasonTicketRepository seasonTicketRepository;
     @Autowired
     private SeasonTicketSegmentRepository seasonTicketSegmentRepository;
+    @Autowired
+    private TrickRepository trickRepository;
 
     @Override
     public Iterable<Dog> findAll() {
@@ -64,6 +68,12 @@ public class DogServiceImpl implements DogService {
     @Override
     public void delete(Integer dogId) {
         dogRepository.deleteById(dogId);
+    }
+
+    @Override
+    public List<Trick> findTricksByDog(Integer dogId) {
+        System.out.println(trickRepository.findTricksByDog(dogId));
+        return trickRepository.findTricksByDog(dogId);
     }
 
 }

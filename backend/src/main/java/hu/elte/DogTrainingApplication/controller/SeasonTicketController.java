@@ -87,13 +87,12 @@ public class SeasonTicketController {
 
     @DeleteMapping("/delete/{id}")
     @ResponseBody
-    public ResponseEntity<Boolean> deleteSeasonTicket(@PathVariable("id") Integer id) {
+    public SeasonTicket deleteSeasonTicket(@PathVariable("id") Integer id) {
         try {
-            seaonTicketService.delete(id);
-            return ResponseEntity.ok(true);
+            return seaonTicketService.deleteById(id);
         } catch (Exception e) {
             log.error("Nem sikerült a season ticket lekérdezése {}", e.getMessage());
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return null;
         }
     }
 }

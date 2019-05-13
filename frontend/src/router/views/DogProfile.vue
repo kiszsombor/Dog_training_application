@@ -32,7 +32,7 @@
             <div class="w-100"></div>
           
           <b-col cols="6">Születési dátum </b-col>
-          <b-col cols="6">{{dog.birthDate}}</b-col>
+          <b-col cols="6">{{moment(String(dog.birthDate)).format("LL")}}</b-col>
               <div class="w-100"></div>
           <b-col cols="6">Fajta </b-col>
           <b-col cols="6">{{dog.breed}}</b-col>
@@ -122,6 +122,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import moment from 'moment'
 
 // import BaseContainer from '@/components/base/BaseContainer'
 
@@ -131,16 +132,16 @@ export default {
 
     },
     mounted() {
-
+      moment.locale('hu')
     },
     created(){
       this.getDog()
     },
     data() {
         return {
+            moment:moment,
             title: "Profilom",
             dogId: this.$route.params.dogId,
-
             myAccount:{
               name:"",
               birthDate:null,

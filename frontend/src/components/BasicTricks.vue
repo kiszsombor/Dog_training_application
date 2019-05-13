@@ -6,20 +6,21 @@
     </div>
     <!-- <nav-bar-trick></nav-bar-trick> -->
     <ul>
+      <label for="r1">Change colors</label><input type="checkbox" v-model="class1" id="r1">
       <li>
-        <button type="button" class="btn li button btn-lg btn-block">Gyere</button>
+        <button id="come" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Gyere</button>
       </li>
       <li>
-        <button type="button" class="btn li button btn-lg btn-block">Ül</button>
+        <button id="sit" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Ül</button>
       </li>
       <li>
-        <button type="button" class="btn li button btn-lg btn-block">Fekszik</button>
+        <button id="lay" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Fekszik</button>
       </li>
       <li>
-        <button type="button" class="btn li button btn-lg btn-block">Marad</button>
+        <button id="stay" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Marad</button>
       </li>
     </ul>
-    <p><b-button class="back"><router-link to="/tricks"> VISSZA </router-link></b-button></p>
+    <p><b-button class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
   </div>
 </template>
 
@@ -31,12 +32,27 @@ export default {
     components: {
         // 'nav-bar-trick': NavBarTrick
     }
-  // ,
-  // data () {
-  //   return {
-  //     msg: 'Welcome to Your Vue.js App'
-  //   }
-  // }
+  ,
+  data () {
+    return {
+      dogId: this.$route.params.dogId,
+      class1 : false,
+      color:""
+    }
+  },
+  methods: {
+    done(id) {
+      this.isActive = true
+      if(id=="stay"){
+        if(this.color=='lightgray'){
+          this.color = 'lightgreen'
+        }else {
+          this.color='lightgray'
+        }
+      }
+      
+    }
+  }
 }
 </script>
 
@@ -99,7 +115,7 @@ li button:hover {
 	  background-position: 40% 50%;
     background-size: 5%;
 }
-li button:active {
+.class1 {
     background-color: lightgreen;
     color: white;
     /* background-image: url('../assets/tennisball.png'); */

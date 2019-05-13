@@ -3,6 +3,7 @@ package hu.elte.DogTrainingApplication.api;
 import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.SeasonTicket;
 import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
+import hu.elte.DogTrainingApplication.entities.Trick;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,5 +54,6 @@ public interface DogService {
      */
     void delete(Integer dogId);
 
+   public List<Trick> findTricksByDog(Integer dogId);
 
 }
