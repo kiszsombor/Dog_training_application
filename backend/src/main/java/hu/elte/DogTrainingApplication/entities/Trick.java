@@ -23,9 +23,10 @@ import java.util.Set;
 public class Trick implements Serializable{
 
     @Transient
-    private static final long serialVersionUID= 4132050751896694568L;
+    private static final long serialVersionUID= -8633980627458783249L;
 
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

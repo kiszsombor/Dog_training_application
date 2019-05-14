@@ -156,8 +156,8 @@ CREATE TABLE `trick` (
 #----------------------------------
 #----------------------------------
 CREATE TABLE `dog_tricks` (
-  `dog_id` int(11) NOT NULL,
-  `trick_id` int(11) NOT NULL
+  `dog_id` int(11) NOT NULL, FOREIGN KEY (`dog_id`) REFERENCES `dog_training_database`.`dog`(`id`),
+  `trick_id` int(11) NOT NULL, FOREIGN KEY (`trick_id`) REFERENCES `dog_training_database`.`trick`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 #--------------------------------------------------------------------------------------
 #----------------------------------BESZÚRÁSOK TÁBLÁKBA
@@ -202,3 +202,7 @@ INSERT INTO dog_tricks (dog_id, trick_id) VALUES (1, 3);
 INSERT INTO dog_tricks (dog_id, trick_id) VALUES (2, 1);
 INSERT INTO dog_tricks (dog_id, trick_id) VALUES (2, 2);
 
+CREATE TABLE `dog_training_database`.`dog_tricks` ( `id` INT NOT NULL AUTO_INCREMENT , 
+                                                  `dog_id` int(11) NOT NULL, FOREIGN KEY (`dog_id`) REFERENCES `dog_training_database`.`dog`(`id`),
+  													`trick_id` int(11) NOT NULL, FOREIGN KEY (`trick_id`) REFERENCES `dog_training_database`.`trick`(`id`), 
+                                                   PRIMARY KEY (`id`)) ENGINE = InnoDB;
