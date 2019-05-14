@@ -3,6 +3,7 @@
     <!-- <h1>{{ msg }}</h1> -->
     <h1 class=" trick-title main-title">
         {{title}}
+        
     </h1>
     <!-- <nav-bar-trick></nav-bar-trick> -->
 

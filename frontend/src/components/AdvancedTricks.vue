@@ -5,6 +5,8 @@
         {{title}}
     </h1>
     <!-- <nav-bar-trick></nav-bar-trick> -->
+
+    <hr>
     <ul>
       <li>
         <button type="button" class="btn li button btn-lg btn-block">Pitiz</button>
