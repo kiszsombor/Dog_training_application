@@ -7,5 +7,6 @@ import java.util.List;
 public interface TrickService {
 
     List<Trick> findAll();
+    List<Trick> findTricksByCategory(String category);
 
 }

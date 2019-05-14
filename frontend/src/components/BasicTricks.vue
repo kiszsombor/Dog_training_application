@@ -16,28 +16,30 @@
 
 
     <div>
-      <b-alert class="alertClass" :show="dogBasicTrickCount==4"  variant="success">
+      <b-alert class="alertClass" :show="dogBasicTrickCount==categoryTricks.length"  variant="success">
         <span> Gratulálunk! Az alapszint összes ({{dogBasicTrickCount}}) feladatát teljesítette! <i class="far fa-smile-wink"></i> </span>
       </b-alert>
     </div>
 
     <div>
-      <b-alert class="alertClass" :show="dogBasicTrickCount!=4" dismissible variant="primary">
-        <span> Még {{4-dogBasicTrickCount}} alapszintes feladat teljesítés szükséges a továbblépéshez!</span>
+      <b-alert class="alertClass" :show="dogBasicTrickCount!=categoryTricks.length" dismissible variant="primary">
+        <span> Még {{categoryTricks.length-dogBasicTrickCount}} alapszintes feladat teljesítés szükséges a továbblépéshez!</span>
       </b-alert>
     </div>
     <hr>
-    <ul >
-      <div v-for="t in dogBasicTrick" :key=t.name>
+    <ul v-for="t in categoryTricks" :key=t.id>
+      <!-- <div v-for="t in dogBasicTrick" :key=t.name>
 
-      </div>
+      </div> -->
 
       
       <!-- <label for="r1">Change colors</label><input type="checkbox" v-model="class1" id="r1"> -->
       <li>
-        <button id="COME" ref="COME" type="checkbox"  v-b-modal.modal-1  @click="done(BASIC.COME), basicId=BASIC.COME" class="btn li button btn-lg btn-block">Gyere</button>
+        <button :id="t.name" ref="COME" type="checkbox"  v-b-modal.modal-1  @click="done(t.name), basicId=t.name" class="btn li button btn-lg btn-block">
+          {{t.name=="COME" ? "Gyere": t.name=="SIT" ? "Ül" : t.name=="LAY" ? "Fekszik" : t.name=="STAY" ? "Marad" : t.name}}
+          </button>
       </li>
-      <li>
+      <!-- <li>
         <button id="SIT" ref="SIT" type="button" v-b-modal.modal-1  @click="done(BASIC.SIT), basicId=BASIC.SIT" class="btn li button btn-lg btn-block">Ül</button>
       </li>
       <li>
@@ -45,30 +47,39 @@
       </li>
       <li>
         <button id="STAY" type="button" v-b-modal.modal-1  @click="done(BASIC.STAY) , basicId=BASIC.STAY" class="btn li button btn-lg btn-block">Marad</button>
-      </li>
+      </li> -->
       
     </ul>
     <p><b-button class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
 
-<!-- <ul v-for="t in dogBasicTrick" :key=t.name>
-  <li>
-        <button id="t.name" type="button" :style="{ 'background-color': color }"  @click="done()" class="btn li button btn-lg btn-block">{{t.name}}</button>
-      </li>
-</ul> -->
 
+  <!-- <div v-if="allTricks.length>0">
+    <ul v-for="t in allTricks" :key=t.id>
+      <li>
+        
+            <button id="t.name" type="button" @click="done(t.name) , basicId=t.name" class="btn li button btn-lg btn-block">{{t.name}}</button>
+          </li>
+    </ul>
+  </div> -->
+  
+<div v-for="t in saveTricks" :key=t.id>
+  <div>
+    {{t}}
+  </div>
+</div>
   <br>
+  <!-- {{saveTricks}} -->
   <br>
   </div>
 
 </template>
 
 <script>
-// import NavBarTrick from './NavBarTrick'
-
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'BasicTricks',
     components: {
-        // 'nav-bar-trick': NavBarTrick
+      
     }
   ,
   data () {
@@ -82,37 +93,44 @@ export default {
       isOkRevocation:false,
       basicId:null,
       //color:"lightgray",
+      category:"BASIC",
       BASIC:{
         COME:'COME',
         SIT:'SIT',
         LAY:'LAY',
         STAY:'STAY',
       },
-
-      
-      
-      dogBasicTrick:[
-
-        {
-          'id': 1,
-          "name": "COME",
-          "category" :"BASIC"
-        },
-        {
-          'id': 2,
-          "name": "LAY",
-          "category" :"BASIC"
-        }
-      ]
+      saveTricks:[],
+      saveTrick:
+      {
+        'id':null,
+        "name": null,
+        "category" :"BASIC"
+      },
           
-      
     }
   },
   created(){
-    this.checkIsAllGreen();
+  
+    this.getTricksByDog();
+    this.getAll_Tricks();
+    this.getTricks_ByCategory();
   },
  
   methods: {
+    ...mapActions(['getTricksByADog','getAllTricks','getTricksByCategory']),
+
+    getTricksByDog(){
+          this.getTricksByADog(this.dogId);
+    },
+    getAll_Tricks(){
+      this.getAllTricks();
+    },
+    getTricks_ByCategory(category){
+      this.getTricksByCategory(this.category);
+    },
+
+
     done(nameId) {
       this.isActive = true
       // for(let i=0;i<this.dogBasicTrick.length;i++){
@@ -148,21 +166,47 @@ export default {
       // }else{
       //   document.getElementById(nameId).style.backgroundColor='lightgray'
       // }
-
+      
+      let sT=
+      {
+        'id':null,
+        "name": nameId,
+        "category" :"BASIC"
+      };
+      
       if(document.getElementById(nameId).className=='btn li button btn-lg btn-block'){
         document.getElementById(nameId).className='btn li button btn-lg btn-block class1'
+        
+         if ( this.saveTricks.includes(sT)==false) {
+              this.saveTricks.push(sT);
+          }
+     
         this.dogBasicTrickCount++;
         this.revocation=false;
-        //console.log(nameId)
+       
+      }else{
+        //console.log(this.saveTricks.length)
+        for( let i = 0; i < this.saveTricks.length; i++){ 
+          console.log("sT[i].name: ", this.saveTricks[i].name)
+          console.log("NAMEID: ", nameId)
+          if ( this.saveTricks[i].name == nameId) {
+            // console.log("NAMEID: ", nameId)
+            // console.log("this.saveTricks[i].name: ", this.saveTricks[i].name)
+            this.saveTricks.splice(i, 1); 
+          }
+        }
+        
+        document.getElementById(nameId).className='btn li button btn-lg btn-block'
 
         
-      }else{
-        document.getElementById(nameId).className='btn li button btn-lg btn-block'
+        
+
+
         if(this.dogBasicTrickCount>0)
           this.dogBasicTrickCount--;
         this.revocation=true;
       }
-      console.log(this.dogBasicTrickCount);
+      //console.log(this.dogBasicTrickCount);
       if(this.dogBasicTrickCount==4){
             this.isAllAchieved=true;
          }
@@ -170,18 +214,14 @@ export default {
       
     },
 
-    checkIsAllGreen(){
-        //for(let i=0;i<this.BASIC.length;i++){
-         // if(document.getElementById("COME").style.backgroundColor=='lightgreen'){
-              console.log(this.dogBasicTrickCount);
-              
-         // }
-        //  if(this.dogBasicTrickCount==4){
-        //     this.isAllAchieved=true;
-        //  }
-
-       // }
-    }
+  },
+  computed:{
+    ...mapState({
+            tricks: function (state) { return state.moduleDog.tricks },
+            allTricks: function (state) { return state.moduleDog.allTricks },
+            categoryTricks: function (state) { return state.moduleDog.categoryTricks },
+            dog: function (state) { return state.moduleDog.dog }
+        }),
   }
 }
 </script>
