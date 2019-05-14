@@ -3,14 +3,21 @@
     <!-- <h1>{{ msg }}</h1> -->
     <h1 class=" trick-title main-title">
         {{title}}
-        
+
     </h1>
+<!-- MODAL -->
+                <div>
+
+                    <b-modal id="modal-1" title="Feladat teljesítésének visszavonása" ok-title="Igen" cancel-title="Nem"  v-if="revocation" @cancel="done(basicId)">
+                        <p class="my-4">Biztos vissza szeretné vonni? </p>
+                    </b-modal>
+                </div>
     <!-- <nav-bar-trick></nav-bar-trick> -->
 
 
     <div>
       <b-alert class="alertClass" :show="dogBasicTrickCount==4"  variant="success">
-        <span> Gratulálunk! Az alapszint összes feladatát teljesítette! <i class="far fa-smile-wink"></i> </span>
+        <span> Gratulálunk! Az alapszint összes ({{dogBasicTrickCount}}) feladatát teljesítette! <i class="far fa-smile-wink"></i> </span>
       </b-alert>
     </div>
 
@@ -28,16 +35,16 @@
       
       <!-- <label for="r1">Change colors</label><input type="checkbox" v-model="class1" id="r1"> -->
       <li>
-        <button id="COME" ref="COME" type="checkbox"   @click="done(BASIC.COME)" class="btn li button btn-lg btn-block">Gyere</button>
+        <button id="COME" ref="COME" type="checkbox"  v-b-modal.modal-1  @click="done(BASIC.COME), basicId=BASIC.COME" class="btn li button btn-lg btn-block">Gyere</button>
       </li>
       <li>
-        <button id="SIT" ref="SIT" type="button"   @click="done(BASIC.SIT)" class="btn li button btn-lg btn-block">Ül</button>
+        <button id="SIT" ref="SIT" type="button" v-b-modal.modal-1  @click="done(BASIC.SIT), basicId=BASIC.SIT" class="btn li button btn-lg btn-block">Ül</button>
       </li>
       <li>
-        <button id="LAY" type="button"   @click="done(BASIC.LAY)" class="btn li button btn-lg btn-block">Fekszik</button>
+        <button id="LAY" type="button" v-b-modal.modal-1  @click="done(BASIC.LAY) , basicId=BASIC.LAY" class="btn li button btn-lg btn-block">Fekszik</button>
       </li>
       <li>
-        <button id="STAY" type="button"   @click="done(BASIC.STAY)" class="btn li button btn-lg btn-block">Marad</button>
+        <button id="STAY" type="button" v-b-modal.modal-1  @click="done(BASIC.STAY) , basicId=BASIC.STAY" class="btn li button btn-lg btn-block">Marad</button>
       </li>
       
     </ul>
@@ -71,6 +78,9 @@ export default {
       class1 : false,
       isAllAchieved:false,
       dogBasicTrickCount:0,
+      revocation:false,
+      isOkRevocation:false,
+      basicId:null,
       //color:"lightgray",
       BASIC:{
         COME:'COME',
@@ -142,12 +152,15 @@ export default {
       if(document.getElementById(nameId).className=='btn li button btn-lg btn-block'){
         document.getElementById(nameId).className='btn li button btn-lg btn-block class1'
         this.dogBasicTrickCount++;
+        this.revocation=false;
         //console.log(nameId)
 
         
       }else{
         document.getElementById(nameId).className='btn li button btn-lg btn-block'
-        this.dogBasicTrickCount--;
+        if(this.dogBasicTrickCount>0)
+          this.dogBasicTrickCount--;
+        this.revocation=true;
       }
       console.log(this.dogBasicTrickCount);
       if(this.dogBasicTrickCount==4){
