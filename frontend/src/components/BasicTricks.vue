@@ -1,27 +1,57 @@
 <template>
   <div class="main">
     <!-- <h1>{{ msg }}</h1> -->
-    <div class="title">
-        <h2>Képzés</h2>
-    </div>
+    <h1 class=" trick-title main-title">
+        {{title}}
+    </h1>
     <!-- <nav-bar-trick></nav-bar-trick> -->
-    <ul>
-      <label for="r1">Change colors</label><input type="checkbox" v-model="class1" id="r1">
+
+
+    <div>
+      <b-alert class="alertClass" :show="dogBasicTrickCount==4"  variant="success">
+        <span> Gratulálunk! Az alapszint összes feladatát teljesítette! <i class="far fa-smile-wink"></i> </span>
+      </b-alert>
+    </div>
+
+    <div>
+      <b-alert class="alertClass" :show="dogBasicTrickCount!=4" dismissible variant="primary">
+        <span> Még {{4-dogBasicTrickCount}} alapszintes feladat teljesítés szükséges a továbblépéshez!</span>
+      </b-alert>
+    </div>
+    <hr>
+    <ul >
+      <div v-for="t in dogBasicTrick" :key=t.name>
+
+      </div>
+
+      
+      <!-- <label for="r1">Change colors</label><input type="checkbox" v-model="class1" id="r1"> -->
       <li>
-        <button id="come" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Gyere</button>
+        <button id="COME" ref="COME" type="checkbox"   @click="done(BASIC.COME)" class="btn li button btn-lg btn-block">Gyere</button>
       </li>
       <li>
-        <button id="sit" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Ül</button>
+        <button id="SIT" ref="SIT" type="button"   @click="done(BASIC.SIT)" class="btn li button btn-lg btn-block">Ül</button>
       </li>
       <li>
-        <button id="lay" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Fekszik</button>
+        <button id="LAY" type="button"   @click="done(BASIC.LAY)" class="btn li button btn-lg btn-block">Fekszik</button>
       </li>
       <li>
-        <button id="stay" type="button" :style="{ 'background-color': color }"  @click="done(id)" class="btn li button btn-lg btn-block">Marad</button>
+        <button id="STAY" type="button"   @click="done(BASIC.STAY)" class="btn li button btn-lg btn-block">Marad</button>
       </li>
+      
     </ul>
     <p><b-button class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
+
+<!-- <ul v-for="t in dogBasicTrick" :key=t.name>
+  <li>
+        <button id="t.name" type="button" :style="{ 'background-color': color }"  @click="done()" class="btn li button btn-lg btn-block">{{t.name}}</button>
+      </li>
+</ul> -->
+
+  <br>
+  <br>
   </div>
+
 </template>
 
 <script>
@@ -35,22 +65,108 @@ export default {
   ,
   data () {
     return {
+      title: "Alapszint",
       dogId: this.$route.params.dogId,
       class1 : false,
-      color:""
+      isAllAchieved:false,
+      dogBasicTrickCount:0,
+      //color:"lightgray",
+      BASIC:{
+        COME:'COME',
+        SIT:'SIT',
+        LAY:'LAY',
+        STAY:'STAY',
+      },
+
+      
+      
+      dogBasicTrick:[
+
+        {
+          'id': 1,
+          "name": "COME",
+          "category" :"BASIC"
+        },
+        {
+          'id': 2,
+          "name": "LAY",
+          "category" :"BASIC"
+        }
+      ]
+          
+      
     }
   },
+  created(){
+    this.checkIsAllGreen();
+  },
+ 
   methods: {
-    done(id) {
+    done(nameId) {
       this.isActive = true
-      if(id=="stay"){
-        if(this.color=='lightgray'){
-          this.color = 'lightgreen'
-        }else {
-          this.color='lightgray'
-        }
-      }
+      // for(let i=0;i<this.dogBasicTrick.length;i++){
+      //     if(this.dogBasicTrick[i].id==id){
+      //         this.dogBasicTrick[i].color = 'lightgray'
+      //       if(this.dogBasicTrick[i].color == 'lightgreen'){
+      //         this.dogBasicTrick[i].color = 'lightgray'
+      //       }
+      //       if(this.dogBasicTrick[i].color == 'lightgray'){
+      //         this.dogBasicTrick[i].color = 'lightgreen'
+      //       }
+            
+      //     }
+          
+
+          //console.log(this.dogBasicTrick[i].name)
+          //console.log("REF: " + this.$refs.COME)
+          //console.log("REF: " + document.getElementById(nameId))
+          
+      //}
       
+      //if(this.dogBasicTrick)
+      
+        // if(this.color=='lightgray'){
+        //   this.color = 'lightgreen'
+        // }else {
+        //   this.color='lightgray'
+        // }
+      // if(document.getElementById(nameId).style.backgroundColor=='lightgray'){
+      //   document.getElementById(nameId).style.backgroundColor='lightgreen'
+      //   console.log(nameId)
+      //   this.dogBasicTrick.push(nameId)
+      // }else{
+      //   document.getElementById(nameId).style.backgroundColor='lightgray'
+      // }
+
+      if(document.getElementById(nameId).className=='btn li button btn-lg btn-block'){
+        document.getElementById(nameId).className='btn li button btn-lg btn-block class1'
+        this.dogBasicTrickCount++;
+        //console.log(nameId)
+
+        
+      }else{
+        document.getElementById(nameId).className='btn li button btn-lg btn-block'
+        this.dogBasicTrickCount--;
+      }
+      console.log(this.dogBasicTrickCount);
+      if(this.dogBasicTrickCount==4){
+            this.isAllAchieved=true;
+         }
+      
+      
+    },
+
+    checkIsAllGreen(){
+        //for(let i=0;i<this.BASIC.length;i++){
+         // if(document.getElementById("COME").style.backgroundColor=='lightgreen'){
+              console.log(this.dogBasicTrickCount);
+              
+         // }
+        //  if(this.dogBasicTrickCount==4){
+        //     this.isAllAchieved=true;
+        //  }
+
+       // }
     }
   }
 }
@@ -62,6 +178,7 @@ export default {
     max-width: 1200px;
 	  min-width: 300px;
     margin: auto;
+    text-align:center;
 	  /* background-image: url('../assets/china.png');
 	  background-repeat: repeat;
 	  background-attachment: fixed; */
@@ -76,6 +193,7 @@ export default {
     text-indent: 5%;
     font-weight: normal;
 } */
+
 h2 {
     margin: 2% 2% 2% 5%;
     color: black;
@@ -96,7 +214,7 @@ li{
     list-style-type: none;
     padding: 2% 0% 2% 0%;
 }
-li button {
+li button{
     font-size: 120%;
     display: inline-block;
     width: 80%;
@@ -108,7 +226,7 @@ li button {
     border: none;
 }
 li button:hover {
-    background-color: gray;
+    /* background-color: gray; */
     color: white;
     /* background-image: url('../assets/tennisball.png'); */
 	  background-repeat: no-repeat;
@@ -117,7 +235,7 @@ li button:hover {
 }
 .class1 {
     background-color: lightgreen;
-    color: white;
+    color: black;
     /* background-image: url('../assets/tennisball.png'); */
 	  background-repeat: no-repeat;
 	  background-position: 40% 50%;
@@ -145,5 +263,18 @@ a:hover {
     background-color: #606060;
     color: skyblue;
     text-decoration: none;
+}
+
+.alertClass{
+    font-size: 100%;
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+    
+    text-decoration: none;
+    
+}
+.far{
+padding-left:1%;
 }
 </style>

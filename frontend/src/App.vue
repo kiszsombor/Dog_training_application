@@ -46,4 +46,8 @@ export default {
     margin-bottom: 2%;
     text-align: center;
 }
+
+.trick-title{
+  padding-top:10%;
+}
 </style>

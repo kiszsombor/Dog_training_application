@@ -1,10 +1,11 @@
 <template>
   <div class="main">
     <!-- <h1>{{ msg }}</h1> -->
-    <div class="title">
-        <h2>Képzés</h2>
-    </div>
+    <h1 class=" trick-title main-title">
+        {{title}}
+    </h1>
     <!-- <nav-bar-trick></nav-bar-trick> -->
+    <hr>
     <ul>
       <li>
         <button type="button" class="btn li button btn-lg btn-block">Figyelj</button>
@@ -34,6 +35,7 @@ export default {
   ,
   data () {
     return {
+      title:"Középszint",
       dogId: this.$route.params.dogId
     }
   }
