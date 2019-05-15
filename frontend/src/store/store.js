@@ -2,11 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import DogApi from '../api/dog-api'
 import SeasonTicketApi from '../api/season-tickets-api'
-<<<<<<< HEAD
 import TrainerApi from '../api/trainer-api'
-=======
 import TrickApi from '../api/tricks-api'
->>>>>>> 5e3d6db2bb58787c4423445d5b0a143b177cb33b
 Vue.use(Vuex)
 
 
