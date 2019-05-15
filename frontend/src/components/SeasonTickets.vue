@@ -177,6 +177,10 @@
 
 
 {{seasonTicket}}
+<br>
+{{trainer}}
+<br>
+{{dog}}
 
     </div>
   
@@ -223,6 +227,7 @@ export default {
     created(){
         this.getDog();
         this.getSeasonTickets();
+        this.getTrainer();
 
         console.log(moment(this.seasonTicket.startDate).format("LL"))
         console.log("Dog ",this.dog.name)
@@ -230,7 +235,7 @@ export default {
 
     },
     methods: {
-        ...mapActions(['getAllSeasonTicketsByDog','deleteSeasonTicketById','getDogById']),
+        ...mapActions(['getAllSeasonTicketsByDog','deleteSeasonTicketById','getDogById','getTrainerById']),
         getSeasonTickets(){
                 // this.ticketsLoading=false;
             this.getAllSeasonTicketsByDog(this.dogId)
@@ -246,6 +251,9 @@ export default {
         },
         getDog(){
                 this.getDogById(this.dogId);
+        },
+        getTrainer(){
+            this.getTrainerById(1);
         },
         showAlert() {
                 this.dismissCountDown = this.dismissSecs
@@ -281,7 +289,8 @@ export default {
     computed: {
         ...mapState({
             seasonTickets: function (state) { return state.moduleDog.seasonTickets },
-            dog: function (state) { return state.moduleDog.dog }
+            dog: function (state) { return state.moduleDog.dog },
+            trainer: function (state) { return state.moduleDog.trainer }
         }),
         classesState() {
             return this.seasonTicket.classes >= 0 ? true : false

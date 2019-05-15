@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import DogApi from '../api/dog-api'
 import SeasonTicketApi from '../api/season-tickets-api'
+import TrainerApi from '../api/trainer-api'
 Vue.use(Vuex)
 
 
@@ -20,6 +21,7 @@ const moduleDog={
   state:{
     dog:{},
     seasonTickets: [],
+    trainer:{}
   },
   mutations: { 
     INIT_DOG_BY_ID(state,dog){
@@ -34,6 +36,10 @@ const moduleDog={
     DELETE_SEASON_TICKET(state, seasonTicket){
       delete state.seasonTickets[seasonTicket];
   },
+  INIT_TRAINER_BY_ID(state,trainer){
+    state.trainer=trainer;
+
+  }
    },
   actions: {  
     getDogById(context,dogID){
@@ -63,7 +69,15 @@ const moduleDog={
         return Promise.resolve()
 
     })
+  },
+  getTrainerById(context,TrainerId){
+    TrainerApi.getTrainerById(TrainerId)
+    .then(res=>{
+        // console.log("Res.data delete: ",res.data)
+        context.commit('INIT_TRAINER_BY_ID', res.data)
+    }) 
 },
+
 
   },
 
