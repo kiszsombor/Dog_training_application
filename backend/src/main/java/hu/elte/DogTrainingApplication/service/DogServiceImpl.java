@@ -66,14 +66,27 @@ public class DogServiceImpl implements DogService {
         return seasonTicketSegmentRepository.findAllBySeasonTicketId(seasonTicketId);
     }
 
-    @Override
-    public void deleteById(Integer dogId) {
+//    @Override
+//    public Dog deleteById(Integer dogId) {
 //        Optional<Dog> dog=dogRepository.findById(dogId);
 //        if(dog.isPresent()){
+//            System.out.println(dog.get());
 //            return dog.get();
 //        }
-        dogRepository.deleteById(dogId);
-       // return null;
+//        dogRepository.deleteById(dogId);
+//        return null;
+//    }
+
+    @Override
+    public Dog deleteById(Integer id) {
+        Optional<Dog> deletedDogOptional=dogRepository.findById(id);
+        Dog deletedDog=null;
+        if(deletedDogOptional.isPresent()){
+            deletedDog=deletedDogOptional.get();
+        }
+
+        dogRepository.deleteById(id);
+        return deletedDog;
     }
 
     @Override

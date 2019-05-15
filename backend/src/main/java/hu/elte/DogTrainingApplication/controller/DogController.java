@@ -90,12 +90,12 @@ public class DogController {
 
     @DeleteMapping("/delete/{id}")
     @ResponseBody
-    public void deleteDog(@PathVariable("id") Integer id) {
+    public Dog deleteDog(@PathVariable("id") Integer id) {
         try {
-            dogService.deleteById(id);
+            return dogService.deleteById(id);
         } catch (Exception e) {
-            log.error("Nem sikerült a kutya lekérdezése {}", e.getMessage());
-            //return null;
+            log.error("Nem sikerült a season ticket lekérdezése {}", e.getMessage());
+            return null;
         }
     }
 

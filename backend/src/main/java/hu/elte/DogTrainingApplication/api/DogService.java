@@ -6,7 +6,7 @@ import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
 import hu.elte.DogTrainingApplication.entities.Trick;
 
 import java.util.List;
-import java.util.Optional;
+
 /**
  * DogService interfésze
  *
@@ -52,7 +52,7 @@ public interface DogService {
      * @param dogId
      *  Id alapján kutya törlése
      */
-    void deleteById(Integer dogId);
+    Dog deleteById(Integer dogId);
 
     /**
      * @param dogId
