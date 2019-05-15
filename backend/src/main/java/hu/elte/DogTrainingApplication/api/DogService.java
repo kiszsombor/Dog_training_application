@@ -6,6 +6,7 @@ import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
 import hu.elte.DogTrainingApplication.entities.Trick;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * DogService interfésze
@@ -19,14 +20,14 @@ public interface DogService {
      * @return Iterable<Dog>
      *     Az összes kutya kilistázása
      */
-    Iterable<Dog> findAll();
+    List<Dog> findAll();
 
     /**
      * @param id
      * @return Dog
      *      Egy kutya lekérése id alapján
      */
-    Dog findById(Integer id);
+    Optional<Dog> findById(Integer id);
 
     /**
      * @param dog
@@ -52,7 +53,11 @@ public interface DogService {
      * @param dogId
      *  Id alapján kutya törlése
      */
-    Dog deleteById(Integer dogId);
+    void deleteAll();
+
+    void deleteById(Integer id);
+
+//    Dog deleteById(Integer dogId);
 
     /**
      * @param dogId

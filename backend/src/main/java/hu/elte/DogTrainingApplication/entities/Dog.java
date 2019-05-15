@@ -63,7 +63,18 @@ public class Dog implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "dog")
     private Set<SeasonTicket> seasonTickets;
 
-//    @JsonIgnore
+
+    public void setDog(String name, Date birthDate, String breed, @NotNull DogSex sex, Integer weight, Trainer trainer, Set<SeasonTicket> seasonTickets) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.breed = breed;
+        this.sex = sex;
+        this.weight = weight;
+        this.trainer = trainer;
+        this.seasonTickets = seasonTickets;
+    }
+
+    //    @JsonIgnore
 //    @ManyToMany(cascade = { CascadeType.ALL })
 //    @JoinTable(
 //            name = "dog_tricks",

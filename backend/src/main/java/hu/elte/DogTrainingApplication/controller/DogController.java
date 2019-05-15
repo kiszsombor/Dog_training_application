@@ -42,12 +42,13 @@ public class DogController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Dog> getDogById(@PathVariable Integer id) {
-        Dog dog= dogService.findById(id);
-        if (!dog.equals(null)) {
-            return ResponseEntity.ok(dog);
+    public Dog getDogById(@PathVariable Integer id) {
+        Optional<Dog> optionalDog= dogService.findById(id);
+
+        if (optionalDog.isPresent()) {
+            return optionalDog.get();
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return null;
     }
 
     /**
@@ -88,15 +89,58 @@ public class DogController {
         return dogService.save(dog);
     }
 
+    @PutMapping("/modify/{id}")
+    public void put(@PathVariable Integer id, @RequestBody Dog dog) {
+        Optional<Dog> optionalDog = dogService.findById(id);
+        Dog oldDog=dog;
+        System.out.println(optionalDog.get());
+
+        if(optionalDog.isPresent()) {
+            System.out.println("ID " + optionalDog.get().getId());
+            oldDog=optionalDog.get();
+        }
+
+//        SeasonTicket oldSeasonTicket=seaonTicketService.findById(id).get();
+//        System.out.println(("Bérlet: "+oldSeasonTicket.getId()));
+        oldDog.setDog(dog.getName(),dog.getBirthDate(),dog.getBreed(),
+                dog.getSex(),dog.getWeight(),dog.getTrainer(), dog.getSeasonTickets());
+
+        dogService.save(oldDog);
+    }
+
+//    @DeleteMapping("/delete/{id}")
+//    @ResponseBody
+//    public Dog deleteDog(@PathVariable("id") Integer id) {
+//        try {
+//            return dogService.deleteById(id);
+//        } catch (Exception e) {
+//            log.error("Nem sikerült a season ticket lekérdezése {}", e.getMessage());
+//            return null;
+//        }
+//    }
+
+    /*********************************************************************************************************************/
+
+
+    @DeleteMapping("/delete")
+    public void deleteAll(){
+        dogService.deleteAll();
+    }
+
     @DeleteMapping("/delete/{id}")
     @ResponseBody
-    public Dog deleteDog(@PathVariable("id") Integer id) {
-        try {
-            return dogService.deleteById(id);
-        } catch (Exception e) {
-            log.error("Nem sikerült a season ticket lekérdezése {}", e.getMessage());
-            return null;
+    public Dog deleteById(@PathVariable Integer id){
+        Dog deletedDog = null;
+        List<Dog> dogList= dogService.findAll();
+        for(int i=0;i<dogList.size();i++){
+            if(dogList.get(i).getId() == id){
+                deletedDog = dogList.get(i);
+            }
         }
+//        System.out.println("deletedDog1: " + dogService.findById(id));
+        dogService.deleteById(id);
+//        System.out.println("deletedDog2: " + deletedDog);
+        return deletedDog;
     }
 
 }

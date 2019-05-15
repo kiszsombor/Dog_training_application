@@ -11,7 +11,6 @@ import hu.elte.DogTrainingApplication.repository.SeasonTicketSegmentRepository;
 import hu.elte.DogTrainingApplication.repository.TrickRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,18 +36,13 @@ public class DogServiceImpl implements DogService {
     private TrickRepository trickRepository;
 
     @Override
-    public Iterable<Dog> findAll() {
+    public List<Dog> findAll() {
         return dogRepository.findAll();
     }
 
     @Override
-    public Dog findById(Integer id) {
-
-        Optional<Dog> optional =dogRepository.findById(id);
-        if(optional.isPresent()){
-            return optional.get();
-        }
-        return null;
+    public Optional<Dog> findById(Integer id) {
+        return dogRepository.findById(id);
     }
 
     @Override
@@ -78,16 +72,33 @@ public class DogServiceImpl implements DogService {
 //    }
 
     @Override
-    public Dog deleteById(Integer id) {
-        Optional<Dog> deletedDogOptional=dogRepository.findById(id);
-        Dog deletedDog=null;
-        if(deletedDogOptional.isPresent()){
-            deletedDog=deletedDogOptional.get();
+    public void deleteById(Integer id){
+        List<Trick> tricks = trickRepository.findTricksByDog(id);
+        List<SeasonTicket> seasonTickets = seasonTicketRepository.findAllByDogId(id);
+//        for(int i=0; i<tricks.size();i++){
+            trickRepository.deleteDogTricksByDogId(id);
+        for(int i=0; i<seasonTickets.size();i++){
+            seasonTicketRepository.deleteById(seasonTickets.get(i).getId());
         }
-
         dogRepository.deleteById(id);
-        return deletedDog;
     }
+
+    @Override
+    public void deleteAll(){
+        dogRepository.deleteAll();
+    }
+
+//    @Override
+//    public Dog deleteById(Integer id) {
+//        Optional<Dog> deletedDogOptional=dogRepository.findById(id);
+//        Dog deletedDog=null;
+//        if(deletedDogOptional.isPresent()){
+//            deletedDog=deletedDogOptional.get();
+//        }
+//
+//        dogRepository.deleteById(id);
+//        return deletedDog;
+//    }
 
     @Override
     public List<Trick> findTricksByDog(Integer dogId) {

@@ -4,6 +4,7 @@ import hu.elte.DogTrainingApplication.entities.Dog;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 /**
@@ -13,4 +14,10 @@ import javax.transaction.Transactional;
  */
 public interface DogRepository extends CrudRepository<Dog, Integer> {
 
+    List<Dog> findAll();
+
+
+//    void deleteAll();
+//
+//    void deleteById(Integer id);
 }

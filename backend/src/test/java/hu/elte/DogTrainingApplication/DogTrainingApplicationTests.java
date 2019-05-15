@@ -60,7 +60,7 @@ public class DogTrainingApplicationTests {
 	public void findDogById() {
 
 		System.out.println(dog);
-		Dog dog2=dogService.findById(id);
+		Optional<Dog> dog2=dogService.findById(id);
 		System.out.println("Id alaján ugyanaz a kutya: ---   " + dog2);
 
 		//assertEquals(dog,dog2);
