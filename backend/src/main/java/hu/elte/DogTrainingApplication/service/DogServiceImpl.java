@@ -52,8 +52,8 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void save(Dog dog) {
-        dogRepository.save(dog);
+    public Dog save(Dog dog) {
+        return dogRepository.save(dog);
     }
 
     @Override
@@ -67,8 +67,13 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void delete(Integer dogId) {
+    public void deleteById(Integer dogId) {
+//        Optional<Dog> dog=dogRepository.findById(dogId);
+//        if(dog.isPresent()){
+//            return dog.get();
+//        }
         dogRepository.deleteById(dogId);
+       // return null;
     }
 
     @Override
