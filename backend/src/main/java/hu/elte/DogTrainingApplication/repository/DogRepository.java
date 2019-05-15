@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface DogRepository extends CrudRepository<Dog, Integer> {
 
-//    @Transactional
-//    void deleteById(Integer id);
+    @Transactional
+    void deleteById(Integer id);
 
 }
