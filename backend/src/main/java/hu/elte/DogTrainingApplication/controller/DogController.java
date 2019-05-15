@@ -77,5 +77,26 @@ public class DogController {
         return dogService.findTricksByDog(id);
     }
 
+    /**
+     * @param dog
+     * @return Dog
+     * Új kutya hozzáadása
+     */
+    @PostMapping("/save")
+    public Dog post(@RequestBody Dog dog) {
+        System.out.println("DOG: "+dog);
+        return dogService.save(dog);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public void deleteDog(@PathVariable("id") Integer id) {
+        try {
+            dogService.deleteById(id);
+        } catch (Exception e) {
+            log.error("Nem sikerült a kutya lekérdezése {}", e.getMessage());
+            //return null;
+        }
+    }
 
 }

@@ -1,6 +1,5 @@
 <template>
   <div class="pages">
-    <!-- <h1>{{ msg }}</h1> -->
     <h1 class="main-title">
       {{title}}
       </h1> 
@@ -8,45 +7,116 @@
     <ul>
       <li class="basic">
         <router-link :to="`/logged/${dogId}/alapszint`"> Alapszint 
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[0]" class="mb-2">{{values[0]}}/{{max}}</b-progress-bar></b-progress>
+          <b-progress id="progress" :max="getLengthTricksBy_Categoryes(basic)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(basic)" class="mb-2">{{getTricksByDogByCategory(basic)}}/{{getLengthTricksBy_Categoryes(basic)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="intermediate">
         <router-link :to="`/logged/${dogId}/kozepszint`"> Középszint
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[1]" class="mb-2">{{values[1]}}/{{max}}</b-progress-bar></b-progress>
+          <b-progress id="progress" :max="getLengthTricksBy_Categoryes(intermediate)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(intermediate)" class="mb-2">{{getTricksByDogByCategory(intermediate)}}/{{getLengthTricksBy_Categoryes(intermediate)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="advanced">
         <router-link :to="`/logged/${dogId}/haladoszint`"> Haladó szint
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[2]" class="mb-2">{{values[2]}}/{{max}}</b-progress-bar></b-progress>
+          <b-progress id="progress" :max="getLengthTricksBy_Categoryes(advanced)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(advanced)" class="mb-2">{{getTricksByDogByCategory(advanced)}}/{{getLengthTricksBy_Categoryes(advanced)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
     </ul>
     <p class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></p>
   </div>
+   <!-- <div v-for="t in tricks" :key=t.id>
+  <div>
+    {{t}}
+  </div>
+</div> -->
   </div>
 </template>
 
 <script>
-// import NavBarTrick from './NavBarTrick'
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  name: 'TrickPage'
-  ,
+  name: 'TrickPage',
+
+  
+  components: {
+      
+  },
   data() {
       return {
-        max: 3,
-        values: [3, 1, 0],
+        //max:3,
+        //values: [3, 1, 0],
         title: 'Trükkjeim',
-        dogId:this.$route.params.dogId
+        dogId:this.$route.params.dogId,
+
+        basic:"BASIC",
+        intermediate:"INTERMEDIATE",
+        advanced:"ADVANCED"
       }
     },
-  components: {
-      // 'nav-bar-trick': NavBarTrick
+
+  created(){
+    this.getTricks_ByDog();
+    this.getAll_Tricks();
+
+
+    //teljesített feladatok meghatározására
+    this.getTricksByDogByCategory(this.basic) //hány basic trükk teljesült az összesből
+    this.getTricksByDogByCategory(this.intermediate)
+    this.getTricksByDogByCategory(this.advanced)
+
+    //feladattípus hosszának meghatározására
+    this.getLengthTricksBy_Categoryes(this.basic); //mennyi BASIC trick van összesen
+    this.getLengthTricksBy_Categoryes(this.intermediate);
+    this.getLengthTricksBy_Categoryes(this.advanced);
+    
+  },
+    
+  methods:{
+     ...mapActions(['getTricksByCategory','getTricksByADog','getAllTricks']),
+    
+    getAll_Tricks(){
+      this.getAllTricks();
+    },
+
+    getTricks_ByDog(){
+      this.getTricksByADog(this.dogId)
+    },
+
+    getTricksByDogByCategory(trickCategory){
+      var count=0;
+      this.tricks.forEach(function(element) {
+        if(element.category==trickCategory){
+          count++;
+        }
+      });
+
+      // for(let i=0;i<this.tricks.length;i++){
+      //     if(this.tricks[i].category==trickCategory){
+      //       count++;
+      //     }
+      // }
+      return count;
+    },
+
+    getLengthTricksBy_Categoryes(trickCategory){
+      var count=0;
+      this.allTricks.forEach(function(element) {
+        if(element.category==trickCategory){
+          count++;
+        }
+      });
+      return count;
     }
+  },
+  computed:{
+    ...mapState({
+          tricks: function (state) { return state.moduleDog.tricks },
+          allTricks: function (state) { return state.moduleDog.allTricks },
+          //categoryTricks: function (state) { return state.moduleDog.categoryTricks },
+        }),
+  }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .main {
     max-width: 1200px;

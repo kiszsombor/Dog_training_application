@@ -32,7 +32,7 @@ public interface DogService {
      * @param dog
      *  Új kutya regisztrálásához
      */
-    void save(Dog dog);
+    Dog save(Dog dog);
     /**
      * @param dogId
      * @return  List<SeasonTicket>
@@ -52,8 +52,15 @@ public interface DogService {
      * @param dogId
      *  Id alapján kutya törlése
      */
-    void delete(Integer dogId);
+    void deleteById(Integer dogId);
 
-   public List<Trick> findTricksByDog(Integer dogId);
+    /**
+     * @param dogId
+     * @return List<Trick>
+     *     Egy kutyához tartozó trükkök lekérdezése
+     */
+    List<Trick> findTricksByDog(Integer dogId);
+
+
 
 }

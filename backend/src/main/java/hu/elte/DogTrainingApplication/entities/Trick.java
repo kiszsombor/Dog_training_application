@@ -22,9 +22,13 @@ import java.util.Set;
 @Table(name = "trick")
 public class Trick implements Serializable{
 
+    @Transient
+    private static final long serialVersionUID= -8633980627458783249L;
+
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -36,8 +40,8 @@ public class Trick implements Serializable{
     @Column(name = "category")
     private TrickCategory category;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tricks")
-    //@ManyToMany(mappedBy = "tricks")
-    private Set<Dog> dogs;
+//    @JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tricks")
+//    //@ManyToMany(mappedBy = "tricks")
+//    private Set<Dog> dogs;
 }

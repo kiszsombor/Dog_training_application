@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * Trainer entity, ami tartalmazza egy trainer (edző) tárolásához szükséges információkat
  */
-@Data
+//@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

@@ -58,6 +58,11 @@ public class Dog implements Serializable {
     @JoinColumn(name = "trainer_id", nullable = false)
     private Trainer trainer;
 
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dog")
+    private Set<SeasonTicket> seasonTickets;
+
 //    @JsonIgnore
 //    @ManyToMany(cascade = { CascadeType.ALL })
 //    @JoinTable(
@@ -67,9 +72,10 @@ public class Dog implements Serializable {
 //    )
 //    Set<Trick> tricks;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "dog_tricks", joinColumns = @JoinColumn(name = "dog_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "trick_id", referencedColumnName = "id"))
-    private Set<Trick> tricks;
+
+//    @JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//    @JoinTable(name = "dog_tricks", joinColumns = @JoinColumn(name = "dog_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "trick_id", referencedColumnName = "id"))
+//    private Set<Trick> tricks;
 }

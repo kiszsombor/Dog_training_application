@@ -302,7 +302,9 @@ export default {
 </script>
 
 <style scoped>
-
+.table{
+    background-color: lightblue;
+}
 .seasonticket-page{
     background-color: #fff;
     padding-top:7%;

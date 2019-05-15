@@ -11,6 +11,7 @@ import hu.elte.DogTrainingApplication.repository.SeasonTicketSegmentRepository;
 import hu.elte.DogTrainingApplication.repository.TrickRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,8 +52,8 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void save(Dog dog) {
-        dogRepository.save(dog);
+    public Dog save(Dog dog) {
+        return dogRepository.save(dog);
     }
 
     @Override
@@ -66,8 +67,13 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public void delete(Integer dogId) {
+    public void deleteById(Integer dogId) {
+//        Optional<Dog> dog=dogRepository.findById(dogId);
+//        if(dog.isPresent()){
+//            return dog.get();
+//        }
         dogRepository.deleteById(dogId);
+       // return null;
     }
 
     @Override
