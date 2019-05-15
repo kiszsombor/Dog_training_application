@@ -61,15 +61,19 @@
           </li>
     </ul>
   </div> -->
-  
+
 <div v-for="t in saveTricks" :key=t.id>
   <div>
     {{t}}
   </div>
 </div>
   <br>
-  <!-- {{saveTricks}} -->
+  {{categoryTricks}}
   <br>
+
+
+
+<button @click="initColorTricks()">Try it</button>
   </div>
 
 </template>
@@ -115,11 +119,14 @@ export default {
     this.getTricksByDog();
     this.getAll_Tricks();
     this.getTricks_ByCategory();
+    //this.initColorTricks();
   },
  
   methods: {
     ...mapActions(['getTricksByADog','getAllTricks','getTricksByCategory']),
-
+ myFunction() {
+  document.getElementById("demo").className='btn li button btn-lg btn-block class1';
+},
     getTricksByDog(){
           this.getTricksByADog(this.dogId);
     },
@@ -128,6 +135,21 @@ export default {
     },
     getTricks_ByCategory(category){
       this.getTricksByCategory(this.category);
+    },
+    
+    initColorTricks(){
+      
+      for(let i=0; i<this.categoryTricks.length; i++){
+        //console.log(this.categoryTricks[i].name)
+        for(let j=0; j<this.tricks.length; j++){
+        //console.log("hali")
+
+          if(this.categoryTricks[i].name==this.tricks[j].name){
+              document.getElementById(this.categoryTricks[i].name).className='btn li button btn-lg btn-block class1'
+          }
+        }
+      }
+      
     },
 
 
@@ -174,9 +196,10 @@ export default {
         "category" :"BASIC"
       };
       
-      if(document.getElementById(nameId).className=='btn li button btn-lg btn-block'){
+      if(        document.getElementById(nameId).className=='btn li button btn-lg btn-block'){
         document.getElementById(nameId).className='btn li button btn-lg btn-block class1'
-        
+        console.log("NAME___: ",document.getElementById(nameId).id)
+
          if ( this.saveTricks.includes(sT)==false) {
               this.saveTricks.push(sT);
           }

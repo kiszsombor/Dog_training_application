@@ -28,6 +28,7 @@
     {{t}}
   </div>
 </div> -->
+<button @click="proba()">Try it</button>
   </div>
 </template>
 
@@ -76,6 +77,9 @@ export default {
     
     getAll_Tricks(){
       this.getAllTricks();
+    },
+    proba(){
+      document.getElementById("COME").className="btn li button btn-lg btn-block class1";
     },
 
     getTricks_ByDog(){
