@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import DogApi from '../api/dog-api'
 import SeasonTicketApi from '../api/season-tickets-api'
+import TrainerApi from '../api/trainer-api'
 import TrickApi from '../api/tricks-api'
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ const moduleDog={
   state:{
     dog:{},
     seasonTickets: [],
+    trainer:{},
     tricks:[],
     allTricks:[],
     categoryTricks:[]
@@ -37,7 +39,10 @@ const moduleDog={
     },
     DELETE_SEASON_TICKET(state, seasonTicket){
       delete state.seasonTickets[seasonTicket];
-  },
+    },
+    INIT_TRAINER_BY_ID(state,trainer){
+      state.trainer=trainer;
+    },
     GET_TRICKS_BY_DOG(state,tricks){
       state.tricks=[...tricks]
     },
@@ -74,8 +79,14 @@ const moduleDog={
           // console.log("Res.data delete: ",res.data)
           context.commit('DELETE_SEASON_TICKET', res.data)
           return Promise.resolve()
-
-      })
+    })
+  },
+    getTrainerById(context,TrainerId){
+      TrainerApi.getTrainerById(TrainerId)
+      .then(res=>{
+          // console.log("Res.data delete: ",res.data)
+          context.commit('INIT_TRAINER_BY_ID', res.data)
+      }) 
     },
     getTricksByADog(context,dogId){
       TrickApi.getTricksByADog(dogId)
@@ -96,9 +107,7 @@ const moduleDog={
         return res.data.length
       });
     }
-
   },
-
 }
 export default new Vuex.Store({
   modules: {

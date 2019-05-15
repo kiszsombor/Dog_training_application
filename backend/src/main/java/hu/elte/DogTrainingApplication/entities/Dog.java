@@ -73,74 +73,9 @@ public class Dog implements Serializable {
 //    Set<Trick> tricks;
 
 
-
 //    @JsonIgnore
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 //    @JoinTable(name = "dog_tricks", joinColumns = @JoinColumn(name = "dog_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "trick_id", referencedColumnName = "id"))
 //    private Set<Trick> tricks;
-
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public Date getBirthDate() {
-//        return birthDate;
-//    }
-//
-//    public void setBirthDate(Date birthDate) {
-//        this.birthDate = birthDate;
-//    }
-//
-//    public String getBreed() {
-//        return breed;
-//    }
-//
-//    public void setBreed(String breed) {
-//        this.breed = breed;
-//    }
-//
-//    public DogSex getSex() {
-//        return sex;
-//    }
-//
-//    public void setSex(DogSex sex) {
-//        this.sex = sex;
-//    }
-//
-//    public Integer getWeight() {
-//        return weight;
-//    }
-//
-//    public void setWeight(Integer weight) {
-//        this.weight = weight;
-//    }
-//
-//    public Trainer getTrainer() {
-//        return trainer;
-//    }
-//
-//    public void setTrainer(Trainer trainer) {
-//        this.trainer = trainer;
-//    }
-//
-//    public Set<Trick> getTricks() {
-//        return tricks;
-//    }
-//
-//    public void setTricks(Set<Trick> tricks) {
-//        this.tricks = tricks;
-//    }
 }
