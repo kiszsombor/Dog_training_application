@@ -31,6 +31,9 @@ const moduleDog={
     INIT_DOG_BY_ID(state,dog){
       state.dog=dog
     },
+    DELETE_DOG(state,dog){
+      //delete state.seasonTickets[seasonTicket];
+    },
     INIT_SEASON_TICKETS_BY_A_DOG(state,seasonTickets){
       state.seasonTickets=[...seasonTickets]
     },
@@ -108,6 +111,21 @@ const moduleDog={
       });
     }
   },
+
+
+
+
+
+
+
+  deleteDogById(context,dogId){
+    DogApi.deleteDogById(dogId)
+    .then(res=>{
+        // console.log("Res.data delete: ",res.data)
+        context.commit('DELETE_DOG', res.data)
+        return Promise.resolve()
+  })
+},
 }
 export default new Vuex.Store({
   modules: {

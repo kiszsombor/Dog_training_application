@@ -86,7 +86,7 @@ public class DogServiceImpl implements DogService {
     @Override
     public void deleteAll(){
         dogRepository.deleteAll();
-        
+
     }
 
 //    @Override
