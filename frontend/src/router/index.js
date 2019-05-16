@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '@/router/views/Home'
-import LoginPage from '@/router/views/LoginPage'
+import LoginPage from '@/router/views/Login'
 import SeasonTickets from '@/components/SeasonTickets'
 
 import TrickPage from '@/components/TrickPage'

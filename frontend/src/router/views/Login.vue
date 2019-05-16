@@ -1,11 +1,15 @@
 <template>
 
-    <div class="login">
+    <div class="login-page pages">
+<div class="main-title">
+    {{title}}
+</div>
+
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
 
             <b-form-group
                 id="inputNameGroup"
-                label="Name:"
+                label="Felhasználónév:"
                 label-for="inputName"
             >
                 <b-form-input
@@ -13,10 +17,10 @@
                     type="text"
                     v-model="form.name"
                     required
-                    placeholder="Full Name" />
+                    placeholder="Írja be a felhasználónevét..." />
             </b-form-group>
 
-            <b-form-group
+            <!-- <b-form-group
                 id="inputEmailGroup"
                 label="Email:"
                 label-for="inputEmail"
@@ -31,7 +35,7 @@
                     required
                     autocomplete="username email"
                     placeholder="email@example.com" />
-            </b-form-group>
+            </b-form-group> -->
 
             <b-form-group
                 id="inputPasswordGroup"
@@ -48,7 +52,7 @@
             </b-form-group>
 
 
-            <b-form-group id="inputSelectGroup"
+            <!-- <b-form-group id="inputSelectGroup"
                 label="Options:"
                 label-for="inputSelect"
             >
@@ -64,10 +68,22 @@
                     <b-form-checkbox value=1>Check 1</b-form-checkbox>
                     <b-form-checkbox value=2>Check 2</b-form-checkbox>
                 </b-form-checkbox-group>
-            </b-form-group>
-
-            <b-button type="submit" variant="primary">Submit</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
+            </b-form-group> -->
+            <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <b-button class="button" type="submit" variant="primary">Bejelentkezés</b-button>
+                    </div>
+                    
+                         
+            </div>
+        <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                        <b-button class="button" type="reset" variant="danger">Visszavonás</b-button>
+                    </div>
+            </div>
+            
         </b-form>
     </div>
 </template>
@@ -78,13 +94,14 @@ export default {
     name: "Login",
     data() {
         return {
+            title:"Bejelnetkezés",
         form: {
             email: '',
             name: '',
-            option: null,
-            checked: []
+            //option: null,
+            //checked: []
         },
-        options: [{ text: 'Select One', value: null }, 'Option1', 'Option2', 'Option3', 'Option4'],
+        //options: [{ text: 'Select One', value: null }, 'Option1', 'Option2', 'Option3', 'Option4'],
         show: true
         }
     },
@@ -118,6 +135,27 @@ div.login{
 
 b-form-input.email-input{
     text-align: center;
+}
+
+.login-page{
+    background-color: #fff;
+    padding-top:7%;
+    padding-left:8%;
+    padding-right:8%;
+    overflow-y:auto;
+    margin-bottom:5%;
+}
+
+.row{
+    text-align:center;
+}
+
+.button{
+    /* padding-right:1%;
+    padding-left:1%;
+    margin-left:1%;
+    margin-right:1%;  */
+    width:100%;
 }
 
 </style>
