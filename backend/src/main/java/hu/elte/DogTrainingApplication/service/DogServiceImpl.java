@@ -73,7 +73,7 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public void deleteById(Integer id){
-        List<Trick> tricks = trickRepository.findTricksByDog(id);
+        List<Trick> tricks = trickRepository.findTricksByDogId(id);
         List<SeasonTicket> seasonTickets = seasonTicketRepository.findAllByDogId(id);
 //        for(int i=0; i<tricks.size();i++){
             trickRepository.deleteDogTricksByDogId(id);
@@ -103,8 +103,8 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public List<Trick> findTricksByDog(Integer dogId) {
-        System.out.println(trickRepository.findTricksByDog(dogId));
-        return trickRepository.findTricksByDog(dogId);
+        System.out.println(trickRepository.findTricksByDogId(dogId));
+        return trickRepository.findTricksByDogId(dogId);
     }
 
 }

@@ -26,4 +26,14 @@ public class TrickController {
     public List<Trick> getTricksByCategory(@PathVariable String category) {
         return trickService.findTricksByCategory(category);
     }
+
+    @PostMapping("/save/{dogId}/{trickId}")
+    public void postDogTricks(@PathVariable Integer dogId, @PathVariable Integer trickId){
+        trickService.postDogTricks(dogId, trickId);
+    }
+
+    @DeleteMapping("/delete/{dogId}/{trickId}")
+    public void deleteDogTricksByDogIdAndTrickId(@PathVariable Integer dogId, @PathVariable Integer trickId) {
+        trickService.deleteDogTricksByDogIdAndTrickId(dogId, trickId);
+    }
 }

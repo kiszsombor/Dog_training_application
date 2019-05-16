@@ -36,8 +36,9 @@
       
       <!-- <label for="r1">Change colors</label><input type="checkbox" v-model="class1" id="r1"> -->
  <li>
-        <button :id="t.name" ref="COME" type="checkbox"  v-b-modal.modal-1  @click="done(t.name), basicId=t.name" v-bind:class="{class1:initColorTricks(t.name)}">
+        <button :id="t.name" ref="COME" type="checkbox"   @click="done(t.name,t.id), basicId=t.name" v-bind:class="{class1:initColorTricks(t.name)}">
           {{t.name=="COME" ? "Gyere": t.name=="SIT" ? "Ül" : t.name=="LAY" ? "Fekszik" : t.name=="STAY" ? "Marad" : t.name}}
+          {{t.id}}
           </button>
       </li>
         
@@ -85,7 +86,7 @@
 
 
 
-<!-- <button @click="initColorTricks()">Try it</button> -->
+<button @click="deleteDogTricks_ByDogIdAndTrickId(2)">Try it</button>
   </div>
 
 </template>
@@ -135,10 +136,10 @@ export default {
   },
  
   methods: {
-    ...mapActions(['getTricksByADog','getAllTricks','getTricksByCategory']),
- myFunction() {
-  document.getElementById("demo").className='btn li button btn-lg btn-block class1';
-},
+    ...mapActions(['getTricksByADog','getAllTricks','getTricksByCategory', 'deleteDogTricksByDogIdAndTrickId', 'addDogTricks']),
+//  myFunction() {
+//   document.getElementById("demo").className='btn li button btn-lg btn-block class1';
+// },
     getTricksByDog(){
           this.getTricksByADog(this.dogId);
     },
@@ -147,6 +148,12 @@ export default {
     },
     getTricks_ByCategory(category){
       this.getTricksByCategory(this.category);
+    },
+    saveDogTricks(trickId){
+      this.addDogTricks({dogId:this.dogId, trickId:trickId});
+    },
+    deleteDogTricks_ByDogIdAndTrickId(trickId){
+      this.deleteDogTricksByDogIdAndTrickId({dogId:this.dogId, trickId:trickId});
     },
     
     initColorTricks(nameId){
@@ -158,80 +165,73 @@ export default {
         }
         return false
       },
-    done(nameId) {
-      this.isActive = true
-      // for(let i=0;i<this.dogBasicTrick.length;i++){
-      //     if(this.dogBasicTrick[i].id==id){
-      //         this.dogBasicTrick[i].color = 'lightgray'
-      //       if(this.dogBasicTrick[i].color == 'lightgreen'){
-      //         this.dogBasicTrick[i].color = 'lightgray'
-      //       }
-      //       if(this.dogBasicTrick[i].color == 'lightgray'){
-      //         this.dogBasicTrick[i].color = 'lightgreen'
-      //       }
+      
+    done(nameId, trickId) {
+      // this.isActive = true      
+      // let sT=
+      // {
+      //   'id':null,
+      //   "name": nameId,
+      //   "category" :"BASIC"
+      // };
+      // console.log("NAME___: ",document.getElementById(nameId).id)
+      for(let i=0;i<this.tricks.length;i++){
+        if(this.tricks[i].id == trickId){
+          // console.log("hali")
+          this.deleteDogTricks_ByDogIdAndTrickId(trickId);
+          // for( let i = 0; i < this.saveTricks.length; i++){ 
             
-      //     }
-          
-
-          //console.log(this.dogBasicTrick[i].name)
-          //console.log("REF: " + this.$refs.COME)
-          //console.log("REF: " + document.getElementById(nameId))
-          
-      //}
-      
-      //if(this.dogBasicTrick)
-      
-        // if(this.color=='lightgray'){
-        //   this.color = 'lightgreen'
-        // }else {
-        //   this.color='lightgray'
-        // }
-      // if(document.getElementById(nameId).style.backgroundColor=='lightgray'){
-      //   document.getElementById(nameId).style.backgroundColor='lightgreen'
-      //   console.log(nameId)
-      //   this.dogBasicTrick.push(nameId)
-      // }else{
-      //   document.getElementById(nameId).style.backgroundColor='lightgray'
-      // }
-      
-      let sT=
-      {
-        'id':null,
-        "name": nameId,
-        "category" :"BASIC"
-      };
-      console.log("NAME___: ",document.getElementById(nameId).id)
-      
-      if(document.getElementById(nameId).className=='btn li button btn-lg btn-block'){
-        document.getElementById(nameId).className='btn li button btn-lg btn-block class1'
-        
-
-         if ( this.saveTricks.includes(sT)==false) {
-              this.saveTricks.push(sT);
-              this.tricks.push(sT);
+          //   if ( this.saveTricks[i].name == nameId) {
+              
+          //     this.saveTricks.splice(i, 1); 
+          //   }
+          // }
+          // if(this.dogBasicTrickCount>0)
+          //   this.dogBasicTrickCount--;
+          // this.revocation=true;
           }
-     
-        this.dogBasicTrickCount++;
-        this.revocation=false;
-       
-      }else{
-        for( let i = 0; i < this.saveTricks.length; i++){ 
-          
-          if ( this.saveTricks[i].name == nameId) {
-            
-            this.saveTricks.splice(i, 1); 
-          }
-        }
-        
-        document.getElementById(nameId).className='btn li button btn-lg btn-block'
+          else {
+            this.saveDogTricks(trickId);
 
-        if(this.dogBasicTrickCount>0)
-          this.dogBasicTrickCount--;
-        this.revocation=true;
+            // if ( this.saveTricks.includes(sT)==false) {
+            //       this.saveTricks.push(sT);
+            //       // this.tricks.push(sT);
+            //   }
+        
+            // this.dogBasicTrickCount++;
+            // this.revocation=false;
+          }
       }
-      if(this.dogBasicTrickCount==4){
-            this.isAllAchieved=true;
-         }
+      // if(this.tricks.includes(sT)==false){
+
+      //   this.saveDogTricks(trickId);
+
+      //    if ( this.saveTricks.includes(sT)==false) {
+      //         this.saveTricks.push(sT);
+      //         // this.tricks.push(sT);
+      //     }
+     
+      //   this.dogBasicTrickCount++;
+      //   this.revocation=false;
+       
+      // }
+      // else if(this.tricks.includes(sT)==true){
+      //   console.log("hali")
+      //   this.deleteDogTricks_ByDogIdAndTrickId(trickId);
+      //   for( let i = 0; i < this.saveTricks.length; i++){ 
+          
+      //     if ( this.saveTricks[i].name == nameId) {
+            
+      //       this.saveTricks.splice(i, 1); 
+      //     }
+      //   }
+      //   if(this.dogBasicTrickCount>0)
+      //     this.dogBasicTrickCount--;
+      //   this.revocation=true;
+      // }
+      // if(this.dogBasicTrickCount==4){
+      //       this.isAllAchieved=true;
+      //    }
       
       
     },
