@@ -21,6 +21,7 @@ const moduleSeasonTickets = {
 const moduleDog={
   state:{
     dog:{},
+    dogs:[],
     seasonTickets: [],
     trainer:{},
     tricks:[],
@@ -28,11 +29,14 @@ const moduleDog={
     categoryTricks:[]
   },
   mutations: { 
+    GET_ALL_DOGS(state,dogs){
+      state.dogs=[...dogs]
+    },
     INIT_DOG_BY_ID(state,dog){
       state.dog=dog
     },
     DELETE_DOG(state,dog){
-      //delete state.seasonTickets[seasonTicket];
+      delete state.dogs[dog];
     },
     INIT_SEASON_TICKETS_BY_A_DOG(state,seasonTickets){
       state.seasonTickets=[...seasonTickets]
@@ -63,6 +67,20 @@ const moduleDog={
     },
    },
   actions: {  
+    getAllDogs(context){
+      DogApi.getAllDogs()
+      .then(res=>{
+        context.commit('GET_ALL_DOGS', res.data)
+      });
+    },
+    deleteDogById(context, dogId){
+      DogApi.deleteDogById(dogId)
+      .then(res=>{
+          // console.log("Res.data delete: ",res.data)
+          context.commit('DELETE_DOG', res.data)
+          return Promise.resolve()
+      })
+    },
     getDogById(context,dogID){
       DogApi.getDogById(dogID)
       .then(res=>{

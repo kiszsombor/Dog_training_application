@@ -150,8 +150,8 @@ export default {
     return {
       title: "Dog Training",
       dogId:this.$route.params.dogId,
-      pageItemsString: ["tricks", "Page3", "seasonTickets"],
-      pageItemStringNames:["Trükkjeim", "Page3", "Bérleteim"]
+      pageItemsString: ["tricks", "kutyáim", "seasonTickets"],
+      pageItemStringNames:["Trükkjeim", "Kutyáim", "Bérleteim"]
       // selectedPageItemIndex: 1,
     }
   },

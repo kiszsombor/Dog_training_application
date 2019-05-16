@@ -55,6 +55,11 @@ export default new Router({
           name: 'AdvancedTricks',
           component: AdvancedTricks
         },
+        {	
+          path: 'kutyáim',
+          name: 'Kutyáim',
+          component: Page3
+        },
       ]
     },
     {
@@ -62,19 +67,13 @@ export default new Router({
       name: 'LoginPge',
       component: LoginPage
     },
-    
-    
-    
+
 	  {
       path: '/Page2',
       name: 'Page2',
       component: Page2
     },
-    {	
-      path: '/Page3',
-      name: 'Page3',
-      component: Page3
-    },
+
     {
       path: '/Page4',
       name: 'Page4',

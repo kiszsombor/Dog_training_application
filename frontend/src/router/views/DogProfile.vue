@@ -58,8 +58,8 @@
 <!-- MODAL -->
                     <div>
 
-                        <b-modal id="modal-1" title="Biztos ki szeretné törölni?" ok-title="Igen" cancel-title="Nem" >
-                          <!-- @ok="showAlert" -->
+                        <b-modal id="modal-1" title="Biztos ki szeretné törölni?" ok-title="Igen" cancel-title="Nem" 
+                          @ok="deleteDog_ById()">
                             <p class="my-4">A törlés végleges! </p>
                         </b-modal>
                     </div>
@@ -112,7 +112,7 @@
             </b-modal>
 <div>
   <br>
-  {{myAccount}}
+  {{dogs}}
 </div>
 
 
@@ -135,7 +135,8 @@ export default {
       moment.locale('hu')
     },
     created(){
-      this.getDog()
+      this.getDog(),
+      this.getDogs()
     },
     data() {
         return {
@@ -152,14 +153,23 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getDogById']),
+        ...mapActions(['getDogById','getAllDogs','deleteDogById']),
         getDog(){
-                this.getDogById(this.dogId);
+          this.getDogById(this.dogId);
         },
+        getDogs(){
+          this.getAllDogs();
+        },
+        deleteDog_ById(){
+          this.deleteDogById(this.dogId)
+          .then(() => this.$router.push(`/LoginPage`))
+        }
     },
     computed: {
         ...mapState({
-            dog: function (state) { return state.moduleDog.dog }
+            dog: function (state) { return state.moduleDog.dog },
+            dogs: function (state) { return state.moduleDog.dogs }
+
         })
     },
     components: {

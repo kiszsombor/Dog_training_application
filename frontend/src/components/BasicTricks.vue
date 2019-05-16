@@ -6,12 +6,16 @@
 
     </h1>
 <!-- MODAL -->
-                <div>
+  <div>
 
-                    <b-modal id="modal-1" title="Feladat teljesítésének visszavonása" ok-title="Igen" cancel-title="Nem"  v-if="revocation" @cancel="done(basicId)">
-                        <p class="my-4">Biztos vissza szeretné vonni? </p>
-                    </b-modal>
-                </div>
+      <b-modal id="modal-1" :title="modalTitle" ok-title="Igen" cancel-title="Nem"  @ok="done(basicId,selectedTrickId)">
+          <p class="my-4">Biztos ez? </p>
+      </b-modal>
+<!-- 
+      <b-modal id="modal-2" title="Feladat teljesítése" ok-title="Igen" cancel-title="Nem"  v-if="isSave" @ok="done(basicId,selectedTrickId)">
+          <p class="my-4">Biztos vissza szeretné vonni? </p>
+      </b-modal> -->
+  </div>
     <!-- <nav-bar-trick></nav-bar-trick> -->
 
 
@@ -36,7 +40,7 @@
       
       <!-- <label for="r1">Change colors</label><input type="checkbox" v-model="class1" id="r1"> -->
  <li>
-        <button :id="t.name" ref="COME" type="checkbox"   @click="done(t.name,t.id), basicId=t.name" v-bind:class="{class1:initColorTricks(t.name)}">
+        <button :id="t.name" ref="COME" type="checkbox" v-b-modal.modal-1  @click=" basicId=t.name, selectedTrickId=t.id" v-bind:class="{class1:initColorTricks(t.name)}">
           {{t.name=="COME" ? "Gyere": t.name=="SIT" ? "Ül" : t.name=="LAY" ? "Fekszik" : t.name=="STAY" ? "Marad" : t.name}}
           {{t.id}}
           </button>
@@ -73,20 +77,16 @@
     </ul>
   </div> -->
 
-<div v-for="t in saveTricks" :key=t.id>
+<!-- <div v-for="t in tricks" :key=t.id>
   <div>
     {{t}}
   </div>
-</div>
-  <br>
-  {{tricks}}
-  <br>
-  {{dogBasicTrickCount}}
-  <br>
+</div> -->
 
 
 
-<button @click="deleteDogTricks_ByDogIdAndTrickId(2)">Try it</button>
+
+<!-- <button @click="deleteDogTricks_ByDogIdAndTrickId(2)">Try it</button> -->
   </div>
 
 </template>
@@ -105,10 +105,16 @@ export default {
       dogId: this.$route.params.dogId,
       class1 : false,
       isAllAchieved:false,
-      dogBasicTrickCount:0,
+      isDelete:false,
+      isSave:false,
+      // dogBasicTrickCount:0,
       revocation:false,
       isOkRevocation:false,
+      modalTitle:"ModalTitle",
+
       basicId:null,
+      selectedTrickId:null,
+
       //color:"lightgray",
       category:"BASIC",
       BASIC:{
@@ -117,13 +123,13 @@ export default {
         LAY:'LAY',
         STAY:'STAY',
       },
-      saveTricks:[],
-      saveTrick:
-      {
-        'id':null,
-        "name": null,
-        "category" :"BASIC"
-      },
+      // saveTricks:[],
+      // saveTrick:
+      // {
+      //   'id':null,
+      //   "name": null,
+      //   "category" :"BASIC"
+      // },
           
     }
   },
@@ -178,6 +184,7 @@ export default {
       for(let i=0;i<this.tricks.length;i++){
         if(this.tricks[i].id == trickId){
           // console.log("hali")
+          this.isDelete = true;
           this.deleteDogTricks_ByDogIdAndTrickId(trickId);
           // for( let i = 0; i < this.saveTricks.length; i++){ 
             
@@ -191,6 +198,7 @@ export default {
           // this.revocation=true;
           }
           else {
+            this.isSave = true;
             this.saveDogTricks(trickId);
 
             // if ( this.saveTricks.includes(sT)==false) {
