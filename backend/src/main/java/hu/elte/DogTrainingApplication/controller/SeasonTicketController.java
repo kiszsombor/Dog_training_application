@@ -64,24 +64,25 @@ public class SeasonTicketController {
 
     /**
      * @param id
-     * @param seasonTicket
+     * @param wrapper
      * Put: id alapján meghatározott bérlet adatainak módosításáért felelős metódus
      */
     @PutMapping("/modify/{id}")
-    public void put(@PathVariable Integer id, @RequestBody SeasonTicket seasonTicket) {
-        Optional<SeasonTicket> optionalSeasonTicket = seaonTicketService.findById(id);
-        SeasonTicket oldSeasonTicket=new SeasonTicket();
-        if(optionalSeasonTicket.isPresent()) {
+    public void put(@PathVariable Integer id, @RequestBody DogAndSeasonTicketWrapper wrapper) {
+        wrapper.getSeasonTicket().setId(id);
+        System.out.println("DOG: "+wrapper.getDog());
+        wrapper.setDog(wrapper.getSeasonTicket(),wrapper.getDog());
 
-            oldSeasonTicket=optionalSeasonTicket.get();
+        SeasonTicket oldSeasonTicket = seaonTicketService.findById(id).get();
 
-        }
-//        SeasonTicket oldSeasonTicket=seaonTicketService.findById(id).get();
-        System.out.println(("Bérlet: "+oldSeasonTicket.getId()));
-        oldSeasonTicket.setSeasonTicket(seasonTicket.getStartDate(),seasonTicket.getEndDate(),seasonTicket.getType(),
-                seasonTicket.getPaid(),seasonTicket.getDog(),seasonTicket.getSeasonTicketSegments());
+        //System.out.println(("Old season ticket: "+oldSeasonTicket.toString()));
+        System.out.println(("Old-seasontick: "+oldSeasonTicket));
+        oldSeasonTicket.setSeasonTicket(wrapper.getSeasonTicket().getStartDate(),wrapper.getSeasonTicket().getEndDate(),wrapper.getSeasonTicket().getType(),
+                wrapper.getSeasonTicket().getPaid(),wrapper.getSeasonTicket().getDog(),wrapper.getSeasonTicket().getSeasonTicketSegments());
+        System.out.println(("Old-seasontick-after: "+oldSeasonTicket));
 
         seaonTicketService.save(oldSeasonTicket);
+
     }
 
 

@@ -6,6 +6,7 @@ import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.SeasonTicket;
 import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
 import hu.elte.DogTrainingApplication.entities.Trick;
+import hu.elte.DogTrainingApplication.wrapper.TrainerAndDogWrapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,16 +79,31 @@ public class DogController {
         return dogService.findTricksByDog(id);
     }
 
+//    /**
+//     * @param dog
+//     * @return Dog
+//     * Új kutya hozzáadása
+//     */
+//    @PostMapping("/save")
+//    public Dog post(@RequestBody Dog dog) {
+//        System.out.println("DOG: "+dog);
+//        return dogService.save(dog);
+//    }
+
+
     /**
-     * @param dog
-     * @return Dog
-     * Új kutya hozzáadása
+     * @param wrapper
+     * Új Kutya felvételéhez
      */
     @PostMapping("/save")
-    public Dog post(@RequestBody Dog dog) {
-        System.out.println("DOG: "+dog);
-        return dogService.save(dog);
+    public Dog post(@RequestBody TrainerAndDogWrapper wrapper) {
+        wrapper.setTrainer(wrapper.getTrainer(),wrapper.getDog());
+        System.out.println("Trainer: "+wrapper.getTrainer());
+        return dogService.save(wrapper.getDog());
     }
+
+
+
 
     @PutMapping("/modify/{id}")
     public void put(@PathVariable Integer id, @RequestBody Dog dog) {
