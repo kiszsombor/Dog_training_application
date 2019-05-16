@@ -27,4 +27,14 @@ public class TrickServiceImpl implements TrickService {
         System.out.println(type.toString());
         return trickRepository.findAllByCategory(type);
     }
+
+    @Override
+    public void postDogTricks(Integer dogId, Integer trickId){
+        trickRepository.postDogTricks(dogId, trickId);
+    }
+
+    @Override
+    public void deleteDogTricksByDogIdAndTrickId(Integer dogId, Integer trickId){
+        trickRepository.deleteDogTricksByDogIdAndTrickId(dogId, trickId);
+    }
 }

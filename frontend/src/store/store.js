@@ -51,7 +51,13 @@ const moduleDog={
     },
     GET_TRICKS_BY_CATEGORY(state,categoryTricks){
       state.categoryTricks=[...categoryTricks]
-    }
+    },
+    ADD_NEW_DOG_TRICKS(state, dogTrick){
+      state.tricks.push(dogTrick)
+    },
+    DELETE_DOG_TRICKS(state, dogTrick){
+      delete state.tricks[dogTrick];
+    },
    },
   actions: {  
     getDogById(context,dogID){
@@ -106,7 +112,22 @@ const moduleDog={
         context.commit('GET_TRICKS_BY_CATEGORY', res.data)
         return res.data.length
       });
-    }
+    },
+    addDogTricks(context,{dogId,trickId}){
+      return TrickApi.postDogTricks(dogId,trickId)
+          .then(res => {
+              context.commit('ADD_NEW_DOG_TRICKS', res.data)
+              return Promise.resolve()
+          })
+  },
+    deleteDogTricksByDogIdAndTrickId(context, {dogId, trickId}){
+      TrickApi.deleteDogTricksByDogIdAndTrickId(dogId, trickId)
+      .then(res=>{
+          // console.log("Res.data delete: ",res.data)
+          context.commit('DELETE_DOG_TRICKS', res.data)
+          return Promise.resolve()
+    })
+  },
   },
 }
 export default new Vuex.Store({
