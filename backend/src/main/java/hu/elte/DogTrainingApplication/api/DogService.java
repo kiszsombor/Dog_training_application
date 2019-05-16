@@ -50,12 +50,12 @@ public interface DogService {
     List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(Integer seasonTicketId);
 
     /**
-     * @param dogId
+     * @param id
      *  Id alapján kutya törlése
      */
-    void deleteAll();
 
     void deleteById(Integer id);
+    void deleteAll();
 
 //    Dog deleteById(Integer dogId);
 
@@ -65,6 +65,8 @@ public interface DogService {
      *     Egy kutyához tartozó trükkök lekérdezése
      */
     List<Trick> findTricksByDog(Integer dogId);
+
+    List <Dog> findDogByTrainerId(Integer trainerId);
 
 
 

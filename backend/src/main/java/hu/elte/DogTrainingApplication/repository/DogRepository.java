@@ -15,6 +15,8 @@ import java.util.List;
 public interface DogRepository extends CrudRepository<Dog, Integer> {
 
     List<Dog> findAll();
+    List<Dog> findAllByTrainerId(Integer trainerId);
+
 
 
 //    void deleteAll();
