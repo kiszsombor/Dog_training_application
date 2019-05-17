@@ -22,7 +22,7 @@
     <div>
       <b-alert class="alertClass" :show="tricks.length==categoryTricks.length"  variant="success">
         <span> Gratulálunk! Az alapszint összes ({{tricks.length}}) feladatát teljesítette! Továbbléphet a 
-          <router-link class="router" :to="`/logged/${dogId}/kozepszint`">középszintre</router-link>.<i class="far fa-smile-wink"></i> </span>
+          <router-link class="router" :to="`/logged/${trainerId}/${dogId}/kozepszint`">középszintre</router-link>.<i class="far fa-smile-wink"></i> </span>
       </b-alert>
     </div>
 
@@ -65,7 +65,7 @@
       </li> -->
       
     </ul>
-    <p><b-button class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
+    <p><b-button class="back"><router-link :to="`/logged/${trainerId}/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
 
 
   <!-- <div v-if="allTricks.length>0">
@@ -102,6 +102,7 @@ export default {
   data () {
     return {
       title: "Alapszint",
+      trainerId: this.$route.params.trainerId,
       dogId: this.$route.params.dogId,
       class1 : false,
       isAllAchieved:false,
@@ -181,6 +182,11 @@ export default {
       //   "category" :"BASIC"
       // };
       // console.log("NAME___: ",document.getElementById(nameId).id)
+      if(this.tricks.length == 0){
+            this.isSave = true;
+            this.saveDogTricks(trickId);
+      }
+
       for(let i=0;i<this.tricks.length;i++){
         if(this.tricks[i].id == trickId){
           // console.log("hali")
@@ -196,8 +202,7 @@ export default {
           // if(this.dogBasicTrickCount>0)
           //   this.dogBasicTrickCount--;
           // this.revocation=true;
-          }
-          else {
+        } else {
             this.isSave = true;
             this.saveDogTricks(trickId);
 

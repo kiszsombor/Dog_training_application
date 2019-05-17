@@ -26,7 +26,6 @@ public class TrainerServiceImpl implements TrainerService {
     @Autowired
     private TrainerRepository trainerRepository;
 
-
     @Override
     public Iterable<Trainer> findAll() {
         return trainerRepository.findAll();

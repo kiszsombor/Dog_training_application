@@ -81,48 +81,58 @@
       
       </h1>
     </router-link>
+    <b-navbar-nav>
+                
+                  <b-nav-item class="menu">
+                    <router-link :to="`/logged/${trainerId}/${dogId}/${pageDog[0]}`">
+                      <h6><a>{{pageDogName[0]}}</a></h6>
+                    </router-link>
+                  </b-nav-item>
+                
+                
+      </b-navbar-nav>
     
                      
-                      <!-- Right aligned nav items -->
-                            <b-navbar-nav class="ml-auto">
-                              <b-navbar-nav>
-                                      
-                                        <b-nav-item class="menu">
-                                          <router-link
-                                            v-for="(pageItemString,index) in pageItemsString"
-                                            :key="pageItemString.id"
-                                            :to="`/logged/${dogId}/${pageItemString}`"
-                                          >
-                                            <h6>
-                                              <a>{{pageItemStringNames[index]}}</a></h6>
-                                           
-                                          </router-link>
-                                          </b-nav-item>
-                                      
-                                      
-                            </b-navbar-nav>
+<!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-navbar-nav>
+                
+                  <b-nav-item class="menu">
+                    <router-link 
+                      v-for="(pageItemString,index) in pageItemsString"
+                      :key="pageItemString.id"
+                      :to="`/logged/${trainerId}/${dogId}/${pageItemString}` " 
+                    >
+                      <h6>
+                        <a>{{pageItemStringNames[index]}}</a></h6>
+                      
+                    </router-link>
+                    </b-nav-item>
+                
+                
+      </b-navbar-nav>
 
 
-                              <b-nav-item-dropdown right class="end_menu">
-                                <template slot="button-content"><h6>
-                                  <i class="fas fa-user"></i>
-                                  Felhasználó
-                                  </h6></template>
-                                <b-dropdown-item aria-role="listitem">
-                                  <router-link :to="`/logged/${dogId}/profile`">
-                                    <div class="dropdown_item"> Saját profil</div>
-                                    </router-link>
-                                </b-dropdown-item>
-                                
-                                <b-dropdown-item href="/">
-                                  <router-link :to="`/`">
-                                  <div class="dropdown_item">Kijelentkezés</div> 
-                                  </router-link>
-                                  </b-dropdown-item>
-                                
-                              </b-nav-item-dropdown>
-                            </b-navbar-nav>
-                          
+        <b-nav-item-dropdown right class="end_menu">
+          <template slot="button-content"><h6>
+            <i class="fas fa-user"></i>
+            Felhasználó
+            </h6></template>
+          <b-dropdown-item aria-role="listitem">
+            <router-link :to="`/logged/${trainerId}/${dogId}/profile`">
+              <div class="dropdown_item"> Saját profil</div>
+              </router-link>
+          </b-dropdown-item>
+          
+          <b-dropdown-item href="/">
+            <router-link :to="`/`">
+            <div class="dropdown_item">Kijelentkezés</div> 
+            </router-link>
+            </b-dropdown-item>
+          
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    
 
                       
       
@@ -149,9 +159,12 @@ export default {
   data () {
     return {
       title: "Dog Training",
+      trainerId:this.$route.params.trainerId,
       dogId:this.$route.params.dogId,
-      pageItemsString: ["tricks", "kutyáim", "seasonTickets"],
-      pageItemStringNames:["Trükkjeim", "Kutyáim", "Bérleteim"]
+      pageDog: ["kutyaim"],
+      pageDogName: ["Kutyáim"],
+      pageItemsString: ["tricks",  "seasonTickets"],
+      pageItemStringNames:["Trükkjeim",  "Bérleteim"]
       // selectedPageItemIndex: 1,
     }
   },

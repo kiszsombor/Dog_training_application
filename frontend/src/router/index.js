@@ -11,7 +11,7 @@ import IntermediateTricks from '@/components/IntermediateTricks'
 import AdvancedTricks from '@/components/AdvancedTricks'
 import DogProfile from '@/router/views/DogProfile'
 import Page2 from '@/router/views/Page2'
-import Page3 from '@/router/views/Page3'
+import DogList from '@/router/views/DogList'
 import Page4 from '@/router/views/Page4'
 
 Vue.use(Router)
@@ -21,7 +21,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/logged/:dogId',
+      path: '/logged/:trainerId/:dogId',
       name: 'Home',
       component: Home,
       children:[
@@ -56,9 +56,9 @@ export default new Router({
           component: AdvancedTricks
         },
         {	
-          path: 'kutyáim',
+          path: 'kutyaim',
           name: 'Kutyáim',
-          component: Page3
+          component: DogList
         },
       ]
     },

@@ -1,10 +1,7 @@
 package hu.elte.DogTrainingApplication.service;
 
 import hu.elte.DogTrainingApplication.api.DogService;
-import hu.elte.DogTrainingApplication.entities.Dog;
-import hu.elte.DogTrainingApplication.entities.SeasonTicket;
-import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
-import hu.elte.DogTrainingApplication.entities.Trick;
+import hu.elte.DogTrainingApplication.entities.*;
 import hu.elte.DogTrainingApplication.repository.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +30,8 @@ public class DogServiceImpl implements DogService {
     private TrickRepository trickRepository;
     @Autowired
     private TrainerRepository trainerRepository;
+
+    private Trainer trainer;
 
     @Override
     public List<Dog> findAll() {
@@ -99,6 +98,11 @@ public class DogServiceImpl implements DogService {
 //        dogRepository.deleteById(id);
 //        return deletedDog;
 //    }
+
+    @Override
+    public Optional<Trainer> findTrainerByDog(Integer dogId){
+        return trainerRepository.findById(dogRepository.findTrainerByDog(dogId));
+    }
 
     @Override
     public List<Trick> findTricksByDog(Integer dogId) {

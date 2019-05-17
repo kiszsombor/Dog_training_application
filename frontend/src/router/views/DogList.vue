@@ -14,28 +14,31 @@
         <th scope="col">Fajta</th>
         <th scope="col">Nem</th>
         <th scope="col">Súly</th>
+        <!-- <th scope="col">Kutya kiválasztás</th> -->
         </tr>
     </thead>
     <tbody v-for="s in dogs" :key="s.id">
+      
         <tr>
-            <th scope="row">{{s.id}}</th>
+          <router-link :to="`/logged/${trainerId}/${s.id}/kutyaim`">
+            <td scope="row">{{s.id}}</td>
+          </router-link>
             <!-- <td>{{moment(String(s.birthDate)).format("LL")}}</td> -->
             <td>{{s.name}}</td>
             <td>{{s.birthDate}}</td>
             <td>{{s.breed}}</td>
             <td>{{s.sex}}</td>
             <td>{{s.weight}}</td>
+            <!-- <td scope="row"><input type="radio" name="dogs" :value="s.id"></td> -->
+
             <!-- <td><b-button v-b-modal.modal-modify variant="secondary"><i class="fas fa-edit"></i></b-button></td>
             <td><b-button v-b-modal.modal-1 variant="secondary" @click="ticketId=s.id"><i class="fas fa-trash"></i></b-button></td> -->
-            
         </tr>
-        
     </tbody>
-    </table>
-
-
-
-  </div>
+  </table>
+  {{ checked }}
+</div>
+      
   
 </template>
 
@@ -57,7 +60,10 @@ export default {
     },
     data() {
         return {
-            title: "Kutyáim",
+          trainerId:this.$route.params.trainerId,
+          dogId:this.$route.params.dogId,
+          title: "Kutyáim",
+          checked:''
         }
     },
     methods: {

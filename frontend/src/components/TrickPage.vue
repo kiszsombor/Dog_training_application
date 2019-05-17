@@ -6,22 +6,22 @@
 <div class="main">
     <ul>
       <li class="basic">
-        <router-link :to="`/logged/${dogId}/alapszint`"> Alapszint 
+        <router-link :to="`/logged/${trainerId}/${dogId}/alapszint`"> Alapszint 
           <b-progress id="progress" :max="getLengthTricksBy_Categoryes(basic)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(basic)" class="mb-2">{{getTricksByDogByCategory(basic)}}/{{getLengthTricksBy_Categoryes(basic)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="intermediate">
-        <router-link :to="`/logged/${dogId}/kozepszint`"> Középszint
+        <router-link :to="`/logged/${trainerId}/${dogId}/kozepszint`"> Középszint
           <b-progress id="progress" :max="getLengthTricksBy_Categoryes(intermediate)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(intermediate)" class="mb-2">{{getTricksByDogByCategory(intermediate)}}/{{getLengthTricksBy_Categoryes(intermediate)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="advanced">
-        <router-link :to="`/logged/${dogId}/haladoszint`"> Haladó szint
+        <router-link :to="`/logged/${trainerId}/${dogId}/haladoszint`"> Haladó szint
           <b-progress id="progress" :max="getLengthTricksBy_Categoryes(advanced)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(advanced)" class="mb-2">{{getTricksByDogByCategory(advanced)}}/{{getLengthTricksBy_Categoryes(advanced)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
     </ul>
-    <p class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></p>
+    <p class="back"><router-link :to="`/logged/${trainerId}/${dogId}/tricks`"> VISSZA </router-link></p>
   </div>
    <!-- <div v-for="t in tricks" :key=t.id>
   <div>
@@ -43,17 +43,18 @@ export default {
       
   },
   data() {
-      return {
+    return {
         //max:3,
         //values: [3, 1, 0],
-        title: 'Trükkjeim',
-        dogId:this.$route.params.dogId,
+      title: 'Trükkjeim',
+      trainerId:this.$route.params.trainerId,
+      dogId:this.$route.params.dogId,
 
-        basic:"BASIC",
-        intermediate:"INTERMEDIATE",
-        advanced:"ADVANCED"
-      }
-    },
+      basic:"BASIC",
+      intermediate:"INTERMEDIATE",
+      advanced:"ADVANCED"
+    }
+  },
 
   created(){
     this.getTricks_ByDog();

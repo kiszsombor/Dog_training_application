@@ -1,9 +1,6 @@
 package hu.elte.DogTrainingApplication.api;
 
-import hu.elte.DogTrainingApplication.entities.Dog;
-import hu.elte.DogTrainingApplication.entities.SeasonTicket;
-import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
-import hu.elte.DogTrainingApplication.entities.Trick;
+import hu.elte.DogTrainingApplication.entities.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,11 +56,14 @@ public interface DogService {
 
 //    Dog deleteById(Integer dogId);
 
-    /**
-     * @param dogId
-     * @return List<Trick>
-     *     Egy kutyához tartozó trükkök lekérdezése
-     */
+    Optional<Trainer> findTrainerByDog(Integer dogId);
+
+
+        /**
+         * @param dogId
+         * @return List<Trick>
+         *     Egy kutyához tartozó trükkök lekérdezése
+         */
     List<Trick> findTricksByDog(Integer dogId);
 
     List <Dog> findDogByTrainerId(Integer trainerId);

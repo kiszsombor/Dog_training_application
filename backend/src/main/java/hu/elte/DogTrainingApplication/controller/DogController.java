@@ -2,10 +2,8 @@ package hu.elte.DogTrainingApplication.controller;
 
 
 import hu.elte.DogTrainingApplication.api.DogService;
-import hu.elte.DogTrainingApplication.entities.Dog;
-import hu.elte.DogTrainingApplication.entities.SeasonTicket;
-import hu.elte.DogTrainingApplication.entities.SeasonTicketSegment;
-import hu.elte.DogTrainingApplication.entities.Trick;
+import hu.elte.DogTrainingApplication.api.TrainerService;
+import hu.elte.DogTrainingApplication.entities.*;
 import hu.elte.DogTrainingApplication.wrapper.TrainerAndDogWrapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +33,8 @@ import java.util.Optional;
 public class DogController {
     @Autowired
     private DogService dogService;
+    @Autowired
+    private TrainerService trainerService;
 
 
     @GetMapping("")
@@ -78,6 +78,16 @@ public class DogController {
         System.out.println(dogService.findTricksByDog(id));
         return dogService.findTricksByDog(id);
     }
+
+    @GetMapping("/{id}/trainer")
+    public Trainer findTrainerByDog(@PathVariable Integer id){
+        Optional<Trainer> optionalTrainer= dogService.findTrainerByDog(id);
+
+        if (optionalTrainer.isPresent()) {
+            return optionalTrainer.get();
+        }
+        return null;
+}
 
 //    /**
 //     * @param dog
