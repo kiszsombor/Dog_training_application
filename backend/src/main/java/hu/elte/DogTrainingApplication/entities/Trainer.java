@@ -43,12 +43,6 @@ public class Trainer implements Serializable {
     @Column( name="password",nullable = false)
     private String password;
 
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
-    @Column( name="password",nullable = false)
-    private String password;
-
     @Column(name = "email")
     private String email;
 

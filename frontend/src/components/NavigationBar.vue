@@ -161,17 +161,11 @@ export default {
       title: "Dog Training",
       trainerId:this.$route.params.trainerId,
       dogId:this.$route.params.dogId,
-<<<<<<< HEAD
       pageDog: ["kutyaim"],
       pageDogName: ["Kutyáim"],
       pageItemsString: ["tricks",  "seasonTickets"],
       pageItemStringNames:["Trükkjeim",  "Bérleteim"]
-=======
-      pageItemsString: ["tricks", "kutyáim", "seasonTickets"],
-      pageItemStringNames:["Trükkjeim", "Kutyáim", "Bérleteim"],
->>>>>>> 60f0ac033db3c031093cb9a63b85c73a8cf126f4
       // selectedPageItemIndex: 1,
-      isLoggedIn:false
     }
   },
   methods: {
