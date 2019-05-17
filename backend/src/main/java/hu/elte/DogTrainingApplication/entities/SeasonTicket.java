@@ -43,8 +43,8 @@ public class SeasonTicket implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
-    @Column(name = "type")
-    private SeasonTicketType type;
+    @Column(name = "spent_time")
+    private Integer spentTime;
 
     @Column(name = "paid")
     private Boolean paid;
@@ -62,10 +62,10 @@ public class SeasonTicket implements Serializable {
         this.id=id;
     }
 
-    public void setSeasonTicket(Date startDate, Date endDate, SeasonTicketType type, Boolean paid, Dog dog, Set<SeasonTicketSegment> seasonTicketSegments) {
+    public void setSeasonTicket(Date startDate, Date endDate, Integer spentTime, Boolean paid, Dog dog, Set<SeasonTicketSegment> seasonTicketSegments) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.type = type;
+        this.spentTime = spentTime;
         this.paid = paid;
         this.dog = dog;
         this.seasonTicketSegments = seasonTicketSegments;
