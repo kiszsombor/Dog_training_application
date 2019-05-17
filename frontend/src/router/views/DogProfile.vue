@@ -135,6 +135,7 @@ export default {
       moment.locale('hu')
     },
     created(){
+      if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
       this.getDog(),
       this.getDogs()
     },

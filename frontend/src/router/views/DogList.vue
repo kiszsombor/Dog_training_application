@@ -56,12 +56,13 @@ export default {
 
     },
     created(){
+      if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
       this.getDogs()
       //this.getDogsByTrainer()
     },
     data() {
         return {
-          trainerId:this.$route.params.trainerId,
+          trainerId:this.$store.state.moduleDog.me.id,
           dogId:this.$route.params.dogId,
           title: "Kutyáim",
           checked:''

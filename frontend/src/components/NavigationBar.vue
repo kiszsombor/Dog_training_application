@@ -125,7 +125,7 @@
           </b-dropdown-item>
           
           <b-dropdown-item href="/">
-            <router-link :to="`/`">
+            <router-link :to="`/LoginPage`">
             <div class="dropdown_item">Kijelentkezés</div> 
             </router-link>
             </b-dropdown-item>
