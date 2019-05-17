@@ -115,7 +115,7 @@
                                 </b-dropdown-item>
                                 
                                 <b-dropdown-item href="/">
-                                  <router-link :to="`/`">
+                                  <router-link :to="`/LoginPage`">
                                   <div class="dropdown_item">Kijelentkezés</div> 
                                   </router-link>
                                   </b-dropdown-item>
@@ -151,8 +151,9 @@ export default {
       title: "Dog Training",
       dogId:this.$route.params.dogId,
       pageItemsString: ["tricks", "kutyáim", "seasonTickets"],
-      pageItemStringNames:["Trükkjeim", "Kutyáim", "Bérleteim"]
+      pageItemStringNames:["Trükkjeim", "Kutyáim", "Bérleteim"],
       // selectedPageItemIndex: 1,
+      isLoggedIn:false
     }
   },
   methods: {
