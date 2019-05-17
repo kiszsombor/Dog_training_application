@@ -43,38 +43,6 @@ CREATE TABLE `trainer` (
 # Author: Kis Zsombor
 #----------------------------------
 #
-# Létrehozó script a season_ticket_segment táblához
-#
-#----------------------------------
--- CREATE TABLE `season_ticket_segment` (
---   `id` int(11) NOT NULL AUTO_INCREMENT,
---   `season_ticket_id` int(11) NOT NULL,
---   `date` timestamp NULL DEFAULT NULL,
---   `spent_time` timestamp NULL DEFAULT NULL,
---   PRIMARY KEY (`Id`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-#----------------------------------
-# Author: Bajári Lúcia
-#----------------------------------
-#
-# Módosítás + kapcsolat hozzáadása: season_ticket_segment
-#
-#----------------------------------
-
-CREATE TABLE `season_ticket_segment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `season_ticket_id` int(11) DEFAULT NULL,
-  `date` timestamp NULL DEFAULT NULL,
-  `spent_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `season_ticket_id` (`season_ticket_id`),
-  FOREIGN KEY (`season_ticket_id`) REFERENCES `season_ticket` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-#----------------------------------
-# Author: Kis Zsombor
-#----------------------------------
-#
 # Létrehozó script a season_ticket táblához
 #
 #----------------------------------
@@ -104,6 +72,40 @@ CREATE TABLE `season_ticket` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`dog_id`) REFERENCES `dog_training_database`.`dog`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#----------------------------------
+# Author: Kis Zsombor
+#----------------------------------
+#
+# Létrehozó script a season_ticket_segment táblához
+#
+#----------------------------------
+-- CREATE TABLE `season_ticket_segment` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `season_ticket_id` int(11) NOT NULL,
+--   `date` timestamp NULL DEFAULT NULL,
+--   `spent_time` timestamp NULL DEFAULT NULL,
+--   PRIMARY KEY (`Id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+#----------------------------------
+# Author: Bajári Lúcia
+#----------------------------------
+#
+# Módosítás + kapcsolat hozzáadása: season_ticket_segment
+#
+#----------------------------------
+
+CREATE TABLE `season_ticket_segment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `season_ticket_id` int(11) DEFAULT NULL,
+  `date` timestamp NULL DEFAULT NULL,
+  `spent_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `season_ticket_id` (`season_ticket_id`),
+  FOREIGN KEY (`season_ticket_id`) REFERENCES `season_ticket` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 
 #----------------------------------
 # Author: Kis Zsombor
@@ -171,13 +173,13 @@ VALUES ('Kis Károly', 'karcsi25@gmail.com', 'karesz_address', 305552145, '1990-
 INSERT INTO dog (name,birth_date,breed,sex,weight,trainer_id) VALUES ("Buksi",NOW(),"breed_Buksi","MALE",5,1);
 INSERT INTO dog (name,birth_date,breed,sex,weight,trainer_id) VALUES ("Morci",NOW(),"breed_Morci","NEUTERED_FEMALE",5,2);
 
-INSERT INTO season_ticket_segment (season_ticket_id, date, spent_time) VALUES (1, NOW(), 90);
+#INSERT INTO season_ticket_segment (season_ticket_id, date, spent_time) VALUES (1, NOW(), 90);
 
 INSERT INTO season_ticket (start_date, end_date, paid, dog_id) VALUES ('2019-01-16 12:00:00', '2019-02-16 12:00:00', true, 1);
 
-INSERT INTO free_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 12:00:00');
+#INSERT INTO free_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 12:00:00');
 
-INSERT INTO taken_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 12:00:00');
+#INSERT INTO taken_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 12:00:00');
 
 INSERT INTO trick (name, category) VALUES ("COME", "BASIC");
 INSERT INTO trick (name, category) VALUES ("SIT", "BASIC");
@@ -206,3 +208,10 @@ CREATE TABLE `dog_training_database`.`dog_tricks` ( `id` INT NOT NULL AUTO_INCRE
                                                   `dog_id` int(11) NOT NULL, FOREIGN KEY (`dog_id`) REFERENCES `dog_training_database`.`dog`(`id`),
   													`trick_id` int(11) NOT NULL, FOREIGN KEY (`trick_id`) REFERENCES `dog_training_database`.`trick`(`id`), 
                                                    PRIMARY KEY (`id`)) ENGINE = InnoDB;
+												   
+												   
+												   
+												   
+ALTER TABLE `trainer` ADD `user_name` VARCHAR(45) NOT NULL AFTER `name`;
+ALTER TABLE `trainer` ADD `password` VARCHAR(45) NOT NULL AFTER `user_name`;
+ALTER TABLE `trainer` ADD `role` ENUM('ROLE_ADMIN','ROLE_USER','','','') NOT NULL AFTER `birth_place`;
