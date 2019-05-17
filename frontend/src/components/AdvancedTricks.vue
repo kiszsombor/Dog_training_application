@@ -111,7 +111,7 @@ li button:active {
     background-size: 5%;
     border: none;
 }
-.back {
+.back{
     text-align: center;
     background-color: #606060;
     margin-left: auto;
@@ -119,18 +119,18 @@ li button:active {
     font-family: Arial, sans-serif;
     /* visibility: hidden; */
 }
+.back a {
+    text-decoration: none;
+    color: white;
+    /* visibility: hidden; */
+}
+.back a:hover {
+    color: skyblue;
+    text-decoration: none;
+} 
+
 p {
     text-align: center;
 }
-a{
-    background-color: #606060;
-    border-color: #606060;
-    text-decoration: none;
-    color: white;
-}
-a:hover {
-    background-color: #606060;
-    color: skyblue;
-    text-decoration: none;
-}
+
 </style>
