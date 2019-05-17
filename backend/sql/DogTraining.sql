@@ -215,3 +215,7 @@ CREATE TABLE `dog_training_database`.`dog_tricks` ( `id` INT NOT NULL AUTO_INCRE
 ALTER TABLE `trainer` ADD `user_name` VARCHAR(45) NOT NULL AFTER `name`;
 ALTER TABLE `trainer` ADD `password` VARCHAR(45) NOT NULL AFTER `user_name`;
 ALTER TABLE `trainer` ADD `role` ENUM('ROLE_ADMIN','ROLE_USER','','','') NOT NULL AFTER `birth_place`;
+
+
+ALTER TABLE `season_ticket` CHANGE `type` `spent_time` INT(10) NULL DEFAULT NULL;
+
