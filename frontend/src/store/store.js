@@ -35,6 +35,9 @@ const moduleDog={
     INIT_DOG_BY_ID(state,dog){
       state.dog=dog
     },
+    INIT_DOGS_BY_TRAINER(state,dogs){
+      state.dogs=[...dogs]
+    },
     DELETE_DOG(state,dog){
       delete state.dogs[dog];
     },
@@ -85,6 +88,12 @@ const moduleDog={
       DogApi.getDogById(dogID)
       .then(res=>{
         context.commit('INIT_DOG_BY_ID',res.data)
+      })
+    },
+    getDogsByTrainerId(context,trainerId){
+      DogApi.getDogsByTrainerId(trainerId)
+      .then(res=>{
+        context.commit('INIT_DOGS_BY_TRAINER',res.data)
       })
     },
     getAllSeasonTicketsByDog(context,dogID){

@@ -54,6 +54,7 @@ export default {
     },
     created(){
       this.getDogs()
+      //this.getDogsByTrainer()
     },
     data() {
         return {
@@ -61,13 +62,16 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getDogById','getAllDogs']),
+        ...mapActions(['getDogById','getAllDogs','getDogsByTrainerId']),
         getDog(){
           this.getDogById(this.dogId);
         },
         getDogs(){
           this.getAllDogs();
         },
+        getDogsByTrainer(){
+          this.getDogsByTrainerId(this.trainerId);
+        }
     },
     computed: {
         ...mapState({
