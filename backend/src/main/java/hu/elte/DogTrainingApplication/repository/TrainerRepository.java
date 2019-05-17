@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface TrainerRepository extends CrudRepository<Trainer, Integer> {
     Optional<Trainer> findByName(String name);
-    Optional<Trainer> findByUserName(String name);
+    Optional<Trainer> findByUsername(String name);
 
 }

@@ -1,6 +1,5 @@
 package hu.elte.DogTrainingApplication.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +17,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    private static final String USER="USER";
+//    private static final String ADMIN="ADMIN";
+//
+//    @Autowired
+//    public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
+//
+//        auth
+//            .inMemoryAuthentication()
+//            .withUser("user").password("{noop}user").roles(USER)
+//            .and()
+//            .withUser("admin").password("{noop}admin").roles(ADMIN,USER);
+//    }
+
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -28,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/trainer/**", "/trainer/registration", "/").permitAll()   // important!
+                .antMatchers("/trainer/**", "/trainer/registration", "/trainer/login").permitAll()   // important!
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

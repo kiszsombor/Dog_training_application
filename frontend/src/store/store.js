@@ -4,6 +4,7 @@ import DogApi from '../api/dog-api'
 import SeasonTicketApi from '../api/season-tickets-api'
 import TrainerApi from '../api/trainer-api'
 import TrickApi from '../api/tricks-api'
+import Login from '../api/login-api';
 Vue.use(Vuex)
 
 
@@ -26,7 +27,8 @@ const moduleDog={
     trainer:{},
     tricks:[],
     allTricks:[],
-    categoryTricks:[]
+    categoryTricks:[],
+    me:{}
   },
   mutations: { 
     GET_ALL_DOGS(state,dogs){
@@ -68,6 +70,10 @@ const moduleDog={
     DELETE_DOG_TRICKS(state, dogTrick){
       delete state.tricks[dogTrick];
     },
+
+    LOGIN(state,me){
+      state.me=me;
+    }
    },
   actions: {  
     getAllDogs(context){
@@ -158,6 +164,16 @@ const moduleDog={
           return Promise.resolve()
     })
   },
+
+  login(context, payload){
+    console.log("Store",payload)
+    Login.login({...payload})
+    .then(res=>{
+        console.log("Res.data login: ",res.data)
+        context.commit('LOGIN', res.data)
+        //return Promise.resolve()
+  })
+},
   },
 
 

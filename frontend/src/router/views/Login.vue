@@ -15,27 +15,10 @@
                 <b-form-input
                     id="inputName"
                     type="text"
-                    v-model="form.name"
+                    v-model="trainer.username"
                     required
                     placeholder="Írja be a felhasználónevét..." />
             </b-form-group>
-
-            <!-- <b-form-group
-                id="inputEmailGroup"
-                label="Email:"
-                label-for="inputEmail"
-                description="We'll never share your email with anyone else."
-            >
-                <b-form-input 
-                    
-                    id="inputEmail"
-                    type="email"
-                    text-align="center"
-                    v-model="form.email"
-                    required
-                    autocomplete="username email"
-                    placeholder="email@example.com" />
-            </b-form-group> -->
 
             <b-form-group
                 id="inputPasswordGroup"
@@ -45,34 +28,18 @@
                 <b-form-input
                     id="inputPassword"
                     type="password"
-                    v-model="form.password"
+                    v-model="trainer.password"
                     required
                     autocomplete="current-password"
                     placeholder=" *********** " />
             </b-form-group>
-
-
-            <!-- <b-form-group id="inputSelectGroup"
-                label="Options:"
-                label-for="inputSelect"
-            >
-                <b-form-select
-                    id="inputSelect"
-                    :options="options"
-                    required
-                    v-model="form.option" />
-            </b-form-group>
-
-            <b-form-group id="inputCheckGroup">
-                <b-form-checkbox-group v-model="form.checked" id="inputCheck">
-                    <b-form-checkbox value=1>Check 1</b-form-checkbox>
-                    <b-form-checkbox value=2>Check 2</b-form-checkbox>
-                </b-form-checkbox-group>
-            </b-form-group> -->
             <br>
+            {{me}}
+
                 <div class="row">
                     <div class="col-lg-12">
-                        <b-button class="button" type="submit" variant="primary">Bejelentkezés</b-button>
+                            <b-button class="button" type="submit" variant="primary" @click="log_in()">Bejelentkezés</b-button>
+                        
                     </div>
                     
                          
@@ -89,6 +56,9 @@
 </template>
 
 <script>
+
+import { mapState, mapActions } from 'vuex';
+
 export default {
 
     name: "Login",
@@ -96,34 +66,55 @@ export default {
         return {
             title:"Bejelentkezés",
         form: {
-            email: '',
+            password: '',
             name: '',
             //option: null,
             //checked: []
+        },
+        trainer:{
+            username:"",
+	        password:""
         },
         //options: [{ text: 'Select One', value: null }, 'Option1', 'Option2', 'Option3', 'Option4'],
         show: true
         }
     },
+    created(){
+            console.log(this.trainer.username)
+            console.log(this.trainer.password)
+    },
     methods: {
+            ...mapActions(['login']),
+
+            log_in(){
+              this.login({username: this.trainer.username, password: this.trainer.password})
+              .then(() => this.$router.push(`/logged/${me.id}/${dogId}/tricks`))
+            //    this.login(this.trainer.username,this.trainer.password)
+            },
+
         onSubmit(event) {
             event.preventDefault()
-            alert(JSON.stringify(this.form))
+            alert(JSON.stringify(this.trainer))
         },
         onReset(event) {
             event.preventDefault()
             /* Reset our form values */
-            this.form.email = ''
-            this.form.name = ''
-            this.form.option = null
-            this.form.checked = []
+            // this.form.email = ''
+            // this.form.name = ''
+            // this.form.option = null
+            // this.form.checked = []
             /* Trick to reset/clear native browser form validation state */
             this.show = false
             this.$nextTick(() => {
                 this.show = true
             })
         }
-    }
+    },
+    computed:{
+    ...mapState({
+            me: function (state) { return state.moduleDog.me }
+        }),
+  }
 }
 </script>
 

@@ -25,13 +25,14 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<Trainer> oUser = repository.findByUserName(userName);
+        Optional<Trainer> oUser = repository.findByUsername(userName);
         if (!oUser.isPresent()) {
             throw new UsernameNotFoundException(userName);
         }
         Trainer trainer = oUser.get();
         authenticated.setTrainer(trainer);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        System.out.println("Trainer:"+trainer);
         grantedAuthorities.add(new SimpleGrantedAuthority(trainer.getRole().toString()));
 
         return new org.springframework.security.core.userdetails.User(trainer.getName(), trainer.getPassword(),

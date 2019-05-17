@@ -3,6 +3,7 @@ package hu.elte.DogTrainingApplication.controller;
 import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.api.TrainerService;
 import hu.elte.DogTrainingApplication.common.Role;
+import hu.elte.DogTrainingApplication.config.AutenticatedTrainer;
 import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.Trainer;
 import hu.elte.DogTrainingApplication.repository.TrainerRepository;
@@ -38,6 +39,8 @@ public class TrainerController {
     private TrainerRepository trainerRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private AutenticatedTrainer authenticatedOwner;
 
     @Autowired
     private DogService dogService;
@@ -72,4 +75,13 @@ public class TrainerController {
     }
 
 
+    @PostMapping("/login")
+    public Trainer login(@RequestBody Trainer trainer) {
+//        System.out.println(authenticatedOwner.getTrainer());
+//        System.out.println(trainer);
+        Optional<Trainer> tr=trainerRepository.findByUsername(trainer.getUsername());
+        System.out.println("Tr "+tr);
+        authenticatedOwner.setTrainer(tr.get());
+        return authenticatedOwner.getTrainer();
+    }
 }

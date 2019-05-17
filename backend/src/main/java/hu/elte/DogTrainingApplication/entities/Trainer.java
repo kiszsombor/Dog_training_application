@@ -37,8 +37,8 @@ public class Trainer implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
     
-    @Column(name = "user_name", nullable = false)
-    private String userName;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column( name="password",nullable = false)
     private String password;
