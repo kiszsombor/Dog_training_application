@@ -187,7 +187,7 @@ a{
   
   .menu, h6, .end_menu{
     color:#ffffff;
-    display: inline-block;
+    display: inline;
     padding: 8px 16px;
     text-transform: none;
   }

@@ -2,7 +2,7 @@
   <div class="main">
     <!-- <h1>{{ msg }}</h1> -->
     <h1 class=" trick-title main-title">
-        {{title}}
+      {{title}}
 
     </h1>
 <!-- MODAL -->
@@ -21,7 +21,8 @@
 
     <div>
       <b-alert class="alertClass" :show="tricks.length==categoryTricks.length"  variant="success">
-        <span> Gratulálunk! Az alapszint összes ({{tricks.length}}) feladatát teljesítette! <i class="far fa-smile-wink"></i> </span>
+        <span> Gratulálunk! Az alapszint összes ({{tricks.length}}) feladatát teljesítette! Továbbléphet a 
+          <router-link class="router" :to="`/logged/${dogId}/kozepszint`">középszintre</router-link>.<i class="far fa-smile-wink"></i> </span>
       </b-alert>
     </div>
 
@@ -42,7 +43,6 @@
  <li>
         <button :id="t.name" ref="COME" type="checkbox" v-b-modal.modal-1  @click=" basicId=t.name, selectedTrickId=t.id" v-bind:class="{class1:initColorTricks(t.name)}">
           {{t.name=="COME" ? "Gyere": t.name=="SIT" ? "Ül" : t.name=="LAY" ? "Fekszik" : t.name=="STAY" ? "Marad" : t.name}}
-          {{t.id}}
           </button>
       </li>
         
@@ -328,7 +328,7 @@ li button:hover {
     background-size: 5%;
     border: none;
 }
-.back {
+.back{
     text-align: center;
     background-color: #606060;
     margin-left: auto;
@@ -336,21 +336,26 @@ li button:hover {
     font-family: Arial, sans-serif;
     /* visibility: hidden; */
 }
+.back a {
+    text-decoration: none;
+    color: white;
+    /* visibility: hidden; */
+}
+.back a:hover {
+    color: skyblue;
+    text-decoration: none;
+} 
 p {
     text-align: center;
 }
-a{
-    background-color: #606060;
-    border-color: #606060;
-    text-decoration: none;
-    color: white;
+.router{
+    font-size: 120%;
+    color: #155724;
 }
-a:hover {
-    background-color: #606060;
-    color: skyblue;
+.router:hover {
+    color: black;
     text-decoration: none;
 }
-
 .alertClass{
     font-size: 100%;
     display: inline-block;
