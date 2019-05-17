@@ -1,7 +1,10 @@
 package hu.elte.DogTrainingApplication.api;
 
-import hu.elte.DogTrainingApplication.entities.Dog;
+import hu.elte.DogTrainingApplication.entities.*;
+
+import java.util.List;
 import java.util.Optional;
+
 /**
  * DogService interfésze
  *
@@ -14,11 +17,11 @@ public interface DogService {
      * @return Iterable<Dog>
      *     Az összes kutya kilistázása
      */
-    Iterable<Dog> findAll();
+    List<Dog> findAll();
 
     /**
      * @param id
-     * @return Optional<Dog>
+     * @return Dog
      *      Egy kutya lekérése id alapján
      */
     Optional<Dog> findById(Integer id);
@@ -27,5 +30,44 @@ public interface DogService {
      * @param dog
      *  Új kutya regisztrálásához
      */
-    void save(Dog dog);
+    Dog save(Dog dog);
+    /**
+     * @param dogId
+     * @return  List<SeasonTicket>
+     *     Egy kutyához tartozó összes bérlet lekérdezése
+     */
+    List<SeasonTicket> findAllSeasonTicketByDogId(Integer dogId);
+
+
+    /**
+     * @param seasonTicketId
+     * @return  List<SeasonTicketSegment>
+     *     Egy bérlethez tartozó összes id lekérdezése
+     */
+    List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(Integer seasonTicketId);
+
+    /**
+     * @param id
+     *  Id alapján kutya törlése
+     */
+
+    void deleteById(Integer id);
+    void deleteAll();
+
+//    Dog deleteById(Integer dogId);
+
+    Optional<Trainer> findTrainerByDog(Integer dogId);
+
+
+        /**
+         * @param dogId
+         * @return List<Trick>
+         *     Egy kutyához tartozó trükkök lekérdezése
+         */
+    List<Trick> findTricksByDog(Integer dogId);
+
+    List <Dog> findDogByTrainerId(Integer trainerId);
+
+
+
 }

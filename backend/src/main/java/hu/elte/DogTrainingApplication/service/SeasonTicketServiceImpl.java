@@ -30,11 +30,29 @@ public class SeasonTicketServiceImpl implements SeasonTicketService {
 
     @Override
     public Optional<SeasonTicket> findById(Integer id) {
-        return seasonTicketRepository.findById(id);
+        Optional<SeasonTicket> seasonTicket=seasonTicketRepository.findById(id);
+        if(seasonTicket.isPresent()){
+            return seasonTicket;
+        }
+        //return seasonTicketRepository.findById(id);
+        return Optional.empty();
     }
 
     @Override
-    public void save(SeasonTicket seasonTicket) {
-        seasonTicketRepository.save(seasonTicket);
+    public SeasonTicket save(SeasonTicket seasonTicket) {
+
+        return seasonTicketRepository.save(seasonTicket);
+    }
+
+    @Override
+    public SeasonTicket deleteById(Integer id) {
+        Optional<SeasonTicket> deletedTicketOptional=seasonTicketRepository.findById(id);
+        SeasonTicket deletedTicket=null;
+        if(deletedTicketOptional.isPresent()){
+            deletedTicket=deletedTicketOptional.get();
+        }
+
+        seasonTicketRepository.deleteById(id);
+        return deletedTicket;
     }
 }

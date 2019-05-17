@@ -5,6 +5,7 @@ import hu.elte.DogTrainingApplication.entities.Trainer;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
+import java.util.List;
 
 /**
  * @author Bajári LÚCIA
@@ -14,4 +15,5 @@ import java.util.Optional;
 public interface TrainerRepository extends CrudRepository<Trainer, Integer> {
     Optional<Trainer> findByName(String name);
     Optional<Trainer> findByUserName(String name);
+
 }
