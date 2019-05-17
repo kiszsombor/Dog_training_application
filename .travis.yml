@@ -1,0 +1,19 @@
+language: java
+jdk: oraclejdk8
+
+stages:
+  - Compile backend
+  - Backend test
+
+before_install:
+  - cd backend/
+  - chmod 777 mvnw
+
+
+install:
+
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+jobs:
+  - include:
+    - script: mvn test -B

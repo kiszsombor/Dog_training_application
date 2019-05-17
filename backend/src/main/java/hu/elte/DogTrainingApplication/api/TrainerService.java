@@ -1,5 +1,6 @@
 package hu.elte.DogTrainingApplication.api;
 
+import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.Trainer;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface TrainerService {
      *     Egy oktató lekérése id alapján
      */
     Optional<Trainer> findById(Integer id);
+
+
 }
