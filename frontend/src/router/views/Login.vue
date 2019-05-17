@@ -94,7 +94,7 @@ export default {
     name: "Login",
     data() {
         return {
-            title:"Bejelnetkezés",
+            title:"Bejelentkezés",
         form: {
             email: '',
             name: '',

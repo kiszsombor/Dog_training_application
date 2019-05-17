@@ -49,8 +49,10 @@ public class TrainerController {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping("/dog/{id}")
+    @GetMapping("/{id}/dogs")
     public List<Dog> getDogs(@PathVariable Integer id) {
         return dogService.findDogByTrainerId(id);
     }
+
+
 }

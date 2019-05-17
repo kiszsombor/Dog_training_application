@@ -46,7 +46,7 @@
                 ok-variant="primary"
                 ok-title="Hozzáadás"
                 cancel-title="Mégse"
-                @ok="saveNewSeasonTicket()"
+                @ok="saveNewSeasonTicket(),clearSeasonTicket()"
                 @cancel="clearSeasonTicket()"
             >
             <!-- size="lg" -->
@@ -61,7 +61,7 @@
                     <b-col cols="6"><b-form-input type="date"  v-model="seasonTicket.endDate" placeholder="Érvényesség vége..."></b-form-input></b-col>
                     <div class="w-100 padding"></div>
                     <b-col cols="6">Eddig lejárt órák száma</b-col>
-                    <b-col cols="6"><b-form-input v-model="seasonTicket.classes" :state="classesState" type="number"></b-form-input></b-col>
+                    <b-col cols="6"><b-form-input v-model="seasonTicket.spentTime" :state="classesState" type="number"></b-form-input></b-col>
                     <div class="w-100 padding"></div>
                     <b-col cols="6">Fizetve</b-col>
                      <b-col cols="6">
@@ -101,7 +101,7 @@
                         <td>{{moment(String(s.endDate)).format("LL")}}</td>
                         <td v-if="s.paid"><i class="fas fa-check"></i></td>
                         <td v-else><i class="fas fa-times"></i></td>
-                        <td>10/12</td>
+                        <td>{{s.spentTime}}</td>
                         <td><b-button v-b-modal.modal-modify variant="secondary"><i class="fas fa-edit"></i></b-button></td>
                         <td><b-button v-b-modal.modal-1 variant="secondary" @click="ticketId=s.id"><i class="fas fa-trash"></i></b-button></td>
                         
@@ -210,7 +210,7 @@ export default {
             seasonTicket:{
                 startDate:"",
                 endDate:"",
-                classes:0,
+                spentTime:0,
                 paid: true,
             },
             // seasonTickets: this.$store.state.moduleSeasonTickets.seasonTickets,
@@ -260,12 +260,13 @@ export default {
         },
         checkSeasonTicketValues(seasonTicket){
             console.log(moment(String(seasonTicket.startDate)).isValid());
-            return (moment(String(seasonTicket.startDate)).isValid() && moment(String(seasonTicket.endDate)).isValid() && this.seasonTicket.classes >= 0);      
+            return (moment(String(seasonTicket.startDate)).isValid() && moment(String(seasonTicket.endDate)).isValid() 
+            && this.seasonTicket.spentTime >= 0 && this.seasonTicket.spentTime <= 12);      
         },
         clearSeasonTicket(){
             this.seasonTicket.startDate="";
             this.seasonTicket.endDate="";
-            this.seasonTicket.classes=0;
+            this.seasonTicket.spentTime=0;
         },
         saveNewSeasonTicket(){
                 if(this.checkSeasonTicketValues(this.seasonTicket)){
@@ -293,7 +294,14 @@ export default {
             trainer: function (state) { return state.moduleDog.trainer }
         }),
         classesState() {
-            return this.seasonTicket.classes >= 0 ? true : false
+                if(this.seasonTicket.spentTime>=0){
+                    if(this.seasonTicket.spentTime <=12){
+                        return true;
+                    }
+                }
+                return false ;
+
+           // return (this.seasonTicket.spentTime <=12) ? true : false
         }
     },
     components: {
