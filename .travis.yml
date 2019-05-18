@@ -9,6 +9,8 @@ before_install:
   - cd backend/
   - chmod 777 mvnw
 
+services:
+  - mysql
 
 install:
 
