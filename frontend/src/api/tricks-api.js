@@ -1,20 +1,21 @@
 import axios from 'axios';
+const BASE_URL = 'http://localhost:8080';
 
 export default{
     getAllTricks(){
-        return axios.get(`http://localhost:8080/trick`)
+        return axios.get(`${BASE_URL}/trick`)
     },
     getTricksByCategory(categoryName){
-        return axios.get(`http://localhost:8080/trick/${categoryName}`)
+        return axios.get(`${BASE_URL}/trick/${categoryName}`)
     },
     getTricksByADog(dogId){
-        return axios.get(`http://localhost:8080/dog/${dogId}/tricks`)
+        return axios.get(`${BASE_URL}/dog/${dogId}/tricks`)
     },
     postDogTricks(dogId, trickId){
-        return axios.post(`http://localhost:8080/trick/save/${dogId}/${trickId}`)
+        return axios.post(`${BASE_URL}/trick/save/${dogId}/${trickId}`)
     },
     deleteDogTricksByDogIdAndTrickId(dogId, trickId){
         // console.log("api: ",seasonTicketId)
-        return axios.delete(`http://localhost:8080/trick/delete/${dogId}/${trickId}`)
+        return axios.delete(`${BASE_URL}/trick/delete/${dogId}/${trickId}`)
     },
 }

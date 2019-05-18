@@ -173,7 +173,7 @@ export default {
     //   this.$router.push( '/LoginPage' )
     // },
     mainPageButtonPressed: function(event) {
-      this.$router.push( '/' )
+      this.$router.push( '/LoginPage' )
     },
   }
 }

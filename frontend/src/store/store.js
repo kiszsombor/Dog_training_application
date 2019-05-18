@@ -21,6 +21,11 @@ const moduleSeasonTickets = {
 }
 const moduleDog={
   state:{
+    status: '',
+    token: localStorage.getItem('token') || '',
+        me:{},
+
+
     dog:{},
     dogs:[],
     seasonTickets: [],
@@ -28,7 +33,6 @@ const moduleDog={
     tricks:[],
     allTricks:[],
     categoryTricks:[],
-    me:{}
   },
   mutations: { 
     GET_ALL_DOGS(state,dogs){
@@ -73,7 +77,9 @@ const moduleDog={
 
     LOGIN(state,me){
       state.me=me;
-    }
+    },
+
+  
    },
   actions: {  
     getAllDogs(context){
@@ -174,6 +180,8 @@ const moduleDog={
         //return Promise.resolve()
   })
 },
+
+
   },
 
 
@@ -190,6 +198,10 @@ const moduleDog={
         return Promise.resolve()
   })
 },
+// getters : {
+//   isLoggedIn: state => !!state.token,
+//   authStatus: state => state.status,
+// }
 }
 export default new Vuex.Store({
   modules: {

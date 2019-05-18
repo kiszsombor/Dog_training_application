@@ -34,7 +34,7 @@
                     placeholder=" *********** " />
             </b-form-group>
             <br>
-            {{me}}
+            {{me.id}}
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -82,14 +82,14 @@ export default {
     created(){
             console.log(this.trainer.username)
             console.log(this.trainer.password)
+            console.log(this.me.id)
     },
     methods: {
             ...mapActions(['login']),
 
             log_in(){
               this.login({username: this.trainer.username, password: this.trainer.password})
-              .then(() => this.$router.push(`/logged/${me.id}/${dogId}/tricks`))
-            //    this.login(this.trainer.username,this.trainer.password)
+              .then(() => this.$router.push(`/logged/${this.me.id}/${this.dogId}/kutyaim`))
             },
 
         onSubmit(event) {

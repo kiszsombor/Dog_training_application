@@ -28,7 +28,6 @@
     {{t}}
   </div>
 </div> -->
-<button @click="proba()">Try it</button>
   </div>
 </template>
 

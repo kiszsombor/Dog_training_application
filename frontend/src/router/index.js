@@ -16,7 +16,24 @@ import Page4 from '@/router/views/Page4'
 
 Vue.use(Router)
 
+
+// Router.beforeEach((to, from, next) => {
+//   if(to.matched.some(record => record.meta.requiresAuth)) {
+//     if (store.getters.isLoggedIn) {
+//       next()
+//       return
+//     }
+//     next('/login') 
+//   } else {
+//     next() 
+//   }
+// })
+
+
 export default new Router({
+
+
+  
   base: '/app',
   mode: 'history',
   routes: [
@@ -28,7 +45,10 @@ export default new Router({
         {
           path: 'SeasonTickets',
           name: 'SeasonTickets',
-          component: SeasonTickets
+          component: SeasonTickets,
+          meta: { 
+            requiresAuth: true
+          }
         },
         {
           path: 'profile',

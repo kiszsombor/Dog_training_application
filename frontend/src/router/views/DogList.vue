@@ -56,13 +56,14 @@ export default {
 
     },
     created(){
-      if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
+     // if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
       this.getDogs()
       //this.getDogsByTrainer()
     },
     data() {
         return {
-          trainerId:this.$store.state.moduleDog.me.id,
+          //trainerId:this.$store.state.moduleDog.me.id,
+          trainerId:this.$route.params.trainerId,
           dogId:this.$route.params.dogId,
           title: "Kutyáim",
           checked:''
