@@ -72,7 +72,7 @@
 
 <nav class="navbar-dark bg-primary fixed-top">
   <b-navbar toggleable="lg"  class="navbar_color"> <!--type="dark" variant="dark"-->
-    <router-link :to="`/`">
+  
     
     <h1 class="logo">
       <i class="fas fa-dog"></i>
@@ -80,7 +80,6 @@
   
       
       </h1>
-    </router-link>
     <b-navbar-nav>
                 
                   <b-nav-item class="menu">
@@ -97,7 +96,7 @@
       <b-navbar-nav class="ml-auto">
         <b-navbar-nav>
                 
-                  <b-nav-item class="menu">
+                  <b-nav-item class="menu" v-if="isLoggedId">
                     <router-link 
                       v-for="(pageItemString,index) in pageItemsString"
                       :key="pageItemString.id"
@@ -113,7 +112,7 @@
       </b-navbar-nav>
 
 
-        <b-nav-item-dropdown right class="end_menu">
+        <b-nav-item-dropdown right class="end_menu" v-if="isLoggedId">
           <template slot="button-content"><h6>
             <i class="fas fa-user"></i>
             Felhasználó
@@ -131,6 +130,16 @@
             </b-dropdown-item>
           
         </b-nav-item-dropdown>
+
+        <b-nav-item class="menu" v-else>
+                    <router-link 
+                      :to="`/registrationPage` " 
+                    >
+                      <h6>
+                        <a>Regisztráció</a></h6>
+                      
+                    </router-link>
+                    </b-nav-item>
       </b-navbar-nav>
     
 
@@ -164,9 +173,19 @@ export default {
       pageDog: ["kutyaim"],
       pageDogName: ["Kutyáim"],
       pageItemsString: ["tricks",  "seasonTickets"],
-      pageItemStringNames:["Trükkjeim",  "Bérleteim"]
+      pageItemStringNames:["Trükkjeim",  "Bérleteim"],
+      isLoggedId: true //defaultból: false
       // selectedPageItemIndex: 1,
     }
+  },
+  created(){
+    console.log(Object.keys(this.$store.state.moduleDog.me).length )
+        if(Object.keys(this.$store.state.moduleDog.me).length != 0){
+            this.isLoggedId=true;
+        }
+
+      
+    
   },
   methods: {
     // loginButtonPressed: function(event) {

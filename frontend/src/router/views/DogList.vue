@@ -4,7 +4,7 @@
     <h1 class="main-title">
       {{title}}
     </h1>
-{{dogs}}
+<!-- {{dogs}} -->
   <table class="table">
     <thead class=" thread bg-secondary">
         <tr>
