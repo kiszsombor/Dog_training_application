@@ -4,7 +4,7 @@
     <h1 class="main-title">
       {{title}}
     </h1>
-{{dogs}}
+{{trainerDogs}}
   <table class="table">
     <thead class=" thread bg-secondary">
         <tr>
@@ -17,7 +17,7 @@
         <!-- <th scope="col">Kutya kiválasztás</th> -->
         </tr>
     </thead>
-    <tbody v-for="s in dogs" :key="s.id">
+    <tbody v-for="s in trainerDogs" :key="s.id">
       
         <tr>
           <router-link :to="`/logged/${trainerId}/${s.id}/kutyaim`">
@@ -36,7 +36,10 @@
         </tr>
     </tbody>
   </table>
-  {{ checked }}
+  <!-- <div v-for="t in trainerDogs" :key="t.dogId"> -->
+  <!-- {{ trainerDogs.length }}
+  {{ trainerId }} -->
+  <!-- </div> -->
 </div>
       
   
@@ -56,8 +59,8 @@ export default {
 
     },
     created(){
-      this.getDogs()
-      //this.getDogsByTrainer()
+      // this.getDogs()
+      this.getDogsByTrainer()
     },
     data() {
         return {
@@ -81,7 +84,8 @@ export default {
     },
     computed: {
         ...mapState({
-            dogs: function (state) { return state.moduleDog.dogs }
+            dogs: function (state) { return state.moduleDog.dogs },
+            trainerDogs: function (state) {return state.moduleDog.trainerDogs}
         })
     },
     components: {

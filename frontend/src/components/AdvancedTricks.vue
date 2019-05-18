@@ -16,17 +16,15 @@
           <p class="my-4">Biztos vissza szeretné vonni? </p>
       </b-modal> -->
   </div>
-
-
     <div>
-      <b-alert class="alertClass" :show="tricks.length==categoryTricks.length"  variant="success">
-        <span> Gratulálunk! A haladó szint összes ({{tricks.length}}) feladatát teljesítette! Kutyája elvégezte a képzést!<i class="far fa-smile-wink"></i> </span>
+      <b-alert class="alertClass" :show="getTricksByDogByCategory(category)==categoryTricks.length"  variant="success">
+        <span> Gratulálunk! A haladó szint összes ({{categoryTricks.length}}) feladatát teljesítette! Kutyája elvégezte a képzést!<i class="far fa-smile-wink"></i> </span>
       </b-alert>
     </div>
 
     <div>
-      <b-alert class="alertClass" :show="tricks.length!=categoryTricks.length" dismissible variant="primary">
-        <span> Még {{categoryTricks.length-tricks.length}} haladó szintes feladat teljesítés szükséges a képzés teljesítéséhez!</span>
+      <b-alert class="alertClass" :show="getTricksByDogByCategory(category)!=categoryTricks.length" dismissible variant="primary">
+        <span> Még {{categoryTricks.length-getTricksByDogByCategory(category)}} haladó szintes feladat teljesítés szükséges a képzés teljesítéséhez!</span>
       </b-alert>
     </div>
     <hr>
@@ -64,15 +62,12 @@ export default {
       isAllAchieved:false,
       isDelete:false,
       isSave:false,
-      // dogBasicTrickCount:0,
       revocation:false,
       isOkRevocation:false,
       modalTitle:"ModalTitle",
-
       basicId:null,
       selectedTrickId:null,
-
-      //color:"lightgray",
+      advancedTricks:[],
       category:"ADVANCED",
       ADVANCED:{
         UP:'UP',
@@ -80,14 +75,6 @@ export default {
         ROLL_OVER:'ROLL_OVER',
         BRING_IT:'BRING_IT',
       },
-      // saveTricks:[],
-      // saveTrick:
-      // {
-      //   'id':null,
-      //   "name": null,
-      //   "category" :"BASIC"
-      // },
-          
     }
   },
   created(){
@@ -95,6 +82,9 @@ export default {
     this.getTricksByDog();
     this.getAll_Tricks();
     this.getTricks_ByCategory();
+    // this.advancedTrick();
+    this.getTricksByDogByCategory(this.category);
+
   },
  
   methods: {
@@ -114,6 +104,17 @@ export default {
     },
     deleteDogTricks_ByDogIdAndTrickId(trickId){
       this.deleteDogTricksByDogIdAndTrickId({dogId:this.dogId, trickId:trickId});
+    },
+
+  getTricksByDogByCategory(trickCategory){
+      var count=0;
+      this.tricks.forEach(function(element) {
+        if(element.category==trickCategory){
+          count++;
+          
+        }
+      });
+      return count;
     },
     
     initColorTricks(nameId){
@@ -163,24 +164,10 @@ export default {
 <style scoped>
 .main {
     max-width: 1200px;
-	  min-width: 300px;
+    min-width: 300px;
     margin: auto;
     text-align:center;
-	  /* background-image: url('../assets/china.png');
-	  background-repeat: repeat;
-	  background-attachment: fixed; */
 }
-/* .title {
-	  background-color: skyblue;
-    background-image: url('../assets/paw.png');
-	  background-repeat: no-repeat;
-	  background-position: 2% 50%;
-	  background-size: 5%;
-    padding: 0.1%;
-    text-indent: 5%;
-    font-weight: normal;
-} */
-
 h2 {
     margin: 2% 2% 2% 5%;
     color: black;
@@ -192,9 +179,8 @@ h2 {
 ul {
     margin: auto;
     padding: 0%;
-    /* background-image: url('../assets/china.png'); */
-	  background-repeat: repeat;
-	  background-attachment: fixed;
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 li{
     text-align: center;
@@ -213,19 +199,16 @@ li button{
     border: none;
 }
 li button:hover {
-    /* background-color: gray; */
     color: white;
-    /* background-image: url('../assets/tennisball.png'); */
-	  background-repeat: no-repeat;
-	  background-position: 40% 50%;
+    background-repeat: no-repeat;
+    background-position: 40% 50%;
     background-size: 5%;
 }
 .class1 {
     background-color: lightgreen;
     color: black;
-    /* background-image: url('../assets/tennisball.png'); */
-	  background-repeat: no-repeat;
-	  background-position: 40% 50%;
+    background-repeat: no-repeat;
+    background-position: 40% 50%;
     background-size: 5%;
     border: none;
 }
@@ -235,12 +218,10 @@ li button:hover {
     margin-left: auto;
     margin-right: auto;
     font-family: Arial, sans-serif;
-    /* visibility: hidden; */
 }
 .back a {
     text-decoration: none;
     color: white;
-    /* visibility: hidden; */
 }
 .back a:hover {
     color: skyblue;
@@ -262,11 +243,9 @@ p {
     display: inline-block;
     width: 80%;
     text-align: center;
-    
     text-decoration: none;
-    
 }
 .far{
-padding-left:1%;
+    padding-left:1%;
 }
 </style>

@@ -8,34 +8,17 @@
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
 
             <b-form-group
-                id="inputNameGroup"
+                id="inputUsernameGroup"
                 label="Felhasználónév:"
-                label-for="inputName"
+                label-for="inputUsername"
             >
                 <b-form-input
-                    id="inputName"
+                    id="inputUsername"
                     type="text"
-                    v-model="form.name"
+                    v-model="form.username"
                     required
                     placeholder="Írja be a felhasználónevét..." />
             </b-form-group>
-
-            <!-- <b-form-group
-                id="inputEmailGroup"
-                label="Email:"
-                label-for="inputEmail"
-                description="We'll never share your email with anyone else."
-            >
-                <b-form-input 
-                    
-                    id="inputEmail"
-                    type="email"
-                    text-align="center"
-                    v-model="form.email"
-                    required
-                    autocomplete="username email"
-                    placeholder="email@example.com" />
-            </b-form-group> -->
 
             <b-form-group
                 id="inputPasswordGroup"
@@ -48,9 +31,86 @@
                     v-model="form.password"
                     required
                     autocomplete="current-password"
-                    placeholder=" *********** " />
+                    placeholder=" Írja be a teljes jelszavát... " />
             </b-form-group>
 
+            <b-form-group
+                id="inputNameGroup"
+                label="Teljes név:"
+                label-for="inputName"
+            >
+                <b-form-input
+                    id="inputName"
+                    type="text"
+                    v-model="form.name"
+                    required
+                    placeholder="Írja be a teljes nevét..." />
+            </b-form-group>
+
+            <b-form-group
+                id="inputEmailGroup"
+                label="Email-cím:"
+                label-for="inputEmail"
+            >
+                <b-form-input
+                    id="inputEmail"
+                    type="text"
+                    v-model="form.email"
+                    required
+                    placeholder="Írja be az email-címét..." />
+            </b-form-group>
+
+            <b-form-group
+                id="inputAddressGroup"
+                label="Cím:"
+                label-for="inputAddress"
+            >
+                <b-form-input
+                    id="inputAddress"
+                    type="text"
+                    v-model="form.address"
+                    required
+                    placeholder="Írja be a címét..." />
+            </b-form-group>
+
+            <b-form-group
+                id="inputPhonenumberGroup"
+                label="Telefonszám:"
+                label-for="inputPhonenumber"
+            >
+                <b-form-input
+                    id="inputPhonenumber"
+                    type="text"
+                    v-model="form.phonenumber"
+                    required
+                    placeholder="Írja be a telefonszámát..." />
+            </b-form-group>
+
+            <b-form-group
+                id="inputBirthdateGroup"
+                label="Születési idő:"
+                label-for="inputBirthdate"
+            >
+                <b-form-input
+                    id="inputBirthdate"
+                    type="text"
+                    v-model="form.birthdate"
+                    required
+                    placeholder="Írja be a születési dátumát..." />
+            </b-form-group>
+
+            <b-form-group
+                id="inputBirthplaceGroup"
+                label="Születési hely:"
+                label-for="inputBirthplace"
+            >
+                <b-form-input
+                    id="inputBirthplace"
+                    type="text"
+                    v-model="form.birthplace"
+                    required
+                    placeholder="Írja be a születési helyét..." />
+            </b-form-group>
 
             <!-- <b-form-group id="inputSelectGroup"
                 label="Options:"
@@ -72,7 +132,7 @@
             <br>
                 <div class="row">
                     <div class="col-lg-12">
-                        <b-button class="button" type="submit" variant="primary">Bejelentkezés</b-button>
+                        <b-button class="button" type="submit" variant="primary">Regisztráció</b-button>
                     </div>
                     
                          
@@ -80,7 +140,7 @@
         <hr>
             <div class="row">
                 <div class="col-lg-12">
-                        <b-button class="button" type="reset" variant="danger"><router-link to="RegisterPage" >Még nem regisztráltam</router-link></b-button>
+                        <b-button class="button" type="reset" variant="danger"><router-link to="LoginPage" >Vissza a bejelentkezésre</router-link></b-button>
                     </div>
             </div>
             
@@ -91,7 +151,7 @@
 <script>
 export default {
 
-    name: "Login",
+    name: "Register",
     data() {
         return {
             title:"Bejelentkezés",

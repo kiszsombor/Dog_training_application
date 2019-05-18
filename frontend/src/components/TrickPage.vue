@@ -28,7 +28,7 @@
     {{t}}
   </div>
 </div> -->
-<button @click="proba()">Try it</button>
+<!-- <button @click="proba()">Try it</button> -->
   </div>
 </template>
 
@@ -44,12 +44,9 @@ export default {
   },
   data() {
     return {
-        //max:3,
-        //values: [3, 1, 0],
       title: 'Trükkjeim',
       trainerId:this.$route.params.trainerId,
       dogId:this.$route.params.dogId,
-
       basic:"BASIC",
       intermediate:"INTERMEDIATE",
       advanced:"ADVANCED"
@@ -127,21 +124,8 @@ export default {
     max-width: 1200px;
 	  min-width: 300px;
     margin: auto;
-	  /* background-image: url('../assets/china.png');
-	  background-repeat: repeat;
-	  background-attachment: fixed; */
     text-align: center;
 }
-/* .title {
-	  background-color: skyblue;
-    background-image: url('../assets/paw.png');
-    background-repeat: no-repeat;
-    background-position: 2% 50%;
-    background-size: 5%;
-    padding: 0.1%;
-    text-indent: 5%;
-    font-weight: normal;
-} */
 h2 {
     margin: 2% 2% 2% 5%;
     color: black;
@@ -153,9 +137,6 @@ h2 {
 ul {
     margin: auto;
     padding: 0%;
-    /* background-image: url('../assets/china.png');
-    background-repeat: repeat;
-    background-attachment: fixed; */
 }
 li{
     list-style-type: none;
@@ -174,7 +155,6 @@ li a {
 li a:hover {
     background-color: gray;
     color: white;
-    /* background-image: url('../assets/tennisball.png'); */
     background-repeat: no-repeat;
     background-position: 40% 50%;
     background-size: 5%;
@@ -194,13 +174,8 @@ li a:hover {
     margin-bottom: 0rem !important;
     color: black;
 }
-
 .back {
-      margin: 0%;
-      visibility: hidden;
+    margin: 0%;
+    visibility: hidden;
 }
-
-/* .nav {
-  text-align: justify;
-} */
 </style>

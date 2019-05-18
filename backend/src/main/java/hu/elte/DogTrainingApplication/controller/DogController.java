@@ -3,6 +3,8 @@ package hu.elte.DogTrainingApplication.controller;
 
 import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.api.TrainerService;
+import hu.elte.DogTrainingApplication.api.TrickService;
+import hu.elte.DogTrainingApplication.common.TrickCategory;
 import hu.elte.DogTrainingApplication.entities.*;
 import hu.elte.DogTrainingApplication.wrapper.TrainerAndDogWrapper;
 import lombok.extern.log4j.Log4j2;
@@ -35,6 +37,8 @@ public class DogController {
     private DogService dogService;
     @Autowired
     private TrainerService trainerService;
+    @Autowired
+    private TrickService trickService;
 
 
     @GetMapping("")
@@ -77,6 +81,13 @@ public class DogController {
     public List<Trick> findTricksByDog(@PathVariable Integer id){
         System.out.println(dogService.findTricksByDog(id));
         return dogService.findTricksByDog(id);
+    }
+
+    @GetMapping("/{id}/tricks/{category}")
+    public List<Trick> findTricksByDogIdAndCategory(@PathVariable Integer id, @PathVariable String category){
+        System.out.println("category: "+category);
+        System.out.println("tömb: "+dogService.findTricksByDogIdAndCategory(id, category));
+        return dogService.findTricksByDogIdAndCategory(id, category);
     }
 
     @GetMapping("/{id}/trainer")

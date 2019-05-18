@@ -19,15 +19,15 @@
 
 
     <div>
-      <b-alert class="alertClass" :show="tricks.length==categoryTricks.length"  variant="success">
-        <span> Gratulálunk! Az alapszint összes ({{tricks.length}}) feladatát teljesítette! Továbbléphet a 
-          <router-link class="router" :to="`/logged/${trainerId}/${dogId}/kozepszint`">középszintre</router-link>.<i class="far fa-smile-wink"></i> </span>
+      <b-alert class="alertClass" :show="getTricksByDogByCategory(category)==categoryTricks.length"  variant="success">
+        <span> Gratulálunk! Az alapszint összes ({{categoryTricks.length}}) feladatát teljesítette! Továbbléphet a 
+          <router-link class="router" :to="`/logged/${trainerId}/${dogId}/haladoszint`">haladó szintre</router-link>.<i class="far fa-smile-wink"></i> </span>
       </b-alert>
     </div>
 
     <div>
-      <b-alert class="alertClass" :show="tricks.length!=categoryTricks.length" dismissible variant="primary">
-        <span> Még {{categoryTricks.length-tricks.length}} alapszintes feladat teljesítés szükséges a továbblépéshez!</span>
+      <b-alert class="alertClass" :show="getTricksByDogByCategory(category)!=categoryTricks.length" dismissible variant="primary">
+        <span> Még {{categoryTricks.length-getTricksByDogByCategory(category)}} alapszintes feladat teljesítés szükséges a továbblépéshez!</span>
       </b-alert>
     </div>
     <hr>
@@ -64,15 +64,12 @@ export default {
       isAllAchieved:false,
       isDelete:false,
       isSave:false,
-      // dogBasicTrickCount:0,
       revocation:false,
       isOkRevocation:false,
       modalTitle:"ModalTitle",
-
       basicId:null,
       selectedTrickId:null,
-
-      //color:"lightgray",
+      // intermediateTricks:[],
       category:"INTERMEDIATE",
       INTERMEDIATE:{
         PAY_ATTENTION:'PAY_ATTENTION',
@@ -88,6 +85,7 @@ export default {
     this.getTricksByDog();
     this.getAll_Tricks();
     this.getTricks_ByCategory();
+    this.getTricksByDogByCategory(this.category)
   },
  
   methods: {
@@ -109,6 +107,17 @@ export default {
       this.deleteDogTricksByDogIdAndTrickId({dogId:this.dogId, trickId:trickId});
     },
     
+  getTricksByDogByCategory(trickCategory){
+      var count=0;
+      this.tricks.forEach(function(element) {
+        if(element.category==trickCategory){
+          count++;
+          
+        }
+      });
+      return count;
+    },
+
     initColorTricks(nameId){
 
       for(let i=0; i<this.tricks.length; i++){
@@ -137,10 +146,7 @@ export default {
       }
     },
 },
-
-    
-
-  computed:{
+ computed:{
     ...mapState({
             tricks: function (state) { return state.moduleDog.tricks },
             allTricks: function (state) { return state.moduleDog.allTricks },
@@ -155,24 +161,10 @@ export default {
 <style scoped>
 .main {
     max-width: 1200px;
-	  min-width: 300px;
+    min-width: 300px;
     margin: auto;
     text-align:center;
-	  /* background-image: url('../assets/china.png');
-	  background-repeat: repeat;
-	  background-attachment: fixed; */
 }
-/* .title {
-	  background-color: skyblue;
-    background-image: url('../assets/paw.png');
-	  background-repeat: no-repeat;
-	  background-position: 2% 50%;
-	  background-size: 5%;
-    padding: 0.1%;
-    text-indent: 5%;
-    font-weight: normal;
-} */
-
 h2 {
     margin: 2% 2% 2% 5%;
     color: black;
@@ -184,9 +176,8 @@ h2 {
 ul {
     margin: auto;
     padding: 0%;
-    /* background-image: url('../assets/china.png'); */
-	  background-repeat: repeat;
-	  background-attachment: fixed;
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 li{
     text-align: center;
@@ -205,19 +196,16 @@ li button{
     border: none;
 }
 li button:hover {
-    /* background-color: gray; */
     color: white;
-    /* background-image: url('../assets/tennisball.png'); */
-	  background-repeat: no-repeat;
-	  background-position: 40% 50%;
+    background-repeat: no-repeat;
+    background-position: 40% 50%;
     background-size: 5%;
 }
 .class1 {
     background-color: lightgreen;
     color: black;
-    /* background-image: url('../assets/tennisball.png'); */
-	  background-repeat: no-repeat;
-	  background-position: 40% 50%;
+    background-repeat: no-repeat;
+    background-position: 40% 50%;
     background-size: 5%;
     border: none;
 }
@@ -227,12 +215,10 @@ li button:hover {
     margin-left: auto;
     margin-right: auto;
     font-family: Arial, sans-serif;
-    /* visibility: hidden; */
 }
 .back a {
     text-decoration: none;
     color: white;
-    /* visibility: hidden; */
 }
 .back a:hover {
     color: skyblue;
@@ -254,11 +240,9 @@ p {
     display: inline-block;
     width: 80%;
     text-align: center;
-    
     text-decoration: none;
-    
 }
 .far{
-padding-left:1%;
+    padding-left:1%;
 }
 </style>

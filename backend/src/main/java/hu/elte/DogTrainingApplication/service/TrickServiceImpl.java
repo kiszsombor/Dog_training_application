@@ -37,4 +37,11 @@ public class TrickServiceImpl implements TrickService {
     public void deleteDogTricksByDogIdAndTrickId(Integer dogId, Integer trickId){
         trickRepository.deleteDogTricksByDogIdAndTrickId(dogId, trickId);
     }
+
+//    @Override
+//    public List<Trick> findTricksByDogIdAndCategory(Integer dogId, String category){
+//        TrickCategory type = TrickCategory.valueOf(category.toUpperCase());
+//        return trickRepository.findTricksByDogIdAndCategory(dogId,type);
+//    }
+
 }
