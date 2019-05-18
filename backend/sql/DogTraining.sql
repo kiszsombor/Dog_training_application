@@ -168,8 +168,8 @@ INSERT INTO trainer (name, email, address, phone_number, birth_date, birth_place
 VALUES ('Kis Károly', 'karcsi25@gmail.com', 'karesz_address', 305552145, '1990-04-16 00:00:00', 'Budapest'); 
 
 
-INSERT INTO dog (name,birth_date,breed,sex,weight,trainer_id) VALUES ("Buksi",NOW(),"breed_Buksi","MALE",5,1);
-INSERT INTO dog (name,birth_date,breed,sex,weight,trainer_id) VALUES ("Morci",NOW(),"breed_Morci","NEUTERED_FEMALE",5,2);
+INSERT INTO dog (name,birth_date,breed,sex,weight,trainer_id) VALUES ('Buksi',NOW(),'breed_Buksi','MALE',5,1);
+INSERT INTO dog (name,birth_date,breed,sex,weight,trainer_id) VALUES ('Morci',NOW(),'breed_Morci','NEUTERED_FEMALE',5,2);
 
 INSERT INTO season_ticket_segment (season_ticket_id, date, spent_time) VALUES (1, NOW(), 90);
 
@@ -179,18 +179,18 @@ INSERT INTO free_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 1
 
 INSERT INTO taken_times (date, time) VALUES ('2019-01-20 12:00:00', '2019-02-10 12:00:00');
 
-INSERT INTO trick (name, category) VALUES ("COME", "BASIC");
-INSERT INTO trick (name, category) VALUES ("SIT", "BASIC");
-INSERT INTO trick (name, category) VALUES ("LAY", "BASIC");
-INSERT INTO trick (name, category) VALUES ("STAY", "BASIC");
-INSERT INTO trick (name, category) VALUES ("PAY_ATTENTION", "INTERMEDIATE");
-INSERT INTO trick (name, category) VALUES ("LEAVE_IT", "INTERMEDIATE");
-INSERT INTO trick (name, category) VALUES ("LEASH_WALK", "INTERMEDIATE");
-INSERT INTO trick (name, category) VALUES ("LEG_WALK", "INTERMEDIATE");
-INSERT INTO trick (name, category) VALUES ("UP", "ADVANCED");
-INSERT INTO trick (name, category) VALUES ("SHAKE_IT", "ADVANCED");
-INSERT INTO trick (name, category) VALUES ("ROLL_OVER", "ADVANCED");
-INSERT INTO trick (name, category) VALUES ("BRING_IT", "ADVANCED");
+INSERT INTO trick (name, category) VALUES ('COME', 'BASIC');
+INSERT INTO trick (name, category) VALUES ('SIT', 'BASIC');
+INSERT INTO trick (name, category) VALUES ('LAY', 'BASIC');
+INSERT INTO trick (name, category) VALUES ('STAY', 'BASIC');
+INSERT INTO trick (name, category) VALUES ('PAY_ATTENTION', 'INTERMEDIATE');
+INSERT INTO trick (name, category) VALUES ('LEAVE_IT', 'INTERMEDIATE');
+INSERT INTO trick (name, category) VALUES ('LEASH_WALK', 'INTERMEDIATE');
+INSERT INTO trick (name, category) VALUES ('LEG_WALK', 'INTERMEDIATE');
+INSERT INTO trick (name, category) VALUES ('UP', 'ADVANCED');
+INSERT INTO trick (name, category) VALUES ('SHAKE_IT', 'ADVANCED');
+INSERT INTO trick (name, category) VALUES ('ROLL_OVER', 'ADVANCED');
+INSERT INTO trick (name, category) VALUES ('BRING_IT', 'ADVANCED');
 
 INSERT INTO dog_tricks (dog_id, trick_id) VALUES (1, 1);
 INSERT INTO dog_tricks (dog_id, trick_id) VALUES (1, 2);
