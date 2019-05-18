@@ -5,6 +5,8 @@ import SeasonTicketApi from '../api/season-tickets-api'
 import TrainerApi from '../api/trainer-api'
 import TrickApi from '../api/tricks-api'
 import Login from '../api/login-api';
+import axios from 'axios';
+
 Vue.use(Vuex)
 
 
@@ -21,8 +23,8 @@ const moduleSeasonTickets = {
 }
 const moduleDog={
   state:{
-    status: '',
-    token: localStorage.getItem('token') || '',
+    // status: '',
+    // token: localStorage.getItem('token') || '',
         me:{},
 
 
@@ -79,7 +81,21 @@ const moduleDog={
       state.me=me;
     },
 
-  
+    auth_request(state){
+      state.status = 'loading'
+    },
+    auth_success(state, token, user){
+      state.status = 'success'
+      state.token = token
+      state.user = user
+    },
+    auth_error(state){
+      state.status = 'error'
+    },
+    logout(state){
+      state.status = ''
+      state.token = ''
+    },
    },
   actions: {  
     getAllDogs(context){
@@ -181,6 +197,31 @@ const moduleDog={
   })
 },
 
+login_({commit}, user){
+  return new Promise((resolve, reject) => {
+    
+    commit('auth_request')
+    axios({url: 'http://localhost:8080/login', data: user, method: 'POST' })
+    .then(resp => {
+      const token = resp.data.token
+      const user = resp.data.user
+      localStorage.setItem('token', token)
+      axios.defaults.headers.common['Authorization'] = token
+      commit('auth_success', token, user)
+      resolve(resp)
+    })
+    .catch(err => {
+      commit('auth_error')
+      localStorage.removeItem('token')
+      reject(err)
+    })
+  })
+},
+
+
+
+
+
 
   },
 
@@ -198,10 +239,10 @@ const moduleDog={
         return Promise.resolve()
   })
 },
-// getters : {
-//   isLoggedIn: state => !!state.token,
-//   authStatus: state => state.status,
-// }
+getters : {
+  isLoggedIn: state => !!state.token,
+  authStatus: state => state.status,
+}
 }
 export default new Vuex.Store({
   modules: {

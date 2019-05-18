@@ -20,7 +20,7 @@ export default {
     NavigationBar,
     // LoginPage,
     // BasicPage
-  },
+  }
 }
 </script>
 

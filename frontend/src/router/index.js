@@ -17,20 +17,7 @@ import Page4 from '@/router/views/Page4'
 Vue.use(Router)
 
 
-// Router.beforeEach((to, from, next) => {
-//   if(to.matched.some(record => record.meta.requiresAuth)) {
-//     if (store.getters.isLoggedIn) {
-//       next()
-//       return
-//     }
-//     next('/login') 
-//   } else {
-//     next() 
-//   }
-// })
-
-
-export default new Router({
+const router = new Router({
 
 
   
@@ -46,9 +33,7 @@ export default new Router({
           path: 'SeasonTickets',
           name: 'SeasonTickets',
           component: SeasonTickets,
-          meta: { 
-            requiresAuth: true
-          }
+          meta: { requiresAuth: true }
         },
         {
           path: 'profile',
@@ -101,3 +86,52 @@ export default new Router({
     }
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/login') 
+  } else {
+    next() 
+  }
+})
+
+// router.beforeEach((to, from, next) => {
+//   if(to.matched.some(record => record.meta.requiresAuth)) {
+//       if (localStorage.getItem('jwt') == null) {
+//           next({
+//               path: '/login',
+//               params: { nextUrl: to.fullPath }
+//           })
+//       } else {
+//           let user = JSON.parse(localStorage.getItem('user'))
+//           if(to.matched.some(record => record.meta.is_admin)) {
+//               if(user.is_admin == 1){
+//                   next()
+//               }
+//               else{
+//                   next({ name: 'userboard'})
+//               }
+//           }else {
+//               next()
+//           }
+//       }
+//   } else if(to.matched.some(record => record.meta.guest)) {
+//       if(localStorage.getItem('jwt') == null){
+//           next()
+//       }
+//       else{
+//           next({ name: 'userboard'})
+//       }
+//   }else {
+//       next() 
+//   }
+// })
+
+
+export default router;
