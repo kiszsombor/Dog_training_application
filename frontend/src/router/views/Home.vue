@@ -1,13 +1,14 @@
 <template>
   <div class="home">
-    <BaseContainer :headerTitle="title"></BaseContainer>
+    <!-- <BaseContainer :headerTitle="title"></BaseContainer> -->
+    <router-view></router-view>
   </div>
   
 </template>
 
 <script>
 
-import BaseContainer from '@/components/base/BaseContainer'
+// import BaseContainer from '@/components/base/BaseContainer'
 
 export default {
     name: 'Home',
@@ -29,7 +30,7 @@ export default {
         
     },
     components: {
-      BaseContainer,
+      // BaseContainer,
     }
 }
 </script>

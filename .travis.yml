@@ -9,11 +9,18 @@ before_install:
   - cd backend/
   - chmod 777 mvnw
 
+services:
+  - mysql
 
 install:
-
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 jobs:
-  - include:
+  include:
     - script: mvn test -B
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "ENCRYPTED_API_KEY"
+

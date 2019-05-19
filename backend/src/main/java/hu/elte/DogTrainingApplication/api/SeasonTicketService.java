@@ -35,5 +35,5 @@ public interface SeasonTicketService {
      * @param id
      * Bérlet törlése id alapján
      */
-    void delete(Integer id);
+    SeasonTicket deleteById(Integer id);
 }

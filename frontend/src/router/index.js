@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '@/router/views/Home'
-import LoginPage from '@/router/views/LoginPage'
+import LoginPage from '@/router/views/Login'
+import RegisterPage from '@/router/views/Register'
 import SeasonTickets from '@/components/SeasonTickets'
 
 import TrickPage from '@/components/TrickPage'
@@ -11,7 +12,7 @@ import IntermediateTricks from '@/components/IntermediateTricks'
 import AdvancedTricks from '@/components/AdvancedTricks'
 import DogProfile from '@/router/views/DogProfile'
 import Page2 from '@/router/views/Page2'
-import Page3 from '@/router/views/Page3'
+import DogList from '@/router/views/DogList'
 import Page4 from '@/router/views/Page4'
 
 Vue.use(Router)
@@ -21,9 +22,46 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/logged/:trainerId/:dogId',
       name: 'Home',
-      component: Home
+      component: Home,
+      children:[
+        {
+          path: 'SeasonTickets',
+          name: 'SeasonTickets',
+          component: SeasonTickets
+        },
+        {
+          path: 'profile',
+          name: 'DogProfile',
+          component: DogProfile
+        },
+        {
+          path: 'tricks',
+          name: 'TrickPage',
+          component: TrickPage
+        },
+        {
+          path: 'alapszint',
+          name: 'BasicTricks',
+          component: BasicTricks
+        },
+        {
+          path: 'kozepszint',
+          name: 'IntermediateTricks',
+          component: IntermediateTricks
+        },
+        {
+          path: 'haladoszint',
+          name: 'AdvancedTricks',
+          component: AdvancedTricks
+        },
+        {	
+          path: 'kutyaim',
+          name: 'Kutyáim',
+          component: DogList
+        },
+      ]
     },
     {
       path: '/LoginPage',
@@ -31,44 +69,14 @@ export default new Router({
       component: LoginPage
     },
     {
-      path: '/SeasonTickets',
-      name: 'SeasonTickets',
-      component: SeasonTickets
-    },
-    {
-      path: '/tricks',
-      name: 'TrickPage',
-      component: TrickPage
-    },
-    {
-      path: '/alapszint',
-      name: 'BasicTricks',
-      component: BasicTricks
-    },
-    {
-      path: '/kozepszint',
-      name: 'IntermediateTricks',
-      component: IntermediateTricks
-    },
-    {
-      path: '/haladoszint',
-      name: 'AdvancedTricks',
-      component: AdvancedTricks
-    },
-    {
-      path: '/profile',
-      name: 'DogProfile',
-      component: DogProfile
+      path: '/RegisterPage',
+      name: 'RegisterPage',
+      component: RegisterPage
     },
 	  {
       path: '/Page2',
       name: 'Page2',
       component: Page2
-    },
-    {	
-      path: '/Page3',
-      name: 'Page3',
-      component: Page3
     },
     {
       path: '/Page4',

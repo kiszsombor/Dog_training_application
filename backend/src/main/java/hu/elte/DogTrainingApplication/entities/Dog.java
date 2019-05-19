@@ -59,75 +59,38 @@ public class Dog implements Serializable {
     private Trainer trainer;
 
     @JsonIgnore
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "dog_trick",
-            joinColumns = { @JoinColumn(name = "dog_id") },
-            inverseJoinColumns = { @JoinColumn(name = "trick_id") }
-    )
-    Set<Trick> tricks = new HashSet();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private Trainer owner;
 
-    public Integer getId() {
-        return id;
-    }
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dog")
+    private Set<SeasonTicket> seasonTickets;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public void setDog(String name, Date birthDate, String breed, @NotNull DogSex sex, Integer weight, Trainer trainer, Set<SeasonTicket> seasonTickets) {
         this.name = name;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
         this.breed = breed;
-    }
-
-    public DogSex getSex() {
-        return sex;
-    }
-
-    public void setSex(DogSex sex) {
         this.sex = sex;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
         this.weight = weight;
-    }
-
-    public Trainer getTrainer() {
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
+        this.seasonTickets = seasonTickets;
     }
 
-    public Set<Trick> getTricks() {
-        return tricks;
-    }
+    //    @JsonIgnore
+//    @ManyToMany(cascade = { CascadeType.ALL })
+//    @JoinTable(
+//            name = "dog_tricks",
+//            joinColumns = { @JoinColumn(name = "dog_id", referencedColumnName = "id") },
+//            inverseJoinColumns = { @JoinColumn(name = "trick_id", referencedColumnName = "id") }
+//    )
+//    Set<Trick> tricks;
 
-    public void setTricks(Set<Trick> tricks) {
-        this.tricks = tricks;
-    }
+
+//    @JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//    @JoinTable(name = "dog_tricks", joinColumns = @JoinColumn(name = "dog_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "trick_id", referencedColumnName = "id"))
+//    private Set<Trick> tricks;
 }

@@ -1,71 +1,131 @@
 <template>
   <div class="pages">
-    <!-- <h1>{{ msg }}</h1> -->
     <h1 class="main-title">
       {{title}}
       </h1> 
 <div class="main">
     <ul>
       <li class="basic">
-        <router-link to="/alapszint"> Alapszint 
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[0]" class="mb-2">{{values[0]}}/{{max}}</b-progress-bar></b-progress>
+        <router-link :to="`/logged/${trainerId}/${dogId}/alapszint`"> Alapszint 
+          <b-progress id="progress" :max="getLengthTricksBy_Categoryes(basic)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(basic)" class="mb-2">{{getTricksByDogByCategory(basic)}}/{{getLengthTricksBy_Categoryes(basic)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="intermediate">
-        <router-link to="/kozepszint"> Középszint
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[1]" class="mb-2">{{values[1]}}/{{max}}</b-progress-bar></b-progress>
+        <router-link :to="`/logged/${trainerId}/${dogId}/kozepszint`"> Középszint
+          <b-progress id="progress" :max="getLengthTricksBy_Categoryes(intermediate)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(intermediate)" class="mb-2">{{getTricksByDogByCategory(intermediate)}}/{{getLengthTricksBy_Categoryes(intermediate)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
       <li class="advanced">
-        <router-link to="/haladoszint"> Haladó szint
-          <b-progress id="progress" :max="max"><b-progress-bar id="mb-2" :value="values[2]" class="mb-2">{{values[2]}}/{{max}}</b-progress-bar></b-progress>
+        <router-link :to="`/logged/${trainerId}/${dogId}/haladoszint`"> Haladó szint
+          <b-progress id="progress" :max="getLengthTricksBy_Categoryes(advanced)"><b-progress-bar id="mb-2" :value="getTricksByDogByCategory(advanced)" class="mb-2">{{getTricksByDogByCategory(advanced)}}/{{getLengthTricksBy_Categoryes(advanced)}}</b-progress-bar></b-progress>
         </router-link>
       </li>
     </ul>
-    <p class="back"><router-link to="/tricks"> VISSZA </router-link></p>
+    <p class="back"><router-link :to="`/logged/${trainerId}/${dogId}/tricks`"> VISSZA </router-link></p>
   </div>
+   <!-- <div v-for="t in tricks" :key=t.id>
+  <div>
+    {{t}}
+  </div>
+</div> -->
+<!-- <button @click="proba()">Try it</button> -->
   </div>
 </template>
 
 <script>
-// import NavBarTrick from './NavBarTrick'
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  name: 'TrickPage'
-  ,
-  data() {
-      return {
-        max: 3,
-        values: [3, 1, 0],
-        title: 'Trükkjeim'
-      }
-    },
+  name: 'TrickPage',
+
+  
   components: {
-      // 'nav-bar-trick': NavBarTrick
+      
+  },
+  data() {
+    return {
+      title: 'Trükkjeim',
+      trainerId:this.$route.params.trainerId,
+      dogId:this.$route.params.dogId,
+      basic:"BASIC",
+      intermediate:"INTERMEDIATE",
+      advanced:"ADVANCED"
     }
+  },
+
+  created(){
+    this.getTricks_ByDog();
+    this.getAll_Tricks();
+
+
+    //teljesített feladatok meghatározására
+    this.getTricksByDogByCategory(this.basic) //hány basic trükk teljesült az összesből
+    this.getTricksByDogByCategory(this.intermediate)
+    this.getTricksByDogByCategory(this.advanced)
+
+    //feladattípus hosszának meghatározására
+    this.getLengthTricksBy_Categoryes(this.basic); //mennyi BASIC trick van összesen
+    this.getLengthTricksBy_Categoryes(this.intermediate);
+    this.getLengthTricksBy_Categoryes(this.advanced);
+    
+  },
+    
+  methods:{
+     ...mapActions(['getTricksByCategory','getTricksByADog','getAllTricks']),
+    
+    getAll_Tricks(){
+      this.getAllTricks();
+    },
+    proba(){
+      document.getElementById("COME").className="btn li button btn-lg btn-block class1";
+    },
+
+    getTricks_ByDog(){
+      this.getTricksByADog(this.dogId)
+    },
+
+    getTricksByDogByCategory(trickCategory){
+      var count=0;
+      this.tricks.forEach(function(element) {
+        if(element.category==trickCategory){
+          count++;
+        }
+      });
+
+      // for(let i=0;i<this.tricks.length;i++){
+      //     if(this.tricks[i].category==trickCategory){
+      //       count++;
+      //     }
+      // }
+      return count;
+    },
+
+    getLengthTricksBy_Categoryes(trickCategory){
+      var count=0;
+      this.allTricks.forEach(function(element) {
+        if(element.category==trickCategory){
+          count++;
+        }
+      });
+      return count;
+    }
+  },
+  computed:{
+    ...mapState({
+          tricks: function (state) { return state.moduleDog.tricks },
+          allTricks: function (state) { return state.moduleDog.allTricks },
+          //categoryTricks: function (state) { return state.moduleDog.categoryTricks },
+        }),
+  }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
  .main {
     max-width: 1200px;
 	  min-width: 300px;
     margin: auto;
-	  /* background-image: url('../assets/china.png');
-	  background-repeat: repeat;
-	  background-attachment: fixed; */
     text-align: center;
 }
-/* .title {
-	  background-color: skyblue;
-    background-image: url('../assets/paw.png');
-    background-repeat: no-repeat;
-    background-position: 2% 50%;
-    background-size: 5%;
-    padding: 0.1%;
-    text-indent: 5%;
-    font-weight: normal;
-} */
 h2 {
     margin: 2% 2% 2% 5%;
     color: black;
@@ -77,9 +137,6 @@ h2 {
 ul {
     margin: auto;
     padding: 0%;
-    /* background-image: url('../assets/china.png');
-    background-repeat: repeat;
-    background-attachment: fixed; */
 }
 li{
     list-style-type: none;
@@ -98,7 +155,6 @@ li a {
 li a:hover {
     background-color: gray;
     color: white;
-    /* background-image: url('../assets/tennisball.png'); */
     background-repeat: no-repeat;
     background-position: 40% 50%;
     background-size: 5%;
@@ -118,13 +174,8 @@ li a:hover {
     margin-bottom: 0rem !important;
     color: black;
 }
-
 .back {
-      margin: 0%;
-      visibility: hidden;
+    margin: 0%;
+    visibility: hidden;
 }
-
-/* .nav {
-  text-align: justify;
-} */
 </style>
