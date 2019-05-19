@@ -66,17 +66,6 @@ public class DogController {
         return dogService.findAllSeasonTicketByDogId(id);
     }
 
-    /**
-     * @param id
-     * @param seasonTicketId
-     * @return  List<SeasonTicketSegment>
-     *     Egy kztya bérletei közül egy adott id alapján egy bérlet lekérdezése (szegmenseinek megjelenítése)
-     */
-    @GetMapping("/{id}/season_tickets/{seasonTicketId}")
-    public List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(@PathVariable Integer id, @PathVariable Integer seasonTicketId){
-        return dogService.findAllSeasonTicketSegmentBySeasonTicketId(seasonTicketId);
-    }
-
     @GetMapping("/{id}/tricks")
     public List<Trick> findTricksByDog(@PathVariable Integer id){
         System.out.println(dogService.findTricksByDog(id));

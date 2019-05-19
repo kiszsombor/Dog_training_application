@@ -26,8 +26,6 @@ public class DogServiceImpl implements DogService {
     @Autowired
     private SeasonTicketRepository seasonTicketRepository;
     @Autowired
-    private SeasonTicketSegmentRepository seasonTicketSegmentRepository;
-    @Autowired
     private TrickRepository trickRepository;
     @Autowired
     private TrainerRepository trainerRepository;
@@ -52,11 +50,6 @@ public class DogServiceImpl implements DogService {
     @Override
     public List<SeasonTicket> findAllSeasonTicketByDogId(Integer dogId) {
         return seasonTicketRepository.findAllByDogId(dogId);
-    }
-
-    @Override
-    public List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(Integer seasonTicketId) {
-        return seasonTicketSegmentRepository.findAllBySeasonTicketId(seasonTicketId);
     }
 
 //    @Override

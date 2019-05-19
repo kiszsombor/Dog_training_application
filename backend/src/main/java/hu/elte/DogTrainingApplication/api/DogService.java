@@ -44,7 +44,7 @@ public interface DogService {
      * @return  List<SeasonTicketSegment>
      *     Egy bérlethez tartozó összes id lekérdezése
      */
-    List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(Integer seasonTicketId);
+  
 
     /**
      * @param id
