@@ -120,7 +120,7 @@ public class DogController {
      */
     @PostMapping("/save")
     public Dog post(@RequestBody TrainerAndDogWrapper wrapper) {
-        wrapper.setTrainer(wrapper.getTrainer(),wrapper.getDog());
+        wrapper.setTrainerAndOwner(wrapper.getTrainer(),wrapper.getOwner(),wrapper.getDog());
         System.out.println("Trainer: "+wrapper.getTrainer());
         return dogService.save(wrapper.getDog());
     }

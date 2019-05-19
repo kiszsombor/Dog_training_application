@@ -8,8 +8,11 @@ import lombok.Data;
 public class TrainerAndDogWrapper {
     Dog dog;
     Trainer trainer;
+    Trainer owner;
 
-    public void setTrainer(Trainer trainer, Dog dog){
+    public void setTrainerAndOwner(Trainer trainer, Trainer owner,Dog dog){
+
         dog.setTrainer(trainer);
+        dog.setOwner(owner);
     }
 }
