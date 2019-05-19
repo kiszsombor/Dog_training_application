@@ -34,7 +34,7 @@
                     placeholder=" *********** " />
             </b-form-group>
             <br>
-            {{me.id}}
+            {{me}}
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -88,11 +88,11 @@ export default {
 
             log_in(){
               this.login({username: this.trainer.username, password: this.trainer.password})
-              .then(() => this.$router.push(`/logged/${this.me.id}/${this.dogId}/kutyaim`))
+             // .then(() => this.$router.push(`/logged/${this.me.id}/${this.dogId}/kutyaim`))
             },
             log_in_(){
                  this.login_({username: this.trainer.username, password: this.trainer.password})
-              .then(() => this.$router.push(`/logged/${this.me.id}/${this.dogId}/kutyaim`))
+              //.then(() => this.$router.push(`/logged/${this.me.id}/${this.dogId}/kutyaim`))
             },
 
         onSubmit(event) {
