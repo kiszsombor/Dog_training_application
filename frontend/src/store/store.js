@@ -25,7 +25,7 @@ const moduleDog={
   state:{
     // status: '',
     // token: localStorage.getItem('token') || '',
-        me:{},
+    me:{},
 
 
     dog:{},
@@ -87,30 +87,24 @@ const moduleDog={
       delete state.tricks[dogTrick];
     },
 
+    GET_TRAINER_BY_USERNAME(state,trainer){
+      state.trainer=trainer
+    },
+
     REGISTRATION(state,user){
       state.users.push(user)
 
     },
 
     LOGIN(state,me){
-      state.me=me;
-    },
 
-    auth_request(state){
-      state.status = 'loading'
+      state.me=me;
+      console.log("mutation state me", state.me)
     },
-    auth_success(state, token, user){
-      state.status = 'success'
-      state.token = token
-      state.user = user
-    },
-    auth_error(state){
-      state.status = 'error'
-    },
-    logout(state){
-      state.status = ''
-      state.token = ''
-    },
+    LOGOUT(state){
+      state.me={}
+    }
+
    },
   actions: {  
     getAllDogs(context){
@@ -215,6 +209,18 @@ const moduleDog={
     })
   },
 
+  getTrainerByUserName(context, username){
+    TrainerApi.getTrainerByUserName(username)
+    .then(res=>{
+      context.commit('GET_TRAINER_BY_USERNAME', res.data)
+      //return res.data
+    });
+  },
+
+
+
+
+
   registration(context,user){
     TrainerApi.registration({...user})
     .then(res=>{
@@ -228,34 +234,18 @@ const moduleDog={
   login(context, payload){
     console.log("Store",payload)
     Login.login({...payload})
-    .then(res=>{
-        console.log("Res.data login: ",res.data.login)
-        console.log("Token: ", res.data.token)
-        context.commit('LOGIN', res.data)
-        //return Promise.resolve()
-  })
-},
+      .then(loggedinUser=>{
+        console.log("loggedinUser: ",loggedinUser)
+        context.commit('LOGIN', loggedinUser)
+        return Promise.resolve()
+    })
+  },
+  logout(context){
+    Login.logout()
+      .then(context.commit('LOGOUT', loggedinUser))
+  },
+  
 
-login_({commit}, user){
-  return new Promise((resolve, reject) => {
-    
-    commit('auth_request')
-    axios({url: 'http://localhost:8080/login', data: user, method: 'POST' })
-    .then(resp => {
-      const token = resp.data.token
-      const user = resp.data.user
-      localStorage.setItem('token', token)
-      axios.defaults.headers.common['Authorization'] = token
-      commit('auth_success', token, user)
-      resolve(resp)
-    })
-    .catch(err => {
-      commit('auth_error')
-      localStorage.removeItem('token')
-      reject(err)
-    })
-  })
-},
 
 
 

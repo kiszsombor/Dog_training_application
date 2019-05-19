@@ -1,74 +1,5 @@
 <template>
-  <header> <!--container-fluid-->
-    <!-- <div class="row">
-      <div class="container">
-        <div class="row">
-          <h1 class="col-lg-4">
-            <router-link to="/">
-              <div>
-                {{title}}
-              </div>
-            </router-link>
-          </h1> -->
-          
-
-          <!-- <h1 class="col-lg-4" v-on:click="mainPageButtonPressed">
-              {{title}}
-          </h1> -->
-
-          <!-- <nav v-for="menuItem in menuItems">
-            <a href="">{{ menuItem }}</a>
-          </nav> -->
-          
-          <!-- <nav class="col-lg-8"> -->
-            <!-- <b-card no-body>
-              <b-tabs pills card>
-                <b-tab v-for="menuItem in MenuItems" :key="menuItem.value"><b-card-text> {{ menuItem}} </b-card-text></b-tab>
-                <b-tab title="Tab 1" active><b-card-text>Tab Contents 1</b-card-text></b-tab>
-                <b-tab title="Tab 2"><b-card-text>Tab Contents 2</b-card-text></b-tab>
-              </b-tabs>
-            </b-card> -->
-            <!-- <a v-for="menuItem in menuItems" :key="menuItem.value"> {{ menuItem }} </a> -->
-            <!-- <router-link
-              v-for="pageItemString in pageItemsString"
-              :key="pageItemString.id"
-              :to="pageItemString"
-            >
-              <div class ="col-lg-8">
-                {{ pageItemString }}
-              </div> -->
-              
-             
-              <!-- <div class ="col-lg-8">
-                <b-tab :title=pageItemString active="">
-                  <b-card-text> {{pageItemString}} </b-card-text>
-                </b-tab>
-              </div> -->
-
-            <!-- </router-link> -->
-
-              <!-- <div v-if="selectedPageItemIndex === index - 1">
-                {{ pageItemString }}
-              </div> -->
-              
-            
-            <!-- <a href="">menu</a>
-            <a href="">menu</a>
-            <a href="">menu</a>
-            <a href="">menu</a> -->
-          <!-- </nav>
-          
-        </div>
-      </div> -->
-      
-      <!-- <button class= "login-button" v-on:click="loginButtonPressed">LOGIN</button> -->
-      <!-- <router-link to="LoginPage">LOGIN</router-link>
-
-      <b-navbar></b-navbar>
-
-
-
-    </div> -->
+  <header> 
 
 <nav class="navbar-dark bg-primary fixed-top">
   <b-navbar toggleable="lg"  class="navbar_color"> <!--type="dark" variant="dark"-->
@@ -133,10 +64,10 @@
 
         <b-nav-item class="menu" v-else>
                     <router-link 
-                      :to="`/registrationPage` " 
+                      :to="`/LoginPage` " 
                     >
                       <h6>
-                        <a>Regisztráció</a></h6>
+                        <a>Bejelentkezés</a></h6>
                       
                     </router-link>
                     </b-nav-item>

@@ -46,18 +46,18 @@ public class Trainer implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "address")
-    private String address;
-
+//    @Column(name = "address")
+//    private String address;
+//
     @Column(name = "phone_number")
     private Integer phoneNumber;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "birth_date")
-    private Date birthDate;
-
-    @Column(name = "birth_place")
-    private String birthPlace;
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @Column(name = "birth_date")
+//    private Date birthDate;
+//
+//    @Column(name = "birth_place")
+//    private String birthPlace;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

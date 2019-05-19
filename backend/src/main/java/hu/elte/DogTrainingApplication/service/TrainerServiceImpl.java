@@ -36,5 +36,10 @@ public class TrainerServiceImpl implements TrainerService {
         return trainerRepository.findById(id);
     }
 
+    @Override
+    public Trainer findByUsername(String userName) {
+        return trainerRepository.findByUsername(userName);
+    }
+
 
 }

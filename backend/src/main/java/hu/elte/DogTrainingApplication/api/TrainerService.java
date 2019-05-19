@@ -26,5 +26,7 @@ public interface TrainerService {
      */
     Optional<Trainer> findById(Integer id);
 
+    Trainer findByUsername(String userName);
+
 
 }

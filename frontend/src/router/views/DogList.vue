@@ -5,11 +5,11 @@
       {{title}}
     </h1>
 <!-- {{dogs}} -->
-TRAINERDOGS:   {{trainerDogs}}
-{{trainerId}}
-{{dogId}}
+DOG {{trainerDogs}}
+
+<!-- TRAINER {{trainer}} -->
 <div>
-  <!-- {{me}} -->
+  {{me}}
 </div>
   <table class="table">
     <thead class=" thread bg-secondary">
@@ -60,6 +60,7 @@ export default {
 
     },
     created(){
+      console.log("ME_USERNAME  ",this.trainer.id)
      // if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
       this.getDogs()
       //this.getDogsByTrainer()
@@ -68,6 +69,7 @@ export default {
         return {
           //trainerId:this.$store.state.moduleDog.me.id,
           trainerId:this.$route.params.trainerId,
+          //trainerId:this.trainer.id,
           dogId:this.$route.params.dogId,
           tableId:null,
           title: "Kutyáim",
@@ -75,7 +77,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getDogById','getAllDogs','getDogsByTrainerId']),
+        ...mapActions(['getDogById','getAllDogs','getDogsByTrainerId','getTrainerByUserName']),
         getDog(){
           this.getDogById(this.dogId);
         },
@@ -90,13 +92,18 @@ export default {
             return true;
           }
           return false
+        },
+        getTrainer_ByUserName(){
+          
+          this.getTrainerByUserName(this.me.username)
         }
     },
     computed: {
         ...mapState({
             dogs: function (state) { return state.moduleDog.dogs },
+            trainer: function (state) { return state.moduleDog.trainer },
 			      trainerDogs: function (state) {return state.moduleDog.trainerDogs},
-           // me: function (state) { return state.moduleDog.me }
+            me: function (state) { return state.moduleDog.me }
         })
     },
     components: {

@@ -3,7 +3,6 @@ package hu.elte.DogTrainingApplication.controller;
 import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.api.TrainerService;
 import hu.elte.DogTrainingApplication.common.Role;
-//import hu.elte.DogTrainingApplication.config.AutenticatedTrainer;
 import hu.elte.DogTrainingApplication.config.AutenticatedTrainer;
 import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.Trainer;
@@ -14,11 +13,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +57,14 @@ public class TrainerController {
         return trainerService.findAll();
     }
 
+
+
+    @GetMapping("/user/{username}")
+    public Trainer getByUserName(@PathVariable String username) {
+        System.out.println(trainerService.findByUsername(username));
+        return trainerService.findByUsername(username);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Trainer> getTrainerById(@PathVariable Integer id) {
         Optional<Trainer> optional= trainerService.findById(id);
@@ -80,41 +89,54 @@ public class TrainerController {
         return dogService.findDogByTrainerId(id);
     }
 
+//    public String currentUserNameSimple(HttpServletRequest request) {
+//        String username = request.getUserPrincipal().getName();
+//    }
+
+//    @PostMapping("/login")
+//    public ResponseEntity login() {
+//
+//        return ResponseEntity.ok(authenticatedOwner.getTrainer());
+//    }
+
 
     @PostMapping("/login")
-    public String login(@RequestBody Trainer trainer) throws ServletException{
+    public ResponseEntity login() {
+
+        return ResponseEntity.ok(authenticatedOwner.getTrainer());
+    }
+
+//    @PostMapping("/login")
+//    public String login(@RequestBody Trainer trainer)throws ServletException{
 //        System.out.println(authenticatedOwner.getTrainer());
 //        System.out.println(trainer);
-        String jwtToken = "";
-        Optional<Trainer> tr=trainerRepository.findByUsername(trainer.getUsername());
-
-
-        if (tr.get().getEmail() == null || tr.get().getPassword() == null) {
-            throw new ServletException("Please fill in username and password");
-        }
-
-        String email = tr.get().getEmail();
-        String password = tr.get().getPassword();
-
-
-
-        if (tr == null) {
-            throw new ServletException("User email not found.");
-        }
-
-        String pwd = tr.get().getPassword();
-
-        if (!password.equals(pwd)) {
-            throw new ServletException("Invalid login. Please check your name and password.");
-        }
-
-        jwtToken = Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
-
-        System.out.println("Tr "+tr);
+//        String jwtToken = "";
+//        Optional<Trainer> tr=trainerRepository.findByUsername(trainer.getUsername());
+//
+//        if (tr.get().getEmail() == null || tr.get().getPassword() == null) {
+//            throw new ServletException("Please fill in username and password");
+//        }
+//
+//        String email = tr.get().getEmail();
+//        String password = tr.get().getPassword();
+//
+//        if (tr == null) {
+//            throw new ServletException("User email not found.");
+//        }
+//
+//        String pwd = tr.get().getPassword();
+//
+//        if (!password.equals(pwd)) {
+//            throw new ServletException("Invalid login. Please check your name and password.");
+//        }
+//
+//        jwtToken = Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date())
+//                .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+//
+//        System.out.println("Tr "+tr);
 //        authenticatedOwner.setTrainer(tr.get());
-
-        //authenticatedOwner.getTrainer();
-        return jwtToken;
-    }
+//
+//        // authenticatedOwner.getTrainer();
+//        return jwtToken;
+//    }
 }

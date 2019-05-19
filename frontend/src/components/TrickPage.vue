@@ -23,6 +23,8 @@
     </ul>
     <p class="back"><router-link :to="`/logged/${trainerId}/${dogId}/tricks`"> VISSZA </router-link></p>
   </div>
+
+  {{me}}
    <!-- <div v-for="t in tricks" :key=t.id>
   <div>
     {{t}}
@@ -46,6 +48,7 @@ export default {
     return {
       title: 'Trükkjeim',
       trainerId:this.$route.params.trainerId,
+      //trainerId:this.me.id,
       dogId:this.$route.params.dogId,
       basic:"BASIC",
       intermediate:"INTERMEDIATE",
@@ -54,10 +57,11 @@ export default {
   },
 
   created(){
-   // if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
+    if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
 
     this.getTricks_ByDog();
     this.getAll_Tricks();
+    this.getDogsBy_TrainerId();
 
 
     //teljesített feladatok meghatározására
@@ -73,7 +77,7 @@ export default {
   },
     
   methods:{
-     ...mapActions(['getTricksByCategory','getTricksByADog','getAllTricks']),
+     ...mapActions(['getTricksByCategory','getTricksByADog','getAllTricks','getDogsByTrainerId']),
     
     getAll_Tricks(){
       this.getAllTricks();
@@ -84,6 +88,10 @@ export default {
 
     getTricks_ByDog(){
       this.getTricksByADog(this.dogId)
+    },
+
+    getDogsBy_TrainerId(){
+      this.getDogsByTrainerId()
     },
 
     getTricksByDogByCategory(trickCategory){
@@ -115,7 +123,9 @@ export default {
   computed:{
     ...mapState({
           tricks: function (state) { return state.moduleDog.tricks },
+          me: function (state) { return state.moduleDog.me },
           allTricks: function (state) { return state.moduleDog.allTricks },
+
           //categoryTricks: function (state) { return state.moduleDog.categoryTricks },
         }),
   }

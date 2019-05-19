@@ -88,7 +88,7 @@ export default {
 
             log_in(){
               this.login({username: this.trainer.username, password: this.trainer.password})
-             // .then(() => this.$router.push(`/logged/${this.me.id}/${this.dogId}/kutyaim`))
+              .then(() => this.$router.push(`/logged/${this.me.id}/${this.dogId}/kutyaim`))
             },
             log_in_(){
                  this.login_({username: this.trainer.username, password: this.trainer.password})
