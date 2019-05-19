@@ -1,6 +1,7 @@
 package hu.elte.DogTrainingApplication.service;
 
 import hu.elte.DogTrainingApplication.api.DogService;
+import hu.elte.DogTrainingApplication.common.TrickCategory;
 import hu.elte.DogTrainingApplication.entities.*;
 import hu.elte.DogTrainingApplication.repository.*;
 import lombok.extern.log4j.Log4j2;
@@ -112,6 +113,14 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public List<Dog> findDogByTrainerId(Integer trainerId) {
+//        System.out.println(dogRepository.findAllByTrainerId(trainerId));
         return dogRepository.findAllByTrainerId(trainerId);
+    }
+
+    @Override
+    public List<Trick> findTricksByDogIdAndCategory(Integer dogId, String category){
+        TrickCategory type = TrickCategory.valueOf(category.toUpperCase());
+        System.out.println("service: "+type);
+        return trickRepository.findTricksByDogIdAndCategory(dogId, type);
     }
 }

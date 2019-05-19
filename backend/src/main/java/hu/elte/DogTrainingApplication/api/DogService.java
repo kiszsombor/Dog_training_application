@@ -68,6 +68,6 @@ public interface DogService {
 
     List <Dog> findDogByTrainerId(Integer trainerId);
 
-
+    List<Trick> findTricksByDogIdAndCategory(Integer dogId, String category);
 
 }

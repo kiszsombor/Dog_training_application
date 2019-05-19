@@ -46,7 +46,7 @@
         <hr>
             <div class="row">
                 <div class="col-lg-12">
-                        <b-button class="button" type="reset" variant="danger">Visszavonás</b-button>
+                        <b-button class="button" type="reset" variant="danger"><router-link to="RegisterPage" >Még nem regisztráltam</router-link></b-button>
                     </div>
             </div>
             
@@ -145,11 +145,12 @@ b-form-input.email-input{
 }
 
 .button{
-    /* padding-right:1%;
-    padding-left:1%;
-    margin-left:1%;
-    margin-right:1%;  */
     width:100%;
+}
+
+a, a:hover{
+    text-decoration: none;
+    color: white;
 }
 
 </style>

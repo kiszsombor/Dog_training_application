@@ -30,7 +30,8 @@
     <b-container fluid class="bv-example-row">
         <b-row class="datas">
             <div class="w-100"></div>
-          
+          <b-col cols="6"><h2>Kutya adatai: </h2></b-col>
+          <b-col cols="6"></b-col>
           <b-col cols="6">Születési dátum </b-col>
           <b-col cols="6">{{moment(String(dog.birthDate)).format("LL")}}</b-col>
               <div class="w-100"></div>
@@ -38,7 +39,36 @@
           <b-col cols="6">{{dog.breed}}</b-col>
               <div class="w-100"></div>
           <b-col cols="6">Súly </b-col>
-          <b-col cols="6">{{dog.weight}}</b-col>
+          <b-col cols="6">{{dog.weight}} kg</b-col>
+              <div class="w-100"></div>
+          <b-col cols="6">Nem </b-col>
+          <b-col cols="6">{{dog.sex=="MALE" ? "kan": dog.sex=="FEMALE" ? "szuka" : dog.sex=="NEUTERED_MALE" ? "kan (ivartalanított)" : dog.sex=="NEUTERED_FEMALE" ? "szuka (ivartalanított)" : dog.sex}}</b-col>
+              <div class="w-100"></div>
+              <br> 
+              <b-col cols="12">
+                <hr>
+                  
+                  
+                {{dog.description}}</b-col>
+
+        </b-row>
+      </b-container>
+      <b-container fluid class="bv-example-row">
+        <b-row class="datas">
+            <div class="w-100"></div>
+          <b-col cols="6"><h2>Edző adatai: </h2></b-col>
+          <b-col cols="6"></b-col>
+          <b-col cols="6">Név </b-col>
+          <b-col cols="6">{{trainer.name}}</b-col>
+              <div class="w-100"></div>
+          <b-col cols="6">Születési dátum </b-col>
+          <b-col cols="6">{{moment(String(trainer.birthDate)).format("LL")}}</b-col>
+              <div class="w-100"></div>
+          <b-col cols="6">Email-cím </b-col>
+          <b-col cols="6">{{trainer.email}}</b-col>
+              <div class="w-100"></div>
+          <b-col cols="6">Telefonszám </b-col>
+          <b-col cols="6">{{trainer.phoneNumber}}</b-col>
               <div class="w-100"></div>
               <br>
                   
@@ -112,7 +142,7 @@
             </b-modal>
 <div>
   <br>
-  {{dogs}}
+  {{trainer}}
 </div>
 
 
@@ -137,12 +167,14 @@ export default {
     created(){
       if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
       this.getDog(),
-      this.getDogs()
+      this.getDogs(),
+      this.getTrainer()
     },
     data() {
         return {
-            moment:moment,
             title: "Profilom",
+            moment:moment,
+            trainerId:this.$route.params.trainerId,
             dogId: this.$route.params.dogId,
             myAccount:{
               name:"",
@@ -154,7 +186,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getDogById','getAllDogs','deleteDogById']),
+        ...mapActions(['getDogById','getAllDogs','deleteDogById','getTrainerById']),
         getDog(){
           this.getDogById(this.dogId);
         },
@@ -164,13 +196,16 @@ export default {
         deleteDog_ById(){
           this.deleteDogById(this.dogId)
           .then(() => this.$router.push(`/LoginPage`))
-        }
+        },
+        getTrainer(){
+          this.getTrainerById(this.trainerId);
+        },
     },
     computed: {
         ...mapState({
             dog: function (state) { return state.moduleDog.dog },
-            dogs: function (state) { return state.moduleDog.dogs }
-
+            dogs: function (state) { return state.moduleDog.dogs },
+            trainer: function (state) { return state.moduleDog.trainer}
         })
     },
     components: {
@@ -189,6 +224,10 @@ export default {
 }
 h1{
   padding-bottom: 1%;
+}
+h2{
+  padding-bottom: 3%;
+  font-size: 120%;
 }
 
 </style>

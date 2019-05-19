@@ -2,43 +2,160 @@
   <div class="main">
     <!-- <h1>{{ msg }}</h1> -->
     <h1 class=" trick-title main-title">
-        {{title}}
-    </h1>
-    <!-- <nav-bar-trick></nav-bar-trick> -->
+      {{title}}
 
-    <hr>
-    <ul>
-      <li>
-        <button type="button" class="btn li button btn-lg btn-block">Pitiz</button>
-      </li>
-      <li>
-        <button type="button" class="btn li button btn-lg btn-block">Pacsit</button>
-      </li>
-      <li>
-        <button type="button" class="btn li button btn-lg btn-block">Átfordul</button>
-      </li>
-      <li>
-        <button type="button" class="btn li button btn-lg btn-block">Apportíroz</button>
-      </li>
-    </ul>
-    <p><b-button class="back"><router-link :to="`/logged/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
+    </h1>
+<!-- MODAL -->
+  <div>
+
+      <b-modal id="modal-1" :title="modalTitle" ok-title="Igen" cancel-title="Nem"  @ok="done(basicId,selectedTrickId)">
+          <p class="my-4">Biztos ez? </p>
+      </b-modal>
+<!-- 
+      <b-modal id="modal-2" title="Feladat teljesítése" ok-title="Igen" cancel-title="Nem"  v-if="isSave" @ok="done(basicId,selectedTrickId)">
+          <p class="my-4">Biztos vissza szeretné vonni? </p>
+      </b-modal> -->
   </div>
+    <div>
+      <b-alert class="alertClass" :show="getTricksByDogByCategory(category)==categoryTricks.length"  variant="success">
+        <span> Gratulálunk! A haladó szint összes ({{categoryTricks.length}}) feladatát teljesítette! Kutyája elvégezte a képzést!<i class="far fa-smile-wink"></i> </span>
+      </b-alert>
+    </div>
+
+    <div>
+      <b-alert class="alertClass" :show="getTricksByDogByCategory(category)!=categoryTricks.length" dismissible variant="primary">
+        <span> Még {{categoryTricks.length-getTricksByDogByCategory(category)}} haladó szintes feladat teljesítés szükséges a képzés teljesítéséhez!</span>
+      </b-alert>
+    </div>
+    <hr>
+
+    <ul v-for="t in categoryTricks" :key=t.id>
+
+      <li>
+        <button :id="t.name" ref="UP" type="checkbox" v-b-modal.modal-1  @click=" basicId=t.name, selectedTrickId=t.id" v-bind:class="{class1:initColorTricks(t.name)}">
+          {{t.name=="UP" ? "Pitiz": t.name=="SHAKE_IT" ? "Pacsit" : t.name=="ROLL_OVER" ? "Átfordul" : t.name=="BRING_IT" ? "Apportíroz" : t.name}}
+          </button>
+      </li>
+      
+    </ul>
+    <p><b-button class="back"><router-link :to="`/logged/${trainerId}/${dogId}/tricks`"> VISSZA </router-link></b-button></p>
+
+
+  </div>
+
 </template>
 
 <script>
-// import NavBarTrick from './NavBarTrick'
-
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'AdvancedTricks',
     components: {
-      // 'nav-bar-trick': NavBarTrick
+      
     }
   ,
   data () {
     return {
-      title:"Haladó szint",
-      dogId: this.$route.params.dogId
+      title: "Haladó szint",
+      trainerId: this.$route.params.trainerId,
+      dogId: this.$route.params.dogId,
+      class1 : false,
+      isAllAchieved:false,
+      isDelete:false,
+      isSave:false,
+      revocation:false,
+      isOkRevocation:false,
+      modalTitle:"ModalTitle",
+      basicId:null,
+      selectedTrickId:null,
+      advancedTricks:[],
+      category:"ADVANCED",
+      ADVANCED:{
+        UP:'UP',
+        SHAKE_IT:'SHAKE_IT',
+        ROLL_OVER:'ROLL_OVER',
+        BRING_IT:'BRING_IT',
+      },
     }
+  },
+  created(){
+
+    this.getTricksByDog();
+    this.getAll_Tricks();
+    this.getTricks_ByCategory();
+    // this.advancedTrick();
+    this.getTricksByDogByCategory(this.category);
+
+  },
+ 
+  methods: {
+    ...mapActions(['getTricksByADog','getAllTricks','getTricksByCategory', 'deleteDogTricksByDogIdAndTrickId', 'addDogTricks']),
+
+    getTricksByDog(){
+          this.getTricksByADog(this.dogId);
+    },
+    getAll_Tricks(){
+      this.getAllTricks();
+    },
+    getTricks_ByCategory(category){
+      this.getTricksByCategory(this.category);
+    },
+    saveDogTricks(trickId){
+      this.addDogTricks({dogId:this.dogId, trickId:trickId});
+    },
+    deleteDogTricks_ByDogIdAndTrickId(trickId){
+      this.deleteDogTricksByDogIdAndTrickId({dogId:this.dogId, trickId:trickId});
+    },
+
+  getTricksByDogByCategory(trickCategory){
+      var count=0;
+      this.tricks.forEach(function(element) {
+        if(element.category==trickCategory){
+          count++;
+          
+        }
+      });
+      return count;
+    },
+    
+    initColorTricks(nameId){
+
+      for(let i=0; i<this.tricks.length; i++){
+          if(this.tricks[i].name==nameId){
+            return true
+          }
+        }
+        return false
+      },
+      
+    done(nameId, trickId) {
+
+      if(this.tricks.length == 0){
+            this.isSave = true;
+            this.saveDogTricks(trickId);
+      }
+
+      for(let i=0;i<this.tricks.length;i++){
+        if(this.tricks[i].id == trickId){
+
+          this.isDelete = true;
+          this.deleteDogTricks_ByDogIdAndTrickId(trickId);
+        }
+        else {
+
+            this.isSave = true;
+            this.saveDogTricks(trickId);
+          }
+      }
+
+    },
+},
+  computed:{
+    ...mapState({
+            tricks: function (state) { return state.moduleDog.tricks },
+            allTricks: function (state) { return state.moduleDog.allTricks },
+            categoryTricks: function (state) { return state.moduleDog.categoryTricks },
+            dog: function (state) { return state.moduleDog.dog }
+        }),
   }
 }
 </script>
@@ -47,22 +164,10 @@ export default {
 <style scoped>
 .main {
     max-width: 1200px;
-	  min-width: 300px;
+    min-width: 300px;
     margin: auto;
-	  /* background-image: url('../assets/china.png');
-	  background-repeat: repeat;
-	  background-attachment: fixed; */
+    text-align:center;
 }
-/* .title {
-	  background-color: skyblue;
-    background-image: url('../assets/paw.png');
-	  background-repeat: no-repeat;
-	  background-position: 2% 50%;
-	  background-size: 5%;
-    padding: 0.1%;
-    text-indent: 5%;
-    font-weight: normal;
-} */
 h2 {
     margin: 2% 2% 2% 5%;
     color: black;
@@ -74,16 +179,15 @@ h2 {
 ul {
     margin: auto;
     padding: 0%;
-    /* background-image: url('../assets/china.png'); */
-	  background-repeat: repeat;
-	  background-attachment: fixed;
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 li{
     text-align: center;
     list-style-type: none;
     padding: 2% 0% 2% 0%;
 }
-li button {
+li button{
     font-size: 120%;
     display: inline-block;
     width: 80%;
@@ -95,19 +199,16 @@ li button {
     border: none;
 }
 li button:hover {
-    background-color: gray;
     color: white;
-    /* background-image: url('../assets/tennisball.png'); */
-	  background-repeat: no-repeat;
-	  background-position: 40% 50%;
+    background-repeat: no-repeat;
+    background-position: 40% 50%;
     background-size: 5%;
 }
-li button:active {
+.class1 {
     background-color: lightgreen;
-    color: white;
-    /* background-image: url('../assets/tennisball.png'); */
-	  background-repeat: no-repeat;
-	  background-position: 40% 50%;
+    color: black;
+    background-repeat: no-repeat;
+    background-position: 40% 50%;
     background-size: 5%;
     border: none;
 }
@@ -117,20 +218,34 @@ li button:active {
     margin-left: auto;
     margin-right: auto;
     font-family: Arial, sans-serif;
-    /* visibility: hidden; */
 }
 .back a {
     text-decoration: none;
     color: white;
-    /* visibility: hidden; */
 }
 .back a:hover {
     color: skyblue;
     text-decoration: none;
 } 
-
 p {
     text-align: center;
 }
-
+.router{
+    font-size: 120%;
+    color: #155724;
+}
+.router:hover {
+    color: black;
+    text-decoration: none;
+}
+.alertClass{
+    font-size: 100%;
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+    text-decoration: none;
+}
+.far{
+    padding-left:1%;
+}
 </style>

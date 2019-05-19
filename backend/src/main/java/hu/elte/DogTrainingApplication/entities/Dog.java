@@ -58,6 +58,10 @@ public class Dog implements Serializable {
     @JoinColumn(name = "trainer_id", nullable = false)
     private Trainer trainer;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private Trainer owner;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "dog")

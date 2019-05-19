@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from '@/router/views/Home'
 import LoginPage from '@/router/views/Login'
+import RegisterPage from '@/router/views/Register'
 import SeasonTickets from '@/components/SeasonTickets'
 
 import TrickPage from '@/components/TrickPage'
@@ -72,13 +73,16 @@ const router = new Router({
       name: 'LoginPge',
       component: LoginPage
     },
-
+    {
+      path: '/RegisterPage',
+      name: 'RegisterPage',
+      component: RegisterPage
+    },
 	  {
       path: '/Page2',
       name: 'Page2',
       component: Page2
     },
-
     {
       path: '/Page4',
       name: 'Page4',

@@ -22,6 +22,9 @@ public interface TrickRepository extends CrudRepository<Trick, Integer> {
     @Query(value = "SELECT * FROM `trick` WHERE id IN (SELECT trick_id from `dog_tricks` where dog_id = :dogId)", nativeQuery = true)
     List<Trick> findTricksByDogId(@Param("dogId") Integer dogId);
 
+    @Query(value = "SELECT * FROM `trick` WHERE category = :category and id IN (SELECT trick_id from `dog_tricks` where dog_id = :dogId)", nativeQuery = true)
+    List<Trick> findTricksByDogIdAndCategory(@Param("dogId") Integer dogId, @Param("category") TrickCategory category);
+
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO dog_tricks (dog_id, trick_id) VALUES (:dogId, :trickId)", nativeQuery = true)

@@ -32,10 +32,12 @@ const moduleDog={
     dogs:[],
     seasonTickets: [],
     trainer:{},
+    trainerDogs:[],
     tricks:[],
     allTricks:[],
-    categoryTricks:[],
-    users:[]
+    dogTricksCategory:[],
+    categoryTricks:[]
+ 	users:[]
   },
   mutations: { 
     GET_ALL_DOGS(state,dogs){
@@ -44,8 +46,8 @@ const moduleDog={
     INIT_DOG_BY_ID(state,dog){
       state.dog=dog
     },
-    INIT_DOGS_BY_TRAINER(state,dogs){
-      state.dogs=[...dogs]
+    INIT_DOGS_BY_TRAINER(state,trainerDogs){
+      state.trainerDogs=[...trainerDogs]
     },
     DELETE_DOG(state,dog){
       delete state.dogs[dog];
@@ -70,6 +72,9 @@ const moduleDog={
     },
     GET_TRICKS_BY_CATEGORY(state,categoryTricks){
       state.categoryTricks=[...categoryTricks]
+    },
+    GET_TRICKS_BY_DOG_AND_CATEGORY(state,dogTricksCategory){
+      state.dogTricksCategory=[...dogTricksCategory]
     },
     ADD_NEW_DOG_TRICKS(state, dogTrick){
       state.tricks.push(dogTrick)
@@ -177,6 +182,13 @@ const moduleDog={
         return res.data.length
       });
     },
+    getTricksByADogAndCategory(context,{dogId,categoryName}){
+      TrickApi.getTricksByDogIdAndCategory(dogId,categoryName)
+      .then(res=>{
+        context.commit('GET_TRICKS_BY_DOG_AND_CATEGORY', res.data)
+        return res.data.length
+      });
+    },
     addDogTricks(context,{dogId,trickId}){
       return TrickApi.postDogTricks(dogId,trickId)
           .then(res => {
@@ -239,13 +251,6 @@ login_({commit}, user){
 
 
   },
-
-
-
-
-
-
-
   deleteDogById(context,dogId){
     DogApi.deleteDogById(dogId)
     .then(res=>{
