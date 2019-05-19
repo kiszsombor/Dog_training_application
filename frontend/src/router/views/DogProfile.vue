@@ -45,14 +45,9 @@
           <b-col cols="6">{{dog.sex=="MALE" ? "kan": dog.sex=="FEMALE" ? "szuka" : dog.sex=="NEUTERED_MALE" ? "kan (ivartalanított)" : dog.sex=="NEUTERED_FEMALE" ? "szuka (ivartalanított)" : dog.sex}}</b-col>
               <div class="w-100"></div>
               <br> 
-              <b-col cols="12">
-                <hr>
-                  
-                  
-                {{dog.description}}</b-col>
-
         </b-row>
       </b-container>
+      <hr>
       <b-container fluid class="bv-example-row">
         <b-row class="datas">
             <div class="w-100"></div>
@@ -71,13 +66,27 @@
           <b-col cols="6">{{trainer.phoneNumber}}</b-col>
               <div class="w-100"></div>
               <br>
-                  
-              <b-col cols="12">
-                <hr>
-                  
-                  
-                {{dog.description}}</b-col>
-
+        </b-row>
+      </b-container>
+      <hr>
+      <b-container fluid class="bv-example-row">
+        <b-row class="datas">
+            <div class="w-100"></div>
+          <b-col cols="6"><h2>Tulajdonos adatai: </h2></b-col>
+          <b-col cols="6"></b-col>
+          <b-col cols="6">Név </b-col>
+          <b-col cols="6">{{owner.name}}</b-col>
+              <div class="w-100"></div>
+          <b-col cols="6">Születési dátum </b-col>
+          <b-col cols="6">{{moment(String(owner.birthDate)).format("LL")}}</b-col>
+              <div class="w-100"></div>
+          <b-col cols="6">Email-cím </b-col>
+          <b-col cols="6">{{owner.email}}</b-col>
+              <div class="w-100"></div>
+          <b-col cols="6">Telefonszám </b-col>
+          <b-col cols="6">{{owner.phoneNumber}}</b-col>
+              <div class="w-100"></div>
+              <br>
         </b-row>
       </b-container>    
       </b-card-text>
@@ -142,7 +151,7 @@
             </b-modal>
 <div>
   <br>
-  {{trainer}}
+  {{owner}}
 </div>
 
 
@@ -167,7 +176,8 @@ export default {
     created(){
       this.getDog(),
       this.getDogs(),
-      this.getTrainer()
+      this.getTrainer(),
+      this.getOwner()
     },
     data() {
         return {
@@ -185,7 +195,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getDogById','getAllDogs','deleteDogById','getTrainerById']),
+        ...mapActions(['getDogById','getAllDogs','deleteDogById','getTrainerById','getOwnerByDog']),
         getDog(){
           this.getDogById(this.dogId);
         },
@@ -199,12 +209,16 @@ export default {
         getTrainer(){
           this.getTrainerById(this.trainerId);
         },
+        getOwner(){
+          this.getOwnerByDog(this.dogId);
+        }
     },
     computed: {
         ...mapState({
             dog: function (state) { return state.moduleDog.dog },
             dogs: function (state) { return state.moduleDog.dogs },
-            trainer: function (state) { return state.moduleDog.trainer}
+            trainer: function (state) { return state.moduleDog.trainer},
+            owner: function (state) { return state.moduleDog.owner}
         })
     },
     components: {

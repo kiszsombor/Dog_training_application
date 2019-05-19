@@ -24,7 +24,7 @@ public class TrickServiceImpl implements TrickService {
     @Override
     public List<Trick> findTricksByCategory(String category) {
         TrickCategory type=TrickCategory.valueOf(category.toUpperCase());
-        System.out.println(type.toString());
+//        System.out.println(type.toString());
         return trickRepository.findAllByCategory(type);
     }
 

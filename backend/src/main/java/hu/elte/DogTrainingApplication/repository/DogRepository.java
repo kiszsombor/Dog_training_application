@@ -26,7 +26,8 @@ public interface DogRepository extends CrudRepository<Dog, Integer> {
 //    Trainer findTrainerByDog(@Param("dogId") Integer dogId);
 
 
-
+    @Query(value = "SELECT id FROM `trainer` WHERE id IN (SELECT owner_id from `dog` where id = :dogId)", nativeQuery = true)
+    Integer findOwnerByDog(@Param("dogId") Integer dogId);
 
     @Query(value = "SELECT id FROM `trainer` WHERE id IN (SELECT trainer_id from `dog` where id = :dogId)", nativeQuery = true)
     Integer findTrainerByDog(@Param("dogId") Integer dogId);

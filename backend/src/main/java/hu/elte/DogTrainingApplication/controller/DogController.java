@@ -90,6 +90,16 @@ public class DogController {
         return dogService.findTricksByDogIdAndCategory(id, category);
     }
 
+    @GetMapping("/{id}/owner")
+    public Trainer findOwnerByDog(@PathVariable Integer id){
+        Optional<Trainer> optionalTrainer= dogService.findOwnerByDog(id);
+
+        if (optionalTrainer.isPresent()) {
+            return optionalTrainer.get();
+        }
+        return null;
+    }
+
     @GetMapping("/{id}/trainer")
     public Trainer findTrainerByDog(@PathVariable Integer id){
         Optional<Trainer> optionalTrainer= dogService.findTrainerByDog(id);

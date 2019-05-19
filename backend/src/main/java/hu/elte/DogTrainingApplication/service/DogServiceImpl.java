@@ -101,13 +101,18 @@ public class DogServiceImpl implements DogService {
 //    }
 
     @Override
+    public Optional<Trainer> findOwnerByDog(Integer dogId){
+        return trainerRepository.findById(dogRepository.findOwnerByDog(dogId));
+    }
+
+    @Override
     public Optional<Trainer> findTrainerByDog(Integer dogId){
         return trainerRepository.findById(dogRepository.findTrainerByDog(dogId));
     }
 
     @Override
     public List<Trick> findTricksByDog(Integer dogId) {
-        System.out.println(trickRepository.findTricksByDogId(dogId));
+//        System.out.println(trickRepository.findTricksByDogId(dogId));
         return trickRepository.findTricksByDogId(dogId);
     }
 

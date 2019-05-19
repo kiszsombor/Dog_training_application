@@ -24,6 +24,7 @@ const moduleDog={
     dogs:[],
     seasonTickets: [],
     trainer:{},
+    owner:{},
     trainerDogs:[],
     tricks:[],
     allTricks:[],
@@ -54,6 +55,9 @@ const moduleDog={
     },
     INIT_TRAINER_BY_ID(state,trainer){
       state.trainer=trainer;
+    },
+    GET_OWNER_BY_DOG(state,owner){
+      state.owner=owner;
     },
     GET_TRICKS_BY_DOG(state,tricks){
       state.tricks=[...tricks]
@@ -128,6 +132,12 @@ const moduleDog={
           // console.log("Res.data delete: ",res.data)
           context.commit('INIT_TRAINER_BY_ID', res.data)
       }) 
+    },
+    getOwnerByDog(context,dogId){
+      DogApi.getOwnerByDog(dogId)
+      .then(res=>{
+        context.commit('GET_OWNER_BY_DOG', res.data)
+      });
     },
     getTricksByADog(context,dogId){
       TrickApi.getTricksByADog(dogId)

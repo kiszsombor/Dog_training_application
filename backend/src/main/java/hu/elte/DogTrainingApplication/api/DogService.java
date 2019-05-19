@@ -56,6 +56,8 @@ public interface DogService {
 
 //    Dog deleteById(Integer dogId);
 
+    Optional<Trainer> findOwnerByDog(Integer dogId);
+
     Optional<Trainer> findTrainerByDog(Integer dogId);
 
 
