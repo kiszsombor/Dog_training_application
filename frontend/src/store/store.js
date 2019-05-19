@@ -36,8 +36,8 @@ const moduleDog={
     tricks:[],
     allTricks:[],
     dogTricksCategory:[],
-    categoryTricks:[]
- 	users:[]
+    categoryTricks:[],
+ 	  users:[]
   },
   mutations: { 
     GET_ALL_DOGS(state,dogs){
@@ -206,11 +206,13 @@ const moduleDog={
   },
 
   registration(context,user){
-    return TrainerApi.registration(user)
-        .then(res => {
-            context.commit('REGISTRATION', res.data)
-            return Promise.resolve()
-        })
+    TrainerApi.registration({...user})
+    .then(res=>{
+      console.log("STORE: reg: ", res.data);
+      context.commit('REGISTRATION', res.data);
+     // return Promise().resolve();
+    })
+    
 },
 
   login(context, payload){

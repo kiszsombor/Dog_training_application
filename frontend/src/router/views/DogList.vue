@@ -91,7 +91,7 @@ export default {
     computed: {
         ...mapState({
             dogs: function (state) { return state.moduleDog.dogs },
-			trainerDogs: function (state) {return state.moduleDog.trainerDogs}
+			      trainerDogs: function (state) {return state.moduleDog.trainerDogs},
             me: function (state) { return state.moduleDog.me }
         })
     },

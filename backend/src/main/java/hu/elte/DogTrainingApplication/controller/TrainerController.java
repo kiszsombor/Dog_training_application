@@ -7,6 +7,8 @@ import hu.elte.DogTrainingApplication.config.AutenticatedTrainer;
 import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.Trainer;
 import hu.elte.DogTrainingApplication.repository.TrainerRepository;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,16 +80,39 @@ public class TrainerController {
 
 
     @PostMapping("/login")
-    public Trainer login(@RequestBody Trainer trainer) {
+    public String login(@RequestBody Trainer trainer) throws ServletException{
 //        System.out.println(authenticatedOwner.getTrainer());
 //        System.out.println(trainer);
+        String jwtToken = "";
         Optional<Trainer> tr=trainerRepository.findByUsername(trainer.getUsername());
 
-//        String email = trainer.getEmail();
-//        String password = trainer.getPassword();
+
+        if (tr.get().getEmail() == null || tr.get().getPassword() == null) {
+            throw new ServletException("Please fill in username and password");
+        }
+
+        String email = tr.get().getEmail();
+        String password = tr.get().getPassword();
+
+
+
+        if (tr == null) {
+            throw new ServletException("User email not found.");
+        }
+
+        String pwd = tr.get().getPassword();
+
+        if (!password.equals(pwd)) {
+            throw new ServletException("Invalid login. Please check your name and password.");
+        }
+
+        jwtToken = Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
 
         System.out.println("Tr "+tr);
         authenticatedOwner.setTrainer(tr.get());
-        return authenticatedOwner.getTrainer();
+
+        //authenticatedOwner.getTrainer();
+        return jwtToken;
     }
 }

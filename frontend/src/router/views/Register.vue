@@ -5,7 +5,7 @@
     {{title}}
 </div>
 
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form v-if="show">
 
             <b-form-group
                 id="inputUsernameGroup"
@@ -54,13 +54,13 @@
             >
                 <b-form-input
                     id="inputEmail"
-                    type="text"
+                    type="email"
                     v-model="form.email"
                     required
                     placeholder="Írja be az email-címét..." />
             </b-form-group>
 
-            <b-form-group
+            <!-- <b-form-group
                 id="inputAddressGroup"
                 label="Cím:"
                 label-for="inputAddress"
@@ -71,7 +71,7 @@
                     v-model="form.address"
                     required
                     placeholder="Írja be a címét..." />
-            </b-form-group>
+            </b-form-group> -->
 
             <b-form-group
                 id="inputPhonenumberGroup"
@@ -86,7 +86,7 @@
                     placeholder="Írja be a telefonszámát..." />
             </b-form-group>
 
-            <b-form-group
+            <!-- <b-form-group
                 id="inputBirthdateGroup"
                 label="Születési idő:"
                 label-for="inputBirthdate"
@@ -97,9 +97,9 @@
                     v-model="form.birthdate"
                     required
                     placeholder="Írja be a születési dátumát..." />
-            </b-form-group>
+            </b-form-group> -->
 
-            <b-form-group
+            <!-- <b-form-group
                 id="inputBirthplaceGroup"
                 label="Születési hely:"
                 label-for="inputBirthplace"
@@ -110,29 +110,12 @@
                     v-model="form.birthplace"
                     required
                     placeholder="Írja be a születési helyét..." />
-            </b-form-group>
-
-            <!-- <b-form-group id="inputSelectGroup"
-                label="Options:"
-                label-for="inputSelect"
-            >
-                <b-form-select
-                    id="inputSelect"
-                    :options="options"
-                    required
-                    v-model="form.option" />
-            </b-form-group>
-
-            <b-form-group id="inputCheckGroup">
-                <b-form-checkbox-group v-model="form.checked" id="inputCheck">
-                    <b-form-checkbox value=1>Check 1</b-form-checkbox>
-                    <b-form-checkbox value=2>Check 2</b-form-checkbox>
-                </b-form-checkbox-group>
             </b-form-group> -->
+{{form}}
             <br>
                 <div class="row">
                     <div class="col-lg-12">
-                        <b-button class="button" type="submit" variant="primary">Regisztráció</b-button>
+                        <b-button class="button" type="submit" variant="primary" @click="saveRegisteredUser()">Regisztráció</b-button>
                     </div>
                     
                          
@@ -145,10 +128,19 @@
             </div>
             
         </b-form>
+
+            <div class="alert alert-danger" role="alert" v-if="registrationError">
+            This is a danger alert—check it out!
+            </div>
+
+        
     </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
+
 export default {
 
     name: "Register",
@@ -156,33 +148,53 @@ export default {
         return {
             title:"Bejelentkezés",
         form: {
-            email: '',
-            name: '',
-            //option: null,
-            //checked: []
+            username: '',
+            password:'',
+            name:'',
+            email:'',
+            phonenumber:0
         },
-        //options: [{ text: 'Select One', value: null }, 'Option1', 'Option2', 'Option3', 'Option4'],
-        show: true
+        show: true,
+        registrationError:false,
         }
     },
+    created(){
+    },
     methods: {
-        onSubmit(event) {
-            event.preventDefault()
-            alert(JSON.stringify(this.form))
+        ...mapActions(['registration']),
+
+        saveRegisteredUser(){
+            console.log("HAHO")
+            console.log(this.form)
+            this.registration(this.form)
+            .then(() => this.$router.push(`/LoginPage`))
+            .catch(e =>{
+                  this.registrationError=true;
+                     this.$router.push(`/RegisterPage`)
+            });
+           
         },
-        onReset(event) {
-            event.preventDefault()
-            /* Reset our form values */
-            this.form.email = ''
-            this.form.name = ''
-            this.form.option = null
-            this.form.checked = []
-            /* Trick to reset/clear native browser form validation state */
-            this.show = false
-            this.$nextTick(() => {
-                this.show = true
-            })
-        }
+
+        
+        
+
+
+
+        // onSubmit(event) {
+        //     event.preventDefault()
+        //     alert(JSON.stringify(this.form))
+        // },
+        // onReset(event) {
+        //     event.preventDefault()
+        //     /* Reset our form values */
+        //     this.form.email = ''
+        //     this.form.name = ''
+        //     /* Trick to reset/clear native browser form validation state */
+        //     this.show = false
+        //     this.$nextTick(() => {
+        //         this.show = true
+        //     })
+        // }
     }
 }
 </script>
