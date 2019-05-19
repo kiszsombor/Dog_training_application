@@ -1,120 +1,204 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import DogApi from '../api/dog-api'
+import SeasonTicketApi from '../api/season-tickets-api'
+import TrainerApi from '../api/trainer-api'
+import TrickApi from '../api/tricks-api'
 Vue.use(Vuex)
 
+
+const moduleSeasonTickets = {
+  state: { 
+    seasonTickets:[],
+   },
+  mutations: { 
+    
+   },
+  actions: { 
+    
+   },
+}
+const moduleDog={
+  state:{
+    dog:{},
+    dogs:[],
+    seasonTickets: [],
+    trainer:{},
+    owner:{},
+    trainerDogs:[],
+    tricks:[],
+    allTricks:[],
+    dogTricksCategory:[],
+    categoryTricks:[]
+  },
+  mutations: { 
+    GET_ALL_DOGS(state,dogs){
+      state.dogs=[...dogs]
+    },
+    INIT_DOG_BY_ID(state,dog){
+      state.dog=dog
+    },
+    INIT_DOGS_BY_TRAINER(state,trainerDogs){
+      state.trainerDogs=[...trainerDogs]
+    },
+    DELETE_DOG(state,dog){
+      delete state.dogs[dog];
+    },
+    INIT_SEASON_TICKETS_BY_A_DOG(state,seasonTickets){
+      state.seasonTickets=[...seasonTickets]
+    },
+    ADD_NEW_SEASON_TICKET(state, seasonTicket){
+      state.seasonTickets.push(seasonTicket)
+    },
+    DELETE_SEASON_TICKET(state, seasonTicket){
+      delete state.seasonTickets[seasonTicket];
+    },
+    INIT_TRAINER_BY_ID(state,trainer){
+      state.trainer=trainer;
+    },
+    GET_OWNER_BY_DOG(state,owner){
+      state.owner=owner;
+    },
+    GET_TRICKS_BY_DOG(state,tricks){
+      state.tricks=[...tricks]
+    },
+    GET_ALL_TRICKS(state,tricks){
+      state.allTricks=[...tricks]
+    },
+    GET_TRICKS_BY_CATEGORY(state,categoryTricks){
+      state.categoryTricks=[...categoryTricks]
+    },
+    GET_TRICKS_BY_DOG_AND_CATEGORY(state,dogTricksCategory){
+      state.dogTricksCategory=[...dogTricksCategory]
+    },
+    ADD_NEW_DOG_TRICKS(state, dogTrick){
+      state.tricks.push(dogTrick)
+    },
+    DELETE_DOG_TRICKS(state, dogTrick){
+      delete state.tricks[dogTrick];
+    },
+   },
+  actions: {  
+    getAllDogs(context){
+      DogApi.getAllDogs()
+      .then(res=>{
+        context.commit('GET_ALL_DOGS', res.data)
+      });
+    },
+    deleteDogById(context, dogId){
+      DogApi.deleteDogById(dogId)
+      .then(res=>{
+          // console.log("Res.data delete: ",res.data)
+          context.commit('DELETE_DOG', res.data)
+          return Promise.resolve()
+      })
+    },
+    getDogById(context,dogID){
+      DogApi.getDogById(dogID)
+      .then(res=>{
+        context.commit('INIT_DOG_BY_ID',res.data)
+      })
+    },
+    getDogsByTrainerId(context,trainerId){
+      DogApi.getDogsByTrainerId(trainerId)
+      .then(res=>{
+        context.commit('INIT_DOGS_BY_TRAINER',res.data)
+      })
+    },
+    getAllSeasonTicketsByDog(context,dogID){
+      DogApi.getAllSeasonTicketsByDog(dogID)
+      .then(res => {
+          context.commit('INIT_SEASON_TICKETS_BY_A_DOG',res.data)
+      })
+  },
+    addNewSeasonTicket(context, payload){
+      return SeasonTicketApi.addNewSeasonTicket({...payload})
+          .then(res => {
+              context.commit('ADD_NEW_SEASON_TICKET', res.data)
+              return Promise.resolve()
+          })
+  },
+    deleteSeasonTicketById(context,seasonTicketId){
+      SeasonTicketApi.deleteSeasonTicketById(seasonTicketId)
+      .then(res=>{
+          // console.log("Res.data delete: ",res.data)
+          context.commit('DELETE_SEASON_TICKET', res.data)
+          return Promise.resolve()
+    })
+  },
+    getTrainerById(context,TrainerId){
+      TrainerApi.getTrainerById(TrainerId)
+      .then(res=>{
+          // console.log("Res.data delete: ",res.data)
+          context.commit('INIT_TRAINER_BY_ID', res.data)
+      }) 
+    },
+    getOwnerByDog(context,dogId){
+      DogApi.getOwnerByDog(dogId)
+      .then(res=>{
+        context.commit('GET_OWNER_BY_DOG', res.data)
+      });
+    },
+    getTricksByADog(context,dogId){
+      TrickApi.getTricksByADog(dogId)
+      .then(res=>{
+        context.commit('GET_TRICKS_BY_DOG', res.data)
+      });
+    },
+    getAllTricks(context){
+      TrickApi.getAllTricks()
+      .then(res=>{
+        context.commit('GET_ALL_TRICKS', res.data)
+      });
+    },
+    getTricksByCategory(context, categoryName){
+      TrickApi.getTricksByCategory(categoryName)
+      .then(res=>{
+        context.commit('GET_TRICKS_BY_CATEGORY', res.data)
+        return res.data.length
+      });
+    },
+    getTricksByADogAndCategory(context,{dogId,categoryName}){
+      TrickApi.getTricksByDogIdAndCategory(dogId,categoryName)
+      .then(res=>{
+        context.commit('GET_TRICKS_BY_DOG_AND_CATEGORY', res.data)
+        return res.data.length
+      });
+    },
+    addDogTricks(context,{dogId,trickId}){
+      return TrickApi.postDogTricks(dogId,trickId)
+          .then(res => {
+              context.commit('ADD_NEW_DOG_TRICKS', res.data)
+              return Promise.resolve()
+          })
+  },
+    deleteDogTricksByDogIdAndTrickId(context, {dogId, trickId}){
+      TrickApi.deleteDogTricksByDogIdAndTrickId(dogId, trickId)
+      .then(res=>{
+          // console.log("Res.data delete: ",res.data)
+          context.commit('DELETE_DOG_TRICKS', res.data)
+          return Promise.resolve()
+    })
+  },
+  },
+  deleteDogById(context,dogId){
+    DogApi.deleteDogById(dogId)
+    .then(res=>{
+        // console.log("Res.data delete: ",res.data)
+        context.commit('DELETE_DOG', res.data)
+        return Promise.resolve()
+  })
+},
+}
 export default new Vuex.Store({
+  modules: {
+    // moduleSeasonTickets: moduleSeasonTickets,
+    moduleDog:moduleDog
+  },
     state: {
-      seasonTickets:[
-        { id:	1,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	true
-        },
-        { id:	2,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	true
-        },
-        { id:	3,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	true
-        },
-        { id:	4,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	false
-        }
-        ,
-        { id:	5,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	false
-        }
-        ,
-        { id:	6,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	false
-        }
-        ,
-        { id:	7,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	false
-        }
-        ,
-        { id:	8,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	false
-        }
-        ,
-        { id:	9,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	false
-        }
-        ,
-        { id:	10,
-          startDate:	"2019-01-16T12:00:00",
-          endDate:	"2019-02-16T12:00:00",
-          type:	"TWELWE",
-          paid:	false
-        }
-        
-      ],
-      dogs:[
-        {
-          id:	1,
-          name:	"Buksi",
-          birthDate:	"2019-03-21T17:52:00.000+0000",
-          breed:	"breed_Buksi",
-          weight:	5,
-          description:"The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
-        },
-        {
-          id:	2,
-          name:	"Pamacs",
-          birthDate:	"2019-03-21T17:52:00.000+0000",
-          breed:	"breed_pami",
-          weight:	5,
-        },
-        {
-          id:	3,
-          name:	"Szilva",
-          birthDate:	"2019-03-21T17:52:00.000+0000",
-          breed:	"breed_Buksi",
-          weight:	5,
-        },
-        {
-          id:	4,
-          name:	"Körte",
-          birthDate:	"2019-03-21T17:52:00.000+0000",
-          breed:	"breed_Buksi",
-          weight:	5,
-        },
-        {
-          id:	5,
-          name:	"Kutyi",
-          birthDate:	"2019-03-21T17:52:00.000+0000",
-          breed:	"breed_Buksi",
-          weight:	5,
-        }
-      ]
+      
     },
     mutations: {
-      increment (state) {
-        state.count++
-      }
+      
     }
   });

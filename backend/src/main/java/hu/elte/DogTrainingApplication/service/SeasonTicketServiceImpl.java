@@ -30,7 +30,12 @@ public class SeasonTicketServiceImpl implements SeasonTicketService {
 
     @Override
     public Optional<SeasonTicket> findById(Integer id) {
-        return seasonTicketRepository.findById(id);
+        Optional<SeasonTicket> seasonTicket=seasonTicketRepository.findById(id);
+        if(seasonTicket.isPresent()){
+            return seasonTicket;
+        }
+        //return seasonTicketRepository.findById(id);
+        return Optional.empty();
     }
 
     @Override
@@ -40,7 +45,14 @@ public class SeasonTicketServiceImpl implements SeasonTicketService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public SeasonTicket deleteById(Integer id) {
+        Optional<SeasonTicket> deletedTicketOptional=seasonTicketRepository.findById(id);
+        SeasonTicket deletedTicket=null;
+        if(deletedTicketOptional.isPresent()){
+            deletedTicket=deletedTicketOptional.get();
+        }
+
         seasonTicketRepository.deleteById(id);
+        return deletedTicket;
     }
 }

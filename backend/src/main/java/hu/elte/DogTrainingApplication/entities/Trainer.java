@@ -2,6 +2,7 @@ package hu.elte.DogTrainingApplication.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import hu.elte.DogTrainingApplication.common.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,12 +30,18 @@ public class Trainer implements Serializable {
     private static final long serialVersionUID = 6680215604083741163L;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
+    @Column( name="password",nullable = false)
+    private String password;
 
     @Column(name = "email")
     private String email;
@@ -51,6 +58,10 @@ public class Trainer implements Serializable {
 
     @Column(name = "birth_place")
     private String birthPlace;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "trainer")
