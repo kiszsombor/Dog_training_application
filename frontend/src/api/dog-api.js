@@ -11,8 +11,13 @@ export default{
     getDogById(dogId){
         return axios.get(`${BASE_URL}/dog/${dogId}`);
     },
+
     getDogsByTrainerId(trainerId){
         return axios.get(`${BASE_URL}/trainer/${trainerId}/dogs`);
+    },
+
+    getOwnerByDog(dogId){
+        return axios.get(`http://localhost:8080/dog/${dogId}/owner`);
     },
 
     getAllSeasonTicketsByDog(dogId){
