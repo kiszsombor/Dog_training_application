@@ -88,50 +88,67 @@ const router = new Router({
 })
 
 
-router.beforeEach((to, from, next) => {
-  console.log(to)
-  if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
-      next()
-      return
-    }
-    next('/login') 
-  } else {
-    next() 
-  }
-})
+
+
+
+// router.post('/login', (req, res) => {
+//   db.selectByEmail(req.body.email, (err, user) => {
+//       if (err) return res.status(500).send('Error on the server.');
+//       if (!user) return res.status(404).send('No user found.');
+//       let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+//       if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
+//       let token = jwt.sign({ id: user.id }, config.secret, { expiresIn: 86400 // expires in 24 hours
+//       });
+//       res.status(200).send({ auth: true, token: token, user: user });
+//   });
+// })
+
 
 // router.beforeEach((to, from, next) => {
+//   console.log("TO: ",to)
 //   if(to.matched.some(record => record.meta.requiresAuth)) {
-//       if (localStorage.getItem('jwt') == null) {
-//           next({
-//               path: '/login',
-//               params: { nextUrl: to.fullPath }
-//           })
-//       } else {
-//           let user = JSON.parse(localStorage.getItem('user'))
-//           if(to.matched.some(record => record.meta.is_admin)) {
-//               if(user.is_admin == 1){
-//                   next()
-//               }
-//               else{
-//                   next({ name: 'userboard'})
-//               }
-//           }else {
-//               next()
-//           }
-//       }
-//   } else if(to.matched.some(record => record.meta.guest)) {
-//       if(localStorage.getItem('jwt') == null){
-//           next()
-//       }
-//       else{
-//           next({ name: 'userboard'})
-//       }
-//   }else {
-//       next() 
+//     if (store.getters.isLoggedIn) {
+//       next()
+//       return
+//     }
+//     next('/login') 
+//   } else {
+//     next() 
 //   }
 // })
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+      if (localStorage.getItem('jwt') == null) {
+          next({
+              path: '/LoginPage',
+              params: { nextUrl: to.fullPath }
+          })
+      } else {
+        console.log("beforeEach else")
+          let user = JSON.parse(localStorage.getItem('user'))
+          if(to.matched.some(record => record.meta.is_admin)) {
+              if(user.is_admin == 1){
+                  next()
+              }
+              else{
+                  next({ name: 'userboard'})
+              }
+          }else {
+              next()
+          }
+      }
+  } else if(to.matched.some(record => record.meta.guest)) {
+      if(localStorage.getItem('jwt') == null){
+          next()
+      }
+      else{
+          next({ name: 'userboard'})
+      }
+  }else {
+      next() 
+  }
+})
 
 
 export default router;

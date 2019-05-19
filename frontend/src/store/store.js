@@ -35,6 +35,7 @@ const moduleDog={
     tricks:[],
     allTricks:[],
     categoryTricks:[],
+    users:[]
   },
   mutations: { 
     GET_ALL_DOGS(state,dogs){
@@ -75,6 +76,11 @@ const moduleDog={
     },
     DELETE_DOG_TRICKS(state, dogTrick){
       delete state.tricks[dogTrick];
+    },
+
+    REGISTRATION(state,user){
+      state.users.push(user)
+
     },
 
     LOGIN(state,me){
@@ -187,11 +193,20 @@ const moduleDog={
     })
   },
 
+  registration(context,user){
+    return TrainerApi.registration(user)
+        .then(res => {
+            context.commit('REGISTRATION', res.data)
+            return Promise.resolve()
+        })
+},
+
   login(context, payload){
     console.log("Store",payload)
     Login.login({...payload})
     .then(res=>{
-        console.log("Res.data login: ",res.data)
+        console.log("Res.data login: ",res.data.login)
+        console.log("Token: ", res.data.token)
         context.commit('LOGIN', res.data)
         //return Promise.resolve()
   })

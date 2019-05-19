@@ -5,5 +5,9 @@ export default{
     getTrainerById(trainerId){
         return axios.get(`${BASE_URL}/trainer/${trainerId}`);
     },
+    registration(obj){
+        console.log("registration - api ",odj)
+        return axios.post(`${BASE_URL}/trainer/registration`,obj);
+    }
 
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="login-page">
-    <!-- <BaseContainer :headerTitle="title" :bodyTitle="bodyTitle"></BaseContainer> -->
+    <BaseContainer :headerTitle="title" :bodyTitle="bodyTitle"></BaseContainer>
   </div>
 
   <!-- <div class="login-page">

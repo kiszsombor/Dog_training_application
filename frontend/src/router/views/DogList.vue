@@ -4,7 +4,9 @@
     <h1 class="main-title">
       {{title}}
     </h1>
-<!-- {{dogs}} -->
+<div>
+  {{me}}
+</div>
   <table class="table">
     <thead class=" thread bg-secondary">
         <tr>
@@ -83,7 +85,8 @@ export default {
     },
     computed: {
         ...mapState({
-            dogs: function (state) { return state.moduleDog.dogs }
+            dogs: function (state) { return state.moduleDog.dogs },
+            me: function (state) { return state.moduleDog.me }
         })
     },
     components: {

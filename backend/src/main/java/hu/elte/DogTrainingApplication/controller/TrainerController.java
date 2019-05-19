@@ -80,6 +80,10 @@ public class TrainerController {
 //        System.out.println(authenticatedOwner.getTrainer());
 //        System.out.println(trainer);
         Optional<Trainer> tr=trainerRepository.findByUsername(trainer.getUsername());
+
+//        String email = trainer.getEmail();
+//        String password = trainer.getPassword();
+
         System.out.println("Tr "+tr);
         authenticatedOwner.setTrainer(tr.get());
         return authenticatedOwner.getTrainer();
