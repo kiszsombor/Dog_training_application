@@ -8,6 +8,7 @@ stages:
 before_install:
   - cd backend/
   - chmod 777 mvnw
+  - mysql -e 'CREATE DATABASE dog_training_database;'
 
 services:
   - mysql
