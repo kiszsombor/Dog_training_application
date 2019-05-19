@@ -18,32 +18,27 @@
         <th scope="col">Fajta</th>
         <th scope="col">Nem</th>
         <th scope="col">Súly</th>
-        <!-- <th scope="col">Kutya kiválasztás</th> -->
+        <th scope="col">Kutya választás</th>
         </tr>
     </thead>
-    <tbody v-for="s in trainerDogs" :key="s.id">
+    <tbody class="link" v-for="s in trainerDogs" :key="s.id">
       
-        <tr>
-          <router-link :to="`/logged/${trainerId}/${s.id}/kutyaim`">
+        <tr v-bind:class="{ active: colorActiveDog(s.id)}">
             <td scope="row">{{s.id}}</td>
-          </router-link>
-            <!-- <td>{{moment(String(s.birthDate)).format("LL")}}</td> -->
             <td>{{s.name}}</td>
             <td>{{s.birthDate}}</td>
             <td>{{s.breed}}</td>
             <td>{{s.sex}}</td>
             <td>{{s.weight}}</td>
-            <!-- <td scope="row"><input type="radio" name="dogs" :value="s.id"></td> -->
-
-            <!-- <td><b-button v-b-modal.modal-modify variant="secondary"><i class="fas fa-edit"></i></b-button></td>
-            <td><b-button v-b-modal.modal-1 variant="secondary" @click="ticketId=s.id"><i class="fas fa-trash"></i></b-button></td> -->
+            <router-link :to="`/logged/${trainerId}/${s.id}/kutyaim`">
+            <td class="button" @click=" tableId=s.id">Kiválaszt</td>
+            </router-link>
         </tr>
+
     </tbody>
   </table>
-  <!-- <div v-for="t in trainerDogs" :key="t.dogId"> -->
-  <!-- {{ trainerDogs.length }}
-  {{ trainerId }} -->
-  <!-- </div> -->
+  <!-- {{ trainerDogs.length }} -->
+  {{ tableId }}
 </div>
       
   
@@ -72,6 +67,7 @@ export default {
           //trainerId:this.$store.state.moduleDog.me.id,
           trainerId:this.$route.params.trainerId,
           dogId:this.$route.params.dogId,
+          tableId:null,
           title: "Kutyáim",
           checked:''
         }
@@ -86,6 +82,12 @@ export default {
         },
         getDogsByTrainer(){
           this.getDogsByTrainerId(this.trainerId);
+        },
+        colorActiveDog(tableId){
+          if(tableId == this.dogId){
+            return true;
+          }
+          return false
         }
     },
     computed: {
@@ -102,5 +104,30 @@ export default {
 </script>
 
 <style scoped>
+thead, tbody{
+  text-align: center;
+}
+.button, a{
+  color: black;
+  margin: auto;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button:hover, a:hover{
+  color: blue;
+  margin: auto;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+.link{
+  background-color: lightgray;
+}
+.active{
+  background-color: lightblue;
+}
+
 
 </style>

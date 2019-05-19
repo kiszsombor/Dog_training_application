@@ -78,7 +78,7 @@ public class SeasonTicketController {
         //System.out.println(("Old season ticket: "+oldSeasonTicket.toString()));
         System.out.println(("Old-seasontick: "+oldSeasonTicket));
         oldSeasonTicket.setSeasonTicket(wrapper.getSeasonTicket().getStartDate(),wrapper.getSeasonTicket().getEndDate(),wrapper.getSeasonTicket().getSpentTime(),
-                wrapper.getSeasonTicket().getPaid(),wrapper.getSeasonTicket().getDog(),wrapper.getSeasonTicket().getSeasonTicketSegments());
+                wrapper.getSeasonTicket().getPaid(),wrapper.getSeasonTicket().getDog());
         System.out.println(("Old-seasontick-after: "+oldSeasonTicket));
 
         seaonTicketService.save(oldSeasonTicket);

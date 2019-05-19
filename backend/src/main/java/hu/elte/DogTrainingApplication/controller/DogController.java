@@ -68,17 +68,6 @@ public class DogController {
         return dogService.findAllSeasonTicketByDogId(id);
     }
 
-    /**
-     * @param id
-     * @param seasonTicketId
-     * @return  List<SeasonTicketSegment>
-     *     Egy kztya bérletei közül egy adott id alapján egy bérlet lekérdezése (szegmenseinek megjelenítése)
-     */
-    @GetMapping("/{id}/season_tickets/{seasonTicketId}")
-    public List<SeasonTicketSegment> findAllSeasonTicketSegmentBySeasonTicketId(@PathVariable Integer id, @PathVariable Integer seasonTicketId){
-        return dogService.findAllSeasonTicketSegmentBySeasonTicketId(seasonTicketId);
-    }
-
     @GetMapping("/{id}/tricks")
     public List<Trick> findTricksByDog(@PathVariable Integer id){
         System.out.println(dogService.findTricksByDog(id));
@@ -90,6 +79,16 @@ public class DogController {
         System.out.println("category: "+category);
         System.out.println("tömb: "+dogService.findTricksByDogIdAndCategory(id, category));
         return dogService.findTricksByDogIdAndCategory(id, category);
+    }
+
+    @GetMapping("/{id}/owner")
+    public Trainer findOwnerByDog(@PathVariable Integer id){
+        Optional<Trainer> optionalTrainer= dogService.findOwnerByDog(id);
+
+        if (optionalTrainer.isPresent()) {
+            return optionalTrainer.get();
+        }
+        return null;
     }
 
     @GetMapping("/{id}/trainer")

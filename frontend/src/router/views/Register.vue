@@ -8,6 +8,19 @@
         <b-form v-if="show">
 
             <b-form-group
+                id="inputNameGroup"
+                label="Teljes név:"
+                label-for="inputName"
+            >
+                <b-form-input
+                    id="inputName"
+                    type="text"
+                    v-model="form.name"
+                    required
+                    placeholder="Írja be a teljes nevét..." />
+            </b-form-group>
+
+            <b-form-group
                 id="inputUsernameGroup"
                 label="Felhasználónév:"
                 label-for="inputUsername"
@@ -35,19 +48,6 @@
             </b-form-group>
 
             <b-form-group
-                id="inputNameGroup"
-                label="Teljes név:"
-                label-for="inputName"
-            >
-                <b-form-input
-                    id="inputName"
-                    type="text"
-                    v-model="form.name"
-                    required
-                    placeholder="Írja be a teljes nevét..." />
-            </b-form-group>
-
-            <b-form-group
                 id="inputEmailGroup"
                 label="Email-cím:"
                 label-for="inputEmail"
@@ -61,19 +61,6 @@
             </b-form-group>
 
             <!-- <b-form-group
-                id="inputAddressGroup"
-                label="Cím:"
-                label-for="inputAddress"
-            >
-                <b-form-input
-                    id="inputAddress"
-                    type="text"
-                    v-model="form.address"
-                    required
-                    placeholder="Írja be a címét..." />
-            </b-form-group> -->
-
-            <b-form-group
                 id="inputPhonenumberGroup"
                 label="Telefonszám:"
                 label-for="inputPhonenumber"
@@ -86,30 +73,22 @@
                     placeholder="Írja be a telefonszámát..." />
             </b-form-group>
 
-            <!-- <b-form-group
-                id="inputBirthdateGroup"
-                label="Születési idő:"
-                label-for="inputBirthdate"
+            <!-- <b-form-group id="inputSelectGroup"
+                label="Options:"
+                label-for="inputSelect"
             >
-                <b-form-input
-                    id="inputBirthdate"
-                    type="text"
-                    v-model="form.birthdate"
+                <b-form-select
+                    id="inputSelect"
+                    :options="options"
                     required
-                    placeholder="Írja be a születési dátumát..." />
-            </b-form-group> -->
+                    v-model="form.option" />
+            </b-form-group>
 
-            <!-- <b-form-group
-                id="inputBirthplaceGroup"
-                label="Születési hely:"
-                label-for="inputBirthplace"
-            >
-                <b-form-input
-                    id="inputBirthplace"
-                    type="text"
-                    v-model="form.birthplace"
-                    required
-                    placeholder="Írja be a születési helyét..." />
+            <b-form-group id="inputCheckGroup">
+                <b-form-checkbox-group v-model="form.checked" id="inputCheck">
+                    <b-form-checkbox value=1>Check 1</b-form-checkbox>
+                    <b-form-checkbox value=2>Check 2</b-form-checkbox>
+                </b-form-checkbox-group>
             </b-form-group> -->
 {{form}}
             <br>
@@ -146,7 +125,7 @@ export default {
     name: "Register",
     data() {
         return {
-            title:"Bejelentkezés",
+            title:"Regisztráció",
         form: {
             username: '',
             password:'',
