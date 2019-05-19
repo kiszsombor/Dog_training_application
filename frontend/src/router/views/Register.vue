@@ -60,36 +60,7 @@
                     placeholder="Írja be az email-címét..." />
             </b-form-group>
 
-            <!-- <b-form-group
-                id="inputPhonenumberGroup"
-                label="Telefonszám:"
-                label-for="inputPhonenumber"
-            >
-                <b-form-input
-                    id="inputPhonenumber"
-                    type="text"
-                    v-model="form.phonenumber"
-                    required
-                    placeholder="Írja be a telefonszámát..." />
-            </b-form-group>
-
-            <!-- <b-form-group id="inputSelectGroup"
-                label="Options:"
-                label-for="inputSelect"
-            >
-                <b-form-select
-                    id="inputSelect"
-                    :options="options"
-                    required
-                    v-model="form.option" />
-            </b-form-group>
-
-            <b-form-group id="inputCheckGroup">
-                <b-form-checkbox-group v-model="form.checked" id="inputCheck">
-                    <b-form-checkbox value=1>Check 1</b-form-checkbox>
-                    <b-form-checkbox value=2>Check 2</b-form-checkbox>
-                </b-form-checkbox-group>
-            </b-form-group> -->
+           
 {{form}}
             <br>
                 <div class="row">
