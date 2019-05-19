@@ -41,8 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/dog/**", "/trainer/registration", "/trainer/login","season_tickets/**","trick/**","trainer/**").permitAll()   // important!
-                .anyRequest().authenticated()
+//                .antMatchers("/dog/**", "/trainer/registration", "/trainer/login","season_tickets/**","trick/**","trainer/**").permitAll()   // important!
+                .anyRequest().permitAll()
+                //.anyRequest().authenticated()
                 .and()
                 .httpBasic()
                 .authenticationEntryPoint(getBasicAuthEntryPoint())

@@ -54,7 +54,7 @@ export default {
   },
 
   created(){
-    if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
+   // if (!this.$store.state.moduleDog.me.id) { this.$router.push('/LoginPage') }
 
     this.getTricks_ByDog();
     this.getAll_Tricks();
