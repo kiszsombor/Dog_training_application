@@ -3,7 +3,7 @@ package hu.elte.DogTrainingApplication.controller;
 import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.api.TrainerService;
 import hu.elte.DogTrainingApplication.common.Role;
-import hu.elte.DogTrainingApplication.config.AutenticatedTrainer;
+//import hu.elte.DogTrainingApplication.config.AutenticatedTrainer;
 import hu.elte.DogTrainingApplication.entities.Dog;
 import hu.elte.DogTrainingApplication.entities.Trainer;
 import hu.elte.DogTrainingApplication.repository.TrainerRepository;
@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
@@ -41,10 +41,10 @@ public class TrainerController {
     private TrainerService trainerService;
     @Autowired
     private TrainerRepository trainerRepository;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-    @Autowired
-    private AutenticatedTrainer authenticatedOwner;
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
+//    @Autowired
+//    private AutenticatedTrainer authenticatedOwner;
 
     @Autowired
     private DogService dogService;
@@ -62,16 +62,16 @@ public class TrainerController {
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    @PostMapping("/registration")
-    public ResponseEntity<Trainer> regisztracio(@RequestBody Trainer trainer) {
-        Optional<Trainer> oUser = trainerRepository.findByName(trainer.getName());
-        if (oUser.isPresent()) {
-            return ResponseEntity.badRequest().build();
-        }
-        trainer.setPassword(passwordEncoder.encode(trainer.getPassword()));
-        trainer.setRole(Role.ROLE_USER);
-        return ResponseEntity.ok(trainerRepository.save(trainer));
-    }
+//    @PostMapping("/registration")
+//    public ResponseEntity<Trainer> regisztracio(@RequestBody Trainer trainer) {
+//        Optional<Trainer> oUser = trainerRepository.findByName(trainer.getName());
+//        if (oUser.isPresent()) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//        trainer.setPassword(passwordEncoder.encode(trainer.getPassword()));
+//        trainer.setRole(Role.ROLE_USER);
+//        return ResponseEntity.ok(trainerRepository.save(trainer));
+//    }
 
     @GetMapping("/{id}/dogs")
     public List<Dog> getDogs(@PathVariable Integer id) {
@@ -110,7 +110,7 @@ public class TrainerController {
                 .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
 
         System.out.println("Tr "+tr);
-        authenticatedOwner.setTrainer(tr.get());
+//        authenticatedOwner.setTrainer(tr.get());
 
         //authenticatedOwner.getTrainer();
         return jwtToken;
