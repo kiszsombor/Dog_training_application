@@ -1,6 +1,0 @@
-test:
-  adapter: mysql2
-  database: dog_training_database
-  username: user
-  password: User1234
-  encoding: utf8
