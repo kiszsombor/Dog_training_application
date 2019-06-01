@@ -6,7 +6,7 @@ stages:
 
 before_install:
   - cd backend/
-  - chmod 777 mvnw
+  - chmod 777 mvn
   - mysql -e 'CREATE DATABASE dog_training_database;'
 
 services:
@@ -14,9 +14,4 @@ services:
 
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: "ENCRYPTED_API_KEY"
 
