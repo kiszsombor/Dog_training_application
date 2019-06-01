@@ -8,6 +8,7 @@ stages:
 before_install:
   - cd backend/
   - chmod 777 mvnw
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('User1234') where User='user'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - mysql -e 'CREATE DATABASE dog_training_database;'
 
 services:
