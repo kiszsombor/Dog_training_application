@@ -8,8 +8,18 @@ stages:
 before_install:
   - cd backend/
   - chmod 777 mvnw
-  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('User1234') where User='user'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - mysql -e 'CREATE DATABASE dog_training_database;'
+  - mysql -e 'ALTER SEQUENCE trainer_seq RESTART WITH 1;'
+  - mysql -e 'CREATE TABLE trainer (
+      id int NOT NULL DEFAULT NEXTVAL ('trainer_seq'),
+      name varchar(45) DEFAULT NULL,
+      email varchar(45) DEFAULT NULL,
+      address varchar(45) DEFAULT NULL,
+      phone_number int DEFAULT NULL,
+      birth_date timestamp(0) NULL DEFAULT NULL,
+      birth_place varchar(45) DEFAULT NULL,
+      PRIMARY KEY (id)
+    ) ;'
 
 services:
   - mysql
