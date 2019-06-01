@@ -20,9 +20,9 @@ before_install:
       PRIMARY KEY (id)
     ) ;'
   - mysql -e 'INSERT INTO dog_training_database.trainer (name, email, address, phone_number, birth_date, birth_place) 
-        VALUES ('Nagy Emma', 'emma1@gmail.com', 'emma_address', 305552145, '1995-03-04T23:00:00.000+0000', 'Budapest');'
+        VALUES ('Nagy_Emma', 'emma1@gmail.com', 'emma_address', 305552145, '1995-03-04T23:00:00.000+0000', 'Budapest');'
   - mysql -e 'INSERT INTO dog_training_database.trainer (name, email, address, phone_number, birth_date, birth_place) 
-        VALUES ('Kis Károly', 'karcsi25@gmail.com', 'karesz_address', 305552145, '1990-04-15T22:00:00.000+0000', 'Budapest');'
+        VALUES ('Kis_Károly', 'karcsi25@gmail.com', 'karesz_address', 305552145, '1990-04-15T22:00:00.000+0000', 'Budapest');'
 
         
 services:
