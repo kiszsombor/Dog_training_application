@@ -3,10 +3,11 @@ jdk: oraclejdk8
 
 stages:
   - Compile backend
+  - Backend test
 
 before_install:
   - cd backend/
-  - chmod 777 mvn
+  - chmod 777 mvnw
   - mysql -e 'CREATE DATABASE dog_training_database;'
 
 services:
@@ -15,3 +16,11 @@ services:
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
+jobs:
+  include:
+    - script: mvn test -B
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "ENCRYPTED_API_KEY"
