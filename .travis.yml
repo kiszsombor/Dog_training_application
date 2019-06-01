@@ -3,7 +3,6 @@ jdk: oraclejdk8
 
 stages:
   - Compile backend
-  - Backend test
 
 before_install:
   - cd backend/
