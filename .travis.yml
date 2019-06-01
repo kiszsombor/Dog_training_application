@@ -9,9 +9,8 @@ before_install:
   - cd backend/
   - chmod 777 mvnw
   - mysql -e 'CREATE DATABASE dog_training_database;'
-  - mysql -e 'ALTER SEQUENCE trainer_seq RESTART WITH 1;'
   - mysql -e 'CREATE TABLE trainer (
-      id int NOT NULL DEFAULT NEXTVAL ('trainer_seq'),
+      id int NOT NULL AUTO_INCREMENT,
       name varchar(45) DEFAULT NULL,
       email varchar(45) DEFAULT NULL,
       address varchar(45) DEFAULT NULL,
