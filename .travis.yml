@@ -8,7 +8,7 @@ stages:
 before_install:
   - cd backend/
   - chmod 777 mvnw
-  - mysql -e 'CREATE DATABASE dog_training_database;'
+  - mysql -e 'CREATE DATABASE dog_training_database DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;'
   - mysql -e 'CREATE TABLE dog_training_database.trainer (
       id int NOT NULL AUTO_INCREMENT,
       name varchar(45) DEFAULT NULL,
