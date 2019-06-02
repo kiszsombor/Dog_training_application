@@ -10,19 +10,19 @@ before_install:
   - chmod 777 mvnw
   - mysql -e 'CREATE DATABASE dog_training_database DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;'
   - mysql -e 'CREATE TABLE dog_training_database.trainer (
-      id int NOT NULL,
-      name varchar(45) DEFAULT NULL,
-      email varchar(45) DEFAULT NULL,
-      address varchar(45) DEFAULT NULL,
-      phone_number int DEFAULT NULL,
-      birth_date timestamp(0) NULL DEFAULT NULL,
-      birth_place varchar(45) DEFAULT NULL,
+      `id` int NOT NULL,
+      `name` varchar(45) DEFAULT NULL,
+      `email` varchar(45) DEFAULT NULL,
+      `address` varchar(45) DEFAULT NULL,
+      `phone_number` int DEFAULT NULL,
+      `birth_date` timestamp(0) NULL DEFAULT NULL,
+      `birth_place` varchar(45) DEFAULT NULL,
       PRIMARY KEY (id)
     ) ;'
   - mysql -e 'INSERT INTO dog_training_database.trainer (id, name, email, address, phone_number, birth_date, birth_place) 
-        VALUES (1, 'Nagy_Emma', 'emma1@gmail.com', 'emma_address', 305552145, '1995-03-04T23:00:00.000+0000', 'Budapest');'
+        VALUES (1, "Nagy Emma", "emma1@gmail.com", "emma_address", 305552145, "1995-03-04T23:00:00.000+0000", "Budapest");'
   - mysql -e 'INSERT INTO dog_training_database.trainer (id, name, email, address, phone_number, birth_date, birth_place) 
-        VALUES (2, 'Kis_Károly', 'karcsi25@gmail.com', 'karesz_address', 305552145, '1990-04-15T22:00:00.000+0000', 'Budapest');'
+        VALUES (2, "Kis_Károly", "karcsi25@gmail.com", "karesz_address", 305552145, "1990-04-15T22:00:00.000+0000", "Budapest");'
 
         
 services:
