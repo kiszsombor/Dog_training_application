@@ -21,12 +21,14 @@ before_install:
       `phone_number` int DEFAULT NULL,
       `birth_date` timestamp(0) NULL DEFAULT NULL,
       `birth_place` varchar(45) DEFAULT NULL,
+      `role` varchar(45) DEFAULT NULL,
+      
       PRIMARY KEY (id)
     ) ;'
-  - mysql -e 'INSERT INTO dog_training_database.trainer (name, password, email, address, phone_number, birth_date, birth_place) 
-        VALUES ("Nagy Emma", "password1", "emma1@gmail.com", "emma_address", 305552145, "1995-03-05 00:00:00", "Budapest");'
-  - mysql -e 'INSERT INTO dog_training_database.trainer (name, password, email, address, phone_number, birth_date, birth_place) 
-        VALUES ("Kis_Károly", "password2", "karcsi25@gmail.com", "karesz_address", 305552145, "1990-04-16 00:00:00", "Budapest");'
+  - mysql -e 'INSERT INTO dog_training_database.trainer (name, password, email, address, phone_number, birth_date, birth_place, role) 
+        VALUES ("Nagy Emma", "password1", "emma1@gmail.com", "emma_address", 305552145, "1995-03-05 00:00:00", "Budapest", "ROLE_USER");'
+  - mysql -e 'INSERT INTO dog_training_database.trainer (name, password, email, address, phone_number, birth_date, birth_place, role) 
+        VALUES ("Kis_Károly", "password2", "karcsi25@gmail.com", "karesz_address", 305552145, "1990-04-16 00:00:00", "Budapest", "ROLE_USER");'
 
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
