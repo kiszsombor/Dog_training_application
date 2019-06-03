@@ -37,8 +37,3 @@ install:
 jobs:
   include:
     - script: mvn test -B
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: "ENCRYPTED_API_KEY"
