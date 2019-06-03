@@ -118,7 +118,7 @@ public class DogTrainingApplicationTests {
 				// .andExpect(jsonPath("$.address").value("emma_address"))
 				.andExpect(jsonPath("$.phoneNumber").value(305552145))
 				// .andExpect(jsonPath("$.birthDate").value("1995-03-05 00:00:00"))
-				.andExpect(jsonPath("$.birthPlace").value("Budapest"));
+				// .andExpect(jsonPath("$.birthPlace").value("Budapest"));
 	}
 
 	@Test
@@ -131,7 +131,7 @@ public class DogTrainingApplicationTests {
 				// .andExpect(jsonPath("$.address").value("karesz_address"))
 				.andExpect(jsonPath("$.phoneNumber").value(305552145))
 				// .andExpect(jsonPath("$.birthDate").value("1990-04-16 00:00:00"))
-				.andExpect(jsonPath("$.birthPlace").value("Budapest"));
+				// .andExpect(jsonPath("$.birthPlace").value("Budapest"));
 	}
 
 }
