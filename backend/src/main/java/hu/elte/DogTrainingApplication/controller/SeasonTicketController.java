@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * @author: Bajári LÚCIA
  * @category: controller
- *
+ * <p>
  * A SeasonTicketService kommunikációjáért felel.
  */
 //TODO: hiányzik a bérletek módosításáért felelős @PutMapping
@@ -29,7 +29,7 @@ public class SeasonTicketController {
 
     /**
      * @return Iterable<SeasonTicket>
-     *     Összes bérlet lekérdezése
+     * Összes bérlet lekérdezése
      */
     @GetMapping("")
     public Iterable<SeasonTicket> getAll() {
@@ -39,11 +39,11 @@ public class SeasonTicketController {
     /**
      * @param id
      * @return ResponseEntity<SeasonTicket>
-     *     Bérlet lekérdezése id alapján.
+     * Bérlet lekérdezése id alapján.
      */
     @GetMapping("/{id}")
     public ResponseEntity<SeasonTicket> getSeasonTicketById(@PathVariable Integer id) {
-        Optional<SeasonTicket> optional= seaonTicketService.findById(id);
+        Optional<SeasonTicket> optional = seaonTicketService.findById(id);
         if (optional.isPresent()) {
             return ResponseEntity.ok(optional.get());
         }
@@ -51,35 +51,33 @@ public class SeasonTicketController {
     }
 
     /**
-     * @param wrapper
-     * Új bérlet felvételéhez
+     * @param wrapper Új bérlet felvételéhez
      */
     @PostMapping("/save")
     public SeasonTicket post(@RequestBody DogAndSeasonTicketWrapper wrapper) {
-        wrapper.setDog(wrapper.getSeasonTicket(),wrapper.getDog());
-        System.out.println("DOG: "+wrapper.getDog());
+        wrapper.setDog(wrapper.getSeasonTicket(), wrapper.getDog());
+        System.out.println("DOG: " + wrapper.getDog());
         return seaonTicketService.save(wrapper.getSeasonTicket());
     }
 
 
     /**
      * @param id
-     * @param wrapper
-     * Put: id alapján meghatározott bérlet adatainak módosításáért felelős metódus
+     * @param wrapper Put: id alapján meghatározott bérlet adatainak módosításáért felelős metódus
      */
     @PutMapping("/modify/{id}")
     public void put(@PathVariable Integer id, @RequestBody DogAndSeasonTicketWrapper wrapper) {
         wrapper.getSeasonTicket().setId(id);
-        System.out.println("DOG: "+wrapper.getDog());
-        wrapper.setDog(wrapper.getSeasonTicket(),wrapper.getDog());
+        System.out.println("DOG: " + wrapper.getDog());
+        wrapper.setDog(wrapper.getSeasonTicket(), wrapper.getDog());
 
         SeasonTicket oldSeasonTicket = seaonTicketService.findById(id).get();
 
         //System.out.println(("Old season ticket: "+oldSeasonTicket.toString()));
-        System.out.println(("Old-seasontick: "+oldSeasonTicket));
-        oldSeasonTicket.setSeasonTicket(wrapper.getSeasonTicket().getStartDate(),wrapper.getSeasonTicket().getEndDate(),wrapper.getSeasonTicket().getSpentTime(),
-                wrapper.getSeasonTicket().getPaid(),wrapper.getSeasonTicket().getDog());
-        System.out.println(("Old-seasontick-after: "+oldSeasonTicket));
+        System.out.println(("Old-seasontick: " + oldSeasonTicket));
+        oldSeasonTicket.setSeasonTicket(wrapper.getSeasonTicket().getStartDate(), wrapper.getSeasonTicket().getEndDate(), wrapper.getSeasonTicket().getSpentTime(),
+                wrapper.getSeasonTicket().getPaid(), wrapper.getSeasonTicket().getDog());
+        System.out.println(("Old-seasontick-after: " + oldSeasonTicket));
 
         seaonTicketService.save(oldSeasonTicket);
 

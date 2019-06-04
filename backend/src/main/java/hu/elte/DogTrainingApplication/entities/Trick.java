@@ -1,6 +1,5 @@
 package hu.elte.DogTrainingApplication.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import hu.elte.DogTrainingApplication.common.TrickCategory;
 import hu.elte.DogTrainingApplication.common.TrickName;
 import lombok.AllArgsConstructor;
@@ -11,8 +10,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
@@ -20,10 +17,10 @@ import java.util.Set;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Table(name = "trick")
-public class Trick implements Serializable{
+public class Trick implements Serializable {
 
     @Transient
-    private static final long serialVersionUID= -8633980627458783249L;
+    private static final long serialVersionUID = -8633980627458783249L;
 
     @Id
     @Column(name = "id", nullable = false)

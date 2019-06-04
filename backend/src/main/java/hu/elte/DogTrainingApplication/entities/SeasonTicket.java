@@ -1,23 +1,15 @@
 package hu.elte.DogTrainingApplication.entities;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Set;
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import hu.elte.DogTrainingApplication.common.SeasonTicketType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
- *
  * @author kiszs
  * @category entity
  */
@@ -28,7 +20,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "season_ticket")
 public class SeasonTicket implements Serializable {
     @Transient
-    private static final long serialVersionUID= 6921592859109495666L;
+    private static final long serialVersionUID = 6921592859109495666L;
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
@@ -54,8 +46,8 @@ public class SeasonTicket implements Serializable {
     @JoinColumn(name = "dog_id", nullable = false)
     private Dog dog;
 
-    public SeasonTicket(Integer id){
-        this.id=id;
+    public SeasonTicket(Integer id) {
+        this.id = id;
     }
 
     public void setSeasonTicket(Date startDate, Date endDate, Integer spentTime, Boolean paid, Dog dog) {
@@ -66,7 +58,7 @@ public class SeasonTicket implements Serializable {
         this.dog = dog;
     }
 
-    public String toString(){
-        return "Id: "+this.id+", startDate: "+this.startDate+", endDate: "+this.endDate;
+    public String toString() {
+        return "Id: " + this.id + ", startDate: " + this.startDate + ", endDate: " + this.endDate;
     }
 }

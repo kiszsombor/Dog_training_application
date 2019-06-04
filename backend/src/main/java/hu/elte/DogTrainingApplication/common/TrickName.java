@@ -1,6 +1,6 @@
 package hu.elte.DogTrainingApplication.common;
 
-public enum TrickName{
+public enum TrickName {
     COME,
     SIT,
     LAY,

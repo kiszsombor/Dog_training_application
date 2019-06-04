@@ -7,8 +7,8 @@ import java.util.List;
 
 /**
  * @author Bajári LÚCIA
- * @category Repository
  * @version 0.0.1
+ * @category Repository
  */
 public interface SeasonTicketRepository extends CrudRepository<SeasonTicket, Integer> {
     List<SeasonTicket> findAllByDogId(Integer dogId);

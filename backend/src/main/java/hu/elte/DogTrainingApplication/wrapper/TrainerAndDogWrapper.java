@@ -9,7 +9,7 @@ public class TrainerAndDogWrapper {
     Dog dog;
     Trainer trainer;
 
-    public void setTrainer(Trainer trainer, Dog dog){
+    public void setTrainer(Trainer trainer, Dog dog) {
         dog.setTrainer(trainer);
     }
 }

@@ -14,26 +14,24 @@ import java.util.Optional;
 public interface SeasonTicketService {
     /**
      * @return Iterable<SeasonTicket>
-     *     Az összes bérlet kilistázása
+     * Az összes bérlet kilistázása
      */
     Iterable<SeasonTicket> findAll();
 
     /**
      * @param id
      * @return Optional<SeasonTicket>
-     *     Bizonyos id alapján egy bérlet lekérdezése, ha az létezik
+     * Bizonyos id alapján egy bérlet lekérdezése, ha az létezik
      */
     Optional<SeasonTicket> findById(Integer id);
 
     /**
-     * @param seasonTicket
-     *     Új bérlet felvételéhez
+     * @param seasonTicket Új bérlet felvételéhez
      */
-    SeasonTicket save (SeasonTicket seasonTicket);
+    SeasonTicket save(SeasonTicket seasonTicket);
 
     /**
-     * @param id
-     * Bérlet törlése id alapján
+     * @param id Bérlet törlése id alapján
      */
     SeasonTicket deleteById(Integer id);
 }

@@ -15,12 +15,12 @@ import java.util.Optional;
 
 /**
  * TrainerController
- *
+ * <p>
  * A Trainer Service kommunikációjáért felel.
  *
  * @author Bajári LÚCIA
- * @category controller
  * @version 0.0.1
+ * @category controller
  */
 
 @Log4j2
@@ -42,7 +42,7 @@ public class TrainerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Trainer> getTrainerById(@PathVariable Integer id) {
-        Optional<Trainer> optional= trainerService.findById(id);
+        Optional<Trainer> optional = trainerService.findById(id);
         if (optional.isPresent()) {
             return ResponseEntity.ok(optional.get());
         }

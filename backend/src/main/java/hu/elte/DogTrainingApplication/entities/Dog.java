@@ -10,15 +10,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author Bajári LÚCIA
  * @category entity
- *
  * @version: 0.0.1
- *
+ * <p>
  * Dog entity, ami tartalmazza egy kutya tárolásához szükséges információkat
  */
 @Data

@@ -2,8 +2,14 @@ package hu.elte.DogTrainingApplication.service;
 
 import hu.elte.DogTrainingApplication.api.DogService;
 import hu.elte.DogTrainingApplication.common.TrickCategory;
-import hu.elte.DogTrainingApplication.entities.*;
-import hu.elte.DogTrainingApplication.repository.*;
+import hu.elte.DogTrainingApplication.entities.Dog;
+import hu.elte.DogTrainingApplication.entities.SeasonTicket;
+import hu.elte.DogTrainingApplication.entities.Trainer;
+import hu.elte.DogTrainingApplication.entities.Trick;
+import hu.elte.DogTrainingApplication.repository.DogRepository;
+import hu.elte.DogTrainingApplication.repository.SeasonTicketRepository;
+import hu.elte.DogTrainingApplication.repository.TrainerRepository;
+import hu.elte.DogTrainingApplication.repository.TrickRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +19,9 @@ import java.util.Optional;
 
 /**
  * @author Bajári LÚCIA
- * @category Service
  * @version 0.0.1
  * Implementálja a DogService interface-t
+ * @category Service
  */
 
 @Service
@@ -64,19 +70,19 @@ public class DogServiceImpl implements DogService {
 //    }
 
     @Override
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         List<Trick> tricks = trickRepository.findTricksByDogId(id);
         List<SeasonTicket> seasonTickets = seasonTicketRepository.findAllByDogId(id);
 //        for(int i=0; i<tricks.size();i++){
-            trickRepository.deleteDogTricksByDogId(id);
-        for(int i=0; i<seasonTickets.size();i++){
+        trickRepository.deleteDogTricksByDogId(id);
+        for (int i = 0; i < seasonTickets.size(); i++) {
             seasonTicketRepository.deleteById(seasonTickets.get(i).getId());
         }
         dogRepository.deleteById(id);
     }
 
     @Override
-    public void deleteAll(){
+    public void deleteAll() {
         dogRepository.deleteAll();
 
     }
@@ -94,12 +100,12 @@ public class DogServiceImpl implements DogService {
 //    }
 
     @Override
-    public Optional<Trainer> findOwnerByDog(Integer dogId){
+    public Optional<Trainer> findOwnerByDog(Integer dogId) {
         return trainerRepository.findById(dogRepository.findOwnerByDog(dogId));
     }
 
     @Override
-    public Optional<Trainer> findTrainerByDog(Integer dogId){
+    public Optional<Trainer> findTrainerByDog(Integer dogId) {
         return trainerRepository.findById(dogRepository.findTrainerByDog(dogId));
     }
 
@@ -116,9 +122,9 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public List<Trick> findTricksByDogIdAndCategory(Integer dogId, String category){
+    public List<Trick> findTricksByDogIdAndCategory(Integer dogId, String category) {
         TrickCategory type = TrickCategory.valueOf(category.toUpperCase());
-        System.out.println("service: "+type);
+        System.out.println("service: " + type);
         return trickRepository.findTricksByDogIdAndCategory(dogId, type);
     }
 }

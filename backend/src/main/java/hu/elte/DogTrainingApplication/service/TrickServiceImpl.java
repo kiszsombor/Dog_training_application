@@ -17,24 +17,24 @@ public class TrickServiceImpl implements TrickService {
     private TrickRepository trickRepository;
 
     @Override
-    public List<Trick> findAll(){
+    public List<Trick> findAll() {
         return trickRepository.findAll();
     }
 
     @Override
     public List<Trick> findTricksByCategory(String category) {
-        TrickCategory type=TrickCategory.valueOf(category.toUpperCase());
+        TrickCategory type = TrickCategory.valueOf(category.toUpperCase());
 //        System.out.println(type.toString());
         return trickRepository.findAllByCategory(type);
     }
 
     @Override
-    public void postDogTricks(Integer dogId, Integer trickId){
+    public void postDogTricks(Integer dogId, Integer trickId) {
         trickRepository.postDogTricks(dogId, trickId);
     }
 
     @Override
-    public void deleteDogTricksByDogIdAndTrickId(Integer dogId, Integer trickId){
+    public void deleteDogTricksByDogIdAndTrickId(Integer dogId, Integer trickId) {
         trickRepository.deleteDogTricksByDogIdAndTrickId(dogId, trickId);
     }
 

@@ -28,7 +28,7 @@ public class TrickController {
     }
 
     @PostMapping("/save/{dogId}/{trickId}")
-    public void postDogTricks(@PathVariable Integer dogId, @PathVariable Integer trickId){
+    public void postDogTricks(@PathVariable Integer dogId, @PathVariable Integer trickId) {
         trickService.postDogTricks(dogId, trickId);
     }
 

@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
+
 /**
  * @author Bajári LÚCIA
  * @category entity
- *
  * @version: 0.0.1
- *
+ * <p>
  * Trainer entity, ami tartalmazza egy trainer (edző) tárolásához szükséges információkat
  */
 @Data
@@ -40,7 +39,7 @@ public class Trainer implements Serializable {
     @Column(name = "username", nullable = false)
     private String userName;
 
-    @Column( name="password",nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "email")

@@ -1,19 +1,17 @@
 package hu.elte.DogTrainingApplication.repository;
 
 import hu.elte.DogTrainingApplication.entities.Dog;
-import hu.elte.DogTrainingApplication.entities.Trainer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 
 /**
  * @author Bajári LÚCIA
- * @category Repository
  * @version 0.0.1
+ * @category Repository
  */
 public interface DogRepository extends CrudRepository<Dog, Integer> {
 

@@ -9,7 +9,7 @@ public class DogAndSeasonTicketWrapper {
     Dog dog;
     SeasonTicket seasonTicket;
 
-    public void setDog(SeasonTicket seasonTicket, Dog dog){
+    public void setDog(SeasonTicket seasonTicket, Dog dog) {
         seasonTicket.setDog(dog);
     }
 }

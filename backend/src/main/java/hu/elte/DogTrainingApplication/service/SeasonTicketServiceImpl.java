@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * @author: Bajári LÚCIA
- * @category Service
  * @version 0.0.1
  * Implementalja a SeasonTicketService interface-t
+ * @author: Bajári LÚCIA
+ * @category Service
  */
 
 @Log4j2
@@ -30,8 +30,8 @@ public class SeasonTicketServiceImpl implements SeasonTicketService {
 
     @Override
     public Optional<SeasonTicket> findById(Integer id) {
-        Optional<SeasonTicket> seasonTicket=seasonTicketRepository.findById(id);
-        if(seasonTicket.isPresent()){
+        Optional<SeasonTicket> seasonTicket = seasonTicketRepository.findById(id);
+        if (seasonTicket.isPresent()) {
             return seasonTicket;
         }
         //return seasonTicketRepository.findById(id);
@@ -46,10 +46,10 @@ public class SeasonTicketServiceImpl implements SeasonTicketService {
 
     @Override
     public SeasonTicket deleteById(Integer id) {
-        Optional<SeasonTicket> deletedTicketOptional=seasonTicketRepository.findById(id);
-        SeasonTicket deletedTicket=null;
-        if(deletedTicketOptional.isPresent()){
-            deletedTicket=deletedTicketOptional.get();
+        Optional<SeasonTicket> deletedTicketOptional = seasonTicketRepository.findById(id);
+        SeasonTicket deletedTicket = null;
+        if (deletedTicketOptional.isPresent()) {
+            deletedTicket = deletedTicketOptional.get();
         }
 
         seasonTicketRepository.deleteById(id);
