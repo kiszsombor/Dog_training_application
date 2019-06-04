@@ -164,8 +164,8 @@ public class DogController {
     @ResponseBody
     public Dog deleteById(@PathVariable Integer id) {
         Dog deletedDog = null;
-        List<Dog> dogList=dogService.findAll();
-        for (int i = 0; i<dogList.size(); i++) {
+        List<Dog> dogList = dogService.findAll();
+        for (int i = 0; i < dogList.size(); i++) {
             if (dogList.get(i).getId() == id) {
                 deletedDog = dogList.get(i);
             }
