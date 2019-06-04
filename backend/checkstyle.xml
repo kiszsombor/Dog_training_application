@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+        <module name="TreeWalker">
+            <module name="WhitespaceAround"/>
+            <property name="tabWidth" value="4"/>
+                <module name="MethodLength">
+                    <property name="max" value="20"/>
+                </module>
+        </module>
+</module>
